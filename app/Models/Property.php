@@ -31,7 +31,7 @@ class Property extends Model
         "MSSubClass",
         "TotRmsAbvGrd",
         "Fireplaces",
-        "customer_id",
+        "user_id",
         "project_id",
     ];
     public function  scopeSelection($query)
@@ -59,7 +59,7 @@ class Property extends Model
             "MSSubClass",
             "TotRmsAbvGrd",
             "Fireplaces",
-            "customer_id",
+            "user_id",
             "project_id"
         );
     }

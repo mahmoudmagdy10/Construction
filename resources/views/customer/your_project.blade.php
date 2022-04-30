@@ -1,4 +1,4 @@
-@extends('contractor.layout.app')
+@extends('customer.layout.app')
 
 @section('link')
 <link rel="stylesheet" href="{{asset('css/your project.css')}}">
@@ -17,7 +17,7 @@
             <h3>Your project</h3>
         </div>
         <div class="projects">
-        @isset($contractor)
+        @isset($customer)
           @foreach($props as $prop)
             <div data-aos="fade-up" data-aos-delay="150" class="card">
                 <div class="box">

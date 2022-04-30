@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\Contractor;
+namespace App\Http\Controllers\Customer;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Property;
 
-class PagesController extends Controller
+class CustomerPagesController extends Controller
 {
     public function homepage()
     {
         try{
-            $contractor = User::select()->find(Auth::user()->id);
-            if (!$contractor) {
+            $customer = User::select()->find(Auth::user()->id);
+            if (!$customer) {
                 return redirect()->route('log_in');
             } else {
-                return view('contractor.homepage')->with(compact('contractor'));
+                return view('customer.homepage')->with(compact('customer'));
             }
 
         } catch (\Exception $e) {
@@ -29,12 +29,12 @@ class PagesController extends Controller
     public function explor()
     {
         try{
-            $contractor = User::select()->find(Auth::user()->id);
+            $customer = User::select()->find(Auth::user()->id);
             $props = Property::all();
-            if (!$contractor && !$props) {
+            if (!$customer && !$props) {
                 return redirect()->route('log_in');
             } else {
-                return view('contractor.explor')->with(compact('contractor'))->with(compact('props'));
+                return view('customer.explor')->with(compact('customer'))->with(compact('props'));
             }
 
         } catch (\Exception $e) {
@@ -43,15 +43,30 @@ class PagesController extends Controller
 
     }
 
+    public function construction_style()
+    {
+        try{
+            $customer = User::select()->find(Auth::user()->id);
+            if (!$customer) {
+                return redirect()->route('log_in');
+            } else {
+                return view('customer.construction_style')->with(compact('customer'));
+            }
+
+        } catch (\Exception $e) {
+            return redirect()->route('log_in');
+        }
+
+    }
     public function your_project()
     {
         try{
-            $contractor = User::select()->find(Auth::user()->id);
+            $customer = User::select()->find(Auth::user()->id);
             $props = Property::all();
-            if (!$contractor && !$props) {
+            if (!$customer && !$props) {
                 return redirect()->route('log_in');
             } else {
-                return view('contractor.your_project')->with(compact('contractor'))->with(compact('props'));
+                return view('customer.your_project')->with(compact('customer'))->with(compact('props'));
             }
         } catch (\Exception $e) {
             return redirect()->route('log_in');
@@ -81,6 +96,4 @@ class PagesController extends Controller
             return view('user_profile.edit', compact('user'));
         }
     }
-
-
 }

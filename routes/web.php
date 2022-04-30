@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Contractor\PagesController;
+use App\Http\Controllers\Customer\CustomerPagesController;
+use App\Http\Controllers\Customer\UploadController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,18 +30,15 @@ Route::get('/log_in', function () {
 Route::get('/register_', function () {
     return view('auth_user.register');
 })->name('sign_up');
-
-Route::get('/profile', [PagesController::class, 'profile'])->name('user.profile');
-Route::get('/edit', [PagesController::class, 'edit'])->name('user.edit');
-
 // ============================ Contractor routes =======================
 Route::namespace('Contractor')->prefix('contractor')->group(function(){
-    Route::get('/homepage', function(){
-        return view('contractor.homepage');
-    })->name('contractor.homepage');
     
+    Route::get('/homepage', [PagesController::class, 'homepage'])->name('contractor.homepage');
     Route::get('/explor', [PagesController::class, 'explor'])->name('contractor.explor');
     Route::get('/your_project', [PagesController::class, 'your_project'])->name('contractor.your_project');
+    Route::get('/profile', [PagesController::class, 'profile'])->name('user.profile');
+    Route::get('/profile/edit', [PagesController::class, 'edit'])->name('user.edit');
+
 });
 
 // ============================ Contractor routes =======================
@@ -48,10 +47,16 @@ Route::namespace('Contractor')->prefix('contractor')->group(function(){
 
 // ============================ Customer routes =======================
 
-Route::get('/customer/homepage', function(){
-    return view('customer.homepage');
-})->name('customer.homepage');
+Route::namespace('Customer')->prefix('customer')->group(function(){
+    
+    Route::get('/homepage', [CustomerPagesController::class, 'homepage'])->name('customer.homepage');
+    Route::get('/construction_style', [CustomerPagesController::class, 'construction_style'])->name('customer.construction_style');
+    Route::get('/your_project', [CustomerPagesController::class, 'your_project'])->name('customer.your_project');
+    Route::get('/profile', [CustomerPagesController::class, 'profile'])->name('user.profile');
+    Route::get('/profile/edit', [CustomerPagesController::class, 'edit'])->name('user.edit');
+    Route::post('/upload', [UploadController::class, 'upload'])->name('customer.upload');
 
+});
 // ============================ Customer routes =======================
 
 

@@ -23,7 +23,7 @@
                 <li><a href="project.html">Payment</a></li>
                 <li class="icon_profile">
                     <div class ="pop_up">
-                        <a href="">My Projects</a>
+                        <a href="{{ route('contractor.your_project') }}">My Projects</a>
                         <hr>
                         <a href="{{ route('user.profile') }}">Profile</a>
                         <hr>

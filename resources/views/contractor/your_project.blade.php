@@ -17,52 +17,24 @@
             <h3>Your project</h3>
         </div>
         <div class="projects">
-            
+        @isset($contractor)
+          @foreach($props as $prop)
             <div data-aos="fade-up" data-aos-delay="150" class="card">
                 <div class="box">
                     <div class="det">
                         <img src="{{asset('image-home/house2.jpg')}}" alt="" />
                         <ul>
                             <h3>House</h3>
-                            <li name="price" value="">costs:120,000$</li>
-                            <li name="date" value="">publish in :yy-mm-hh</li>
+                            Predict Salary : <li>{{$prop->PREDICTION}}</li>
+                            Publish at : <li>{{$prop->created_at}}</li>
+
                         </ul>
                         <a href="#">Edit</a>
                     </div>
                 </div>
             </div>
-            <div data-aos="fade-up" data-aos-delay="300" class="card">
-                <div class="box">
-                    <div class="det">
-                        <img src="{{asset('image-home/house2.jpg')}}" alt="" />
-                        <ul>
-                            <h3>House</h3>
-                            <li name="price" value="">costs:120,000$</li>
-                            <li name="date" value="">publish in :yy-mm-hh</li>
-                        </ul>
-                        <a href="#">Edit</a>
-                    </div>
-                </div>
-            </div>
-            <div data-aos="fade-up" data-aos-delay="450" class="card">
-                <div class="box">
-                    <div class="det">
-                        <img src="{{asset('image-home/house2.jpg')}}" alt="" />
-                        <ul>
-                            <h3>House</h3>
-                            <li name="price" value="">costs:120,000$</li>
-                            <li name="date" value="">publish in :yy-mm-hh</li>
-                        </ul>
-                        <a href="#">Edit</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-
+            @endforeach
+        @endisset
 @endsection
 @section('script')
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
