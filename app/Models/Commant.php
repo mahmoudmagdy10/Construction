@@ -5,21 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Project extends Model
+class Commant extends Model
 {
     use HasFactory;
-
-    protected $table = 'projects';
+    protected $table = 'commants';
     protected $fillable = [
-        'arch',
-        'file_path',
+        'comment',
         'user_id',
+        'project_id',
     ];
 
     public function  scopeSelection($query)
     {
 
-        return $query->select('id', 'arch', 'file_path', 'user_id');
+        return $query->select('id', 'comment', 'project_id', 'user_id');
     }
-    
 }

@@ -5,19 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class Reply extends Model
 {
     use HasFactory;
-    protected $table = 'comments';
+
+    protected $table = 'replies';
     protected $fillable = [
         'content',
         'user_id',
         'project_id',
+        'comment_id',
+    ];
+    protected $hidden = [
+        'created_at',
+        'updated_at',
     ];
 
     public function  scopeSelection($query)
     {
 
-        return $query->select('id', 'content', 'project_id', 'user_id');
+        return $query->select('id', 'content', 'user_id', 'project_id','comment_id');
     }
 }

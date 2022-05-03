@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Contractor\PagesController;
 use App\Http\Controllers\Customer\CustomerPagesController;
 use App\Http\Controllers\Customer\UploadController;
+use App\Http\Controllers\Contractor\ContractorUploadController;
+use App\Http\Controllers\Contractor\UploadContractorController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,6 +40,8 @@ Route::namespace('Contractor')->prefix('contractor')->group(function(){
     Route::get('/your_project', [PagesController::class, 'your_project'])->name('contractor.your_project');
     Route::get('/profile', [PagesController::class, 'profile'])->name('user.profile');
     Route::get('/profile/edit', [PagesController::class, 'edit'])->name('user.edit');
+    Route::get('/project/details/{id}', [PagesController::class, 'details'])->name('contractor.details');
+    Route::post('/project/details/comment/{project_id}', [UploadContractorController::class, 'comment'])->name('contractor.comment');
 
 });
 
@@ -55,6 +59,8 @@ Route::namespace('Customer')->prefix('customer')->group(function(){
     Route::get('/profile', [CustomerPagesController::class, 'profile'])->name('user.profile');
     Route::get('/profile/edit', [CustomerPagesController::class, 'edit'])->name('user.edit');
     Route::post('/upload', [UploadController::class, 'upload'])->name('customer.upload');
+    Route::get('/project/details/{id}', [CustomerPagesController::class, 'details'])->name('customer.details');
+    Route::post('/project/details/comment/{project_id}', [UploadController::class, 'comment'])->name('customer.comment');
 
 });
 // ============================ Customer routes =======================

@@ -1,4 +1,4 @@
-@extends('contractor.layout.app')
+@extends('customer.layout.app')
 
 @section('link')
 <link rel="stylesheet" href="{{asset('css/home/profile.css')}}">

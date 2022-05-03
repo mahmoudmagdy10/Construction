@@ -18,7 +18,7 @@
             </div>
             <ul class="navigation">
                 <li><a class="accept" href="{{route('contractor.homepage')}}">Home</a></li>
-                <li><a class="accept" href="{{route('contractor.explor')}}">Explor</a></li>
+                <li><a href="{{route('contractor.explor')}}">Explor</a></li>
                 <li><a href="{{route('contractor.your_project')}}">Your Project</a></li>
                 <li><a href="project.html">Payment</a></li>
                 <li class="icon_profile">

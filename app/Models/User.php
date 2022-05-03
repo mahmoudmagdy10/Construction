@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-
+use App\Models\Project;
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -69,4 +69,6 @@ class User extends Authenticatable
 
         return $query->select('id','name','email','password','phone','address','national_id','kind');
     }
+
+
 }

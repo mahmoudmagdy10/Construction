@@ -18,15 +18,15 @@
         </div>
         <div class="projects">
         @isset($contractor)
-          @foreach($props as $prop)
+          @foreach($project as $pro)
             <div data-aos="fade-up" data-aos-delay="150" class="card">
                 <div class="box">
                     <div class="det">
-                        <img src="{{asset('image-home/house2.jpg')}}" alt="" />
+                        <a href="{{route('contractor.details',$pro->id)}}"><img src="{{asset('image-home/house2.jpg')}}" alt="" /></a>
                         <ul>
-                            <h3>House</h3>
-                            Predict Salary : <li>{{$prop->PREDICTION}}</li>
-                            Publish at : <li>{{$prop->created_at}}</li>
+                        <a href="{{route('contractor.details',$pro->id)}}"><h3>House</h3></a>
+                            Predict Salary : <li>{{$pro->arch}}</li>
+                            Publish at : <li>{{$pro->created_at}}</li>
 
                         </ul>
                         <a href="#">Edit</a>
