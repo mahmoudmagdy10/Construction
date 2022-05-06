@@ -288,23 +288,6 @@ td {
 
 /* end table  */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* end restaurant  */
 /* start contract  */
 .maincontract {
@@ -512,9 +495,8 @@ td {
 
 .add {
     margin-top: 20px;
-    /* visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s, opacity 0.5s linear; */
+    margin-bottom: 55px !important;
+    width: 95% !important;
     display: block;
 }
 
@@ -528,4 +510,26 @@ td {
     visibility: visible;
     opacity: 1; */
     display: block;
+}
+
+.user-comment {
+    border: 2px solid #8c978c;
+    padding: 8px;
+    font-family: monospace;
+    background-color: #11a4bb2b;
+    box-shadow: 1px 2px 2px 1px #7c7c7c8a;
+}
+
+.user-reply {
+    border: 2px solid #2368455e;
+    padding: 8px;
+    font-family: monospace;
+    background-color: #30874e4f;
+    box-shadow: 1px 0px 8px 0px #0c54b578;
+
+}
+
+.content {
+    width: 95% !important;
+
 }

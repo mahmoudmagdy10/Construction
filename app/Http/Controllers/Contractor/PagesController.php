@@ -93,71 +93,21 @@ class PagesController extends Controller
     {
         $user = Auth::user();
 
-        if(Comment::where('user_id', '=', $user->id)->count() > 0){
-            $comment = Comment::select()->where('project_id', '=', $id)->first();
-            $comment_id = $comment->id;
-            try{
+        $users = User::find($user->id);
+        $props = Property::all()->where('project_id', '=', $id);
+        $project = Project::all()->where('id', '=', $id);        
+        $comments = Comment::where('project_id',$id)->where('user_id',$user->id)->with(['replies','users'])->get();
+        $project_id = $id;
 
-                $contractor = User::select()->find($user->id);
-                $props = Property::all()->where('project_id', '=', $id);
-                $project = Project::all()->where('id', '=', $id);
-                $comments = Comment::all()->where('project_id', '=', $id);
-                $replies = Reply::all()->where('comment_id', '=', $comment_id);
-    
-                $names_of_users_comments = DB::table('users')
-                ->select('users.name as user_name')
-                ->join('comments', 'comments.user_id', '=', 'users.id')
-                ->get();
-    
-                $comments_of_users = DB::table('comments')
-                ->select('*')
-                ->join('users', 'users.id', '=', 'comments.user_id')
-                ->get();
-    
-                $names_of_users_replies = DB::table('users')
-                ->select('users.name as user_name')
-                ->join('comments', 'comments.user_id', '=', 'users.id')
-                ->join('replies', 'replies.comment_id', '=', 'comments.id')
-                ->get();
-    
-                $replies_of_users = DB::table('replies')
-                ->select('*')
-                ->join('comments', 'comments.id', '=', 'replies.comment_id')
-                ->get();
-    
-                if (!$contractor && !$props && !$project && !$comments && !$replies) {
-                    return redirect()->back();
-                } else {
-                    return view('contractor.details')->with(compact('contractor'))->with(compact('props'))->with(compact('project'))->with(compact('comments'))->with(compact('replies'))
-                    ->with(compact('names_of_users_comments'))->with(compact('comments_of_users'))->with(compact('names_of_users_replies'))->with(compact('replies_of_users'));
-                }
-                // return $replies_of_users;
-    
-            } catch (\Exception $e) {
-                return redirect()->back();
-            }
-
+        $num_of_comments = Comment::where('user_id',"=",Auth::user()->id)->get();
+        
+        if (!$users && !$props && !$project && !$comments_of_users && !$replies_of_users) {
+            return redirect()->back();
         } else {
-            try{
-
-                $contractor = User::select()->find($user->id);
-                $props = Property::all()->where('project_id', '=', $id);
-                $project = Project::all()->where('id', '=', $id);        
-    
-                if (!$contractor && !$props && !$project) {
-                    return 'no';
-                } else {
-                    return view('contractor.details')->with(compact('contractor'))->with(compact('props'))->with(compact('project'));
-                }
-                // return $project;
-            } catch (\Exception $e) {
-                return 'no no';
-            }
-
+            return view('contractor.details')->with(compact('users','props','project','comments','project_id','num_of_comments'));
         }
 
-
-
+        // return $comments;
 
 
     }

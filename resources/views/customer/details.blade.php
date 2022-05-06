@@ -177,15 +177,12 @@
               <img class="nested_comment rounded-circle shadow-1-strong me-3" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp" alt="avatar" width="65" height="65" />
               <div class="media-body">
                 <div class="row">
-                  <div class="col-8 d-flex">
+                  <div class="col-12 d-flex">
                   {{ $item->users->name }}
-                    <span>- 2 hours ago</span>
-                  </div>
-                  <div class="col-4">
-                  
+                    <span class="time"> {{ $item->created_at->format('M D Y h:i') }}</span>
                   </div>
                 </div>		
-                <p class="user-comment mb-1" style="border: 2px solid green;"> {{ $item->content }} </p>
+                <p class="user-comment mb-1 content" > {{ $item->content }} </p>
                 @foreach($item->replies as $reply)
                 @isset($reply)
                 <div class="media mt-4">
@@ -195,10 +192,10 @@
                       <div class="row">
                         <div class="col-12 d-flex">
                             <h5> {{ $reply->users->name }}  </h5>
-                            <span>- 3 hours ago</span>
+                            <span class="time"> {{ $reply->created_at->format('M D Y h:i') }}</span>
                         </div>
                       </div>
-                      <p class="user-comment mb-1" style="border: 2px solid red;"> {{ $reply->content }} </p>
+                      <p class="user-reply mb-1 content"> {{ $reply->content }} </p>
                     </div>
 
                 </div>
@@ -207,9 +204,9 @@
                 <!-- Add Comment -->
                 <form action="{{ route('customer.reply',$item->id) }}" method="POST">
                     @csrf
-                    <div class="form-group add">
+                    <div class="form-group add ">
                         <label for="exampleInputEmail1">Add Comment</label>
-                        <textarea name ="comment" class="form-control" aria-label="With textarea"></textarea>
+                        <textarea name ="comment" class="form-control " aria-label="With textarea"></textarea>
                         <input class="submit btn btn-primary" type="submit" value="Send">
                     </div>
                 </form>

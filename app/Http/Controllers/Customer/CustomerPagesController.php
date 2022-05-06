@@ -11,6 +11,8 @@ use App\Models\project;
 use App\Models\Comment;
 use App\Models\Reply;
 use DB;
+use Carbon\Carbon;
+
 
 class CustomerPagesController extends Controller
 {
@@ -67,14 +69,13 @@ class CustomerPagesController extends Controller
         $id =Auth::user()->id;
         try{
             $customer = User::find($id);
-            $props = Property::all()->where('user_id', '=', $id);
             $project = Project::all()->where('user_id', '=', $id);
 
 
-            if (!$customer && !$props && !$project) {
+            if (!$customer && !$project) {
                 return redirect()->route('log_in');
             } else {
-                return view('customer.your_project')->with(compact('customer'))->with(compact('props'))->with(compact('project'));
+                return view('customer.your_project')->with(compact('customer','project'));
             }
         } catch (\Exception $e) {
             return redirect()->route('log_in');
@@ -108,7 +109,6 @@ class CustomerPagesController extends Controller
     public function details($id)
     {
         $user = Auth::user();
-
         $users = User::find($user->id);
         $props = Property::all()->where('project_id', '=', $id);
         $project = Project::all()->where('id', '=', $id);        
@@ -123,6 +123,8 @@ class CustomerPagesController extends Controller
         } else {
             return view('customer.details')->with(compact('users','props','project','comments','project_id','num_of_comments'));
         }
+
+
 
     }
 

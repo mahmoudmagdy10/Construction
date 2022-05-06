@@ -17,7 +17,7 @@
 @section('content')
 <div class="title">
     <div data-aos="fade-up" data-aos-delay="150" class="container">
-    @isset($contractor)
+    @isset($users)
         @foreach($props as $prop)
         <div class="projects">
                 <div data-aos="fade-up" data-aos-delay="150" class="card">
@@ -164,78 +164,62 @@
     @endisset
     </div>
 </div>
-<!-- end restaurant   -->
-<section class="gradient-custom commment">
-  <div class="container my-5 py-5">
-    <div class="row d-flex justify-content-center">
-      <div class="col-md-12 col-lg-10 col-xl-8">
-        <div class="card main">
-          <div class="card-body p-4">
-            <!-- Successfully msg -->
-            <div id="success" class="alert alert-success" style="display: none">
-                Added Successfuly
-            </div>
+<!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -->
+<div class="container mb-5 mt-5">  
+  <div class="card main">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="text-center mb-5">
+          Nested comment section
+        </h3>
+        <div class="row">
+            @foreach($comments as $item)
+          <div class="col-md-12">
 
-            <h3 class="text-center mb-4 pb-2 h_3"> Project's Comments</h3>
-            <a href="#!"><i class="fas fa-reply fa-xs"></i><span class="small reply"> Add</span></a>
-
-            @isset($comments)
-            @foreach($names_of_users_comments as $names)
-            <div class="row parent">
-              <div class="col">
-                
-                <div class="d-flex flex-start">
-                  <img class="nested_comment rounded-circle shadow-1-strong me-3"
-                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp" alt="avatar" width="65"
-                    height="65" />
-                  <div class="flex-grow-1 flex-shrink-1">
-                    @foreach($comments as $comment)
-                    <div>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <b class="mb-0">
-                          {{$names->user_name}}
-                          <span class="small time"> 2 hours ago</span>
-                        </b>
-                      </div>                      
-                      <p class="small mb-0">
-                        {{$comment->content}}
-                      </p>
-                    </div>
-                    @endforeach
-
-                    @foreach($replies as $reply)
-                    <div class="d-flex flex-start mt-4">
-                      <a class="me-3" href="#">
-                        <img class="nested_comment rounded-circle shadow-1-strong"
-                          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar"
-                          width="65" height="65" />
-                      </a>
-                      <div class="flex-grow-1 flex-shrink-1">
-                        <div>
-                          <div class="d-flex justify-content-between align-items-center">
-                            <b class="mb-1">
-                              {{$contractor->name}} <span class="small time"> 4 hours ago</span>
-                            </b>
-                          </div>
-                          <p class="small mb-0">
-                          {{$reply->content}}
-                          </p>
+            <div class="media">
+              <img class="nested_comment rounded-circle shadow-1-strong me-3" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp" alt="avatar" width="65" height="65" />
+              <div class="media-body">
+                <div class="row">
+                  <div class="col-12 d-flex">
+                  {{ $item->users->name }}
+                    <span class="time"> {{ $item->created_at->format('M D Y h:i') }}</span>
+                  </div>
+                </div>		
+                <p class="user-comment mb-1 content" > {{ $item->content }} </p>
+                @foreach($item->replies as $reply)
+                @isset($reply)
+                <div class="media mt-4">
+                    <img class="nested_comment rounded-circle shadow-1-strong"src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar"width="65" height="65" />
+                    <div class="media-body">
+                        
+                      <div class="row">
+                        <div class="col-12 d-flex">
+                            <h5> {{ $reply->users->name }}  </h5>
+                            <span class="time"> {{ $reply->created_at->format('M D Y h:i') }}</span>
                         </div>
                       </div>
+                      <p class="user-reply mb-1 content"> {{ $reply->content }} </p>
                     </div>
-                    @endforeach
-                  </div>
+
                 </div>
+                @endisset
+                @endforeach
+                <!-- Add Comment -->
+                <form action="{{ route('contractor.reply',$item->id) }}" method="POST">
+                    @csrf
+                    <div class="form-group add ">
+                        <label for="exampleInputEmail1">Add Comment</label>
+                        <textarea name ="comment" class="form-control " aria-label="With textarea"></textarea>
+                        <input class="submit btn btn-primary" type="submit" value="Send">
+                    </div>
+                </form>
+              <!-- Add Comment -->
               </div>
             </div>
             @endforeach
-            @endisset
-            
-
-            @isset($project)
-            @foreach($project as $pro)
             <!-- Add Comment -->
-            <form id="form_id" action="{{route('contractor.comment',$pro->id)}}" method="POST">
+            @if($num_of_comments->count() < 1 )
+            <form id="form_id" action="{{ route('customer.comment',$project_id) }}" method="POST">
                 @csrf
                 <div class="form-group add">
                     <label for="exampleInputEmail1">Add Comment</label>
@@ -243,15 +227,16 @@
                     <input id="add_comment" class="submit btn btn-primary" type="submit" value="Send">
                 </div>
             </form>
+            @endif
             <!-- Add Comment -->
-            @endforeach
-            @endisset
+
           </div>
         </div>
       </div>
     </div>
   </div>
-</section>
+</div>
+<!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -->
 @endsection
 
 
