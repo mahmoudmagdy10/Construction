@@ -10,6 +10,7 @@ use App\Models\Property;
 use App\Models\project;
 use App\Models\Comment;
 use App\Models\Reply;
+use DB;
 
 class CustomerPagesController extends Controller
 {
@@ -65,9 +66,10 @@ class CustomerPagesController extends Controller
     {
         $id =Auth::user()->id;
         try{
-            $customer = User::select()->find($id);
+            $customer = User::find($id);
             $props = Property::all()->where('user_id', '=', $id);
             $project = Project::all()->where('user_id', '=', $id);
+
 
             if (!$customer && !$props && !$project) {
                 return redirect()->route('log_in');
@@ -107,45 +109,19 @@ class CustomerPagesController extends Controller
     {
         $user = Auth::user();
 
-        if(Comment::where('user_id', '=', $user->id)->count() > 0){
+        $users = User::find($user->id);
+        $props = Property::all()->where('project_id', '=', $id);
+        $project = Project::all()->where('id', '=', $id);        
+        $comments = Comment::where('project_id',$id)->with(['users','replies'])->get();
+        $project_id = $id;
+        $user = Comment::where('user_id',$user->id)->with(['users'])->get();
 
-            $comment = Comment::select()->where('user_id', '=', $user->id)->first();
-            $comment_id = $comment->id;
-
-            try{
-
-                $customer = User::select()->find($user->id);
-                $props = Property::all()->where('project_id', '=', $id);
-                $project = Project::all()->where('id', '=', $id);
-                $comments = Comment::all()->where('user_id', '=', $user->id);
-                $replies = Reply::all()->where('comment_id', '=', $comment_id);
+        $num_of_comments = Comment::where('user_id',"=",Auth::user()->id)->get();
         
-    
-                if (!$customer && !$props && !$project && !$comments && !$replies) {
-                    return redirect()->back();
-                } else {
-                    return view('customer.details')->with(compact('customer'))->with(compact('props'))->with(compact('project'))->with(compact('comments'))->with(compact('replies'));
-                }
- 
-            } catch (\Exception $e) {
-                return redirect()->back();
-            }
-        }else{
-            try{
-
-                $customer = User::select()->find($user->id);
-                $props = Property::all()->where('project_id', '=', $id);
-                $project = Project::all()->where('id', '=', $id);        
-    
-                if (!$customer && !$props && !$project) {
-                    return 'no';
-                } else {
-                    return view('customer.details')->with(compact('customer'))->with(compact('props'))->with(compact('project'));
-                }
-                // return $project;
-            } catch (\Exception $e) {
-                return 'no no';
-            }
+        if (!$users && !$props && !$project && !$comments_of_users && !$replies_of_users) {
+            return redirect()->back();
+        } else {
+            return view('customer.details')->with(compact('users','props','project','comments','project_id','num_of_comments'));
         }
 
     }

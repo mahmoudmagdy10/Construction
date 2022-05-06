@@ -125,51 +125,66 @@ class UploadController extends Controller
             return $this->returnError($e->getCode(), $e->getMessage());
         }
 
-        if(Comment::where('user_id', '=', $user->id)->count() > 0){
+        try {
 
-            $comm = Comment::select()->where('user_id', '=', $user->id)->first();
-            $replies = Reply::select()->where('comment_id','=',$comm->id);
-
-            try {
-
-                $request->request->add(['id'=> $user->id]);
-                $request->request->add(['project_id'=>$project_id]);
-                $request->request->add(['comment_id'=>$comm->id]);
+            $request->request->add(['id'=> $user->id]);
+            $request->request->add(['project_id'=>$project_id]);
     
-                    Reply::create([
-                        "content" => $request->comment,
-                        "user_id" => $request->id,
-                        "project_id" => $request->project_id,
-                        "comment_id" => $request->comment_id,
-                    ]);
-                    return redirect()->back();
-                    // return "reply";
-    
-            } catch (\Exception $e) {
-                return $this->returnError($e->getCode(), $e->getMessage());
-            }
+            Comment::create([
+                "content" => $request->comment,
+                "user_id" => $request->id,
+                "project_id" => $request->project_id,
+            ]);
+            return redirect()->back()->with('message','Created Successfully');
+            // return $request;
 
-        }else{
+            
 
-            try {
-
-                $request->request->add(['id'=> $user->id]);
-                $request->request->add(['project_id'=>$project_id]);
-        
-                Comment::create([
-                    "content" => $request->comment,
-                    "user_id" => $request->id,
-                    "project_id" => $request->project_id,
-                ]);
-                return redirect()->back();
-                // return $request;
-    
-                
-    
-            } catch (\Exception $e) {
-                return $this->returnError($e->getCode(), $e->getMessage());
-            }
+        } catch (\Exception $e) {
+            return $this->returnError($e->getCode(), $e->getMessage());
         }
+        
     }
 
+
+    public function reply($comment_id,Request $request){
+        $user = User::select()->find(Auth::user()->id);
+        $comment = Comment::find($comment_id)->first();
+        $project_id = $comment->project_id;
+
+        // Validation
+        try {
+            $rules = [
+                'comment' => "required",
+            ];
+
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return redirect()->back();
+            }
+
+        } catch (\Exception $e) {
+            return $this->returnError($e->getCode(), $e->getMessage());
+        }
+        try {
+
+            $request->request->add(['id'=> $user->id]);
+            $request->request->add(['project_id'=>$project_id]);
+            $request->request->add(['comment_id'=>$comment_id]);
+    
+            Reply::create([
+                "content" => $request->comment,
+                "user_id" => $request->id,
+                "project_id" => $request->project_id,
+                "comment_id" => $request->comment_id,
+            ]);
+            return redirect()->back()->with('message','Created Successfully');
+            // return $id;
+
+            
+
+        } catch (\Exception $e) {
+            return $this->returnError($e->getCode(), $e->getMessage());
+        }
+    }
 }

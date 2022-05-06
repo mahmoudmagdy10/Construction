@@ -15,8 +15,6 @@
 @endsection
 
 @section('content')
-
-@endsection
 <div class="title">
     <div data-aos="fade-up" data-aos-delay="150" class="container">
     @isset($contractor)
@@ -182,9 +180,10 @@
             <a href="#!"><i class="fas fa-reply fa-xs"></i><span class="small reply"> Add</span></a>
 
             @isset($comments)
-
+            @foreach($names_of_users_comments as $names)
             <div class="row parent">
               <div class="col">
+                
                 <div class="d-flex flex-start">
                   <img class="nested_comment rounded-circle shadow-1-strong me-3"
                     src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp" alt="avatar" width="65"
@@ -194,15 +193,16 @@
                     <div>
                       <div class="d-flex justify-content-between align-items-center">
                         <b class="mb-0">
-                          {{$contractor->name}}
+                          {{$names->user_name}}
                           <span class="small time"> 2 hours ago</span>
                         </b>
-                      </div>
+                      </div>                      
                       <p class="small mb-0">
                         {{$comment->content}}
                       </p>
                     </div>
                     @endforeach
+
                     @foreach($replies as $reply)
                     <div class="d-flex flex-start mt-4">
                       <a class="me-3" href="#">
@@ -228,7 +228,9 @@
                 </div>
               </div>
             </div>
+            @endforeach
             @endisset
+            
 
             @isset($project)
             @foreach($project as $pro)
@@ -250,6 +252,8 @@
     </div>
   </div>
 </section>
+@endsection
+
 
 <!-- ####################### -->
 <!-- <section style="background-color: #ad655f;">

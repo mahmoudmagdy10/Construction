@@ -17,7 +17,7 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
         "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
         "Segoe UI Symbol", "Noto Color Emoji";
-    background-color: #3fa2ab;
+    background-color: #3fa2ab !important;
 }
 
 ul {
@@ -476,7 +476,8 @@ td {
 
 /* end contract  */
 .main {
-    box-shadow: 1px 1px 16px 8px #6a1f1f9e;
+    box-shadow: 1px 1px 16px 8px #6a1f1f9e !important;
+    border: 1px solid rgb(153, 199, 78) !important;
 
 }
 
@@ -511,9 +512,10 @@ td {
 
 .add {
     margin-top: 20px;
-    visibility: hidden;
+    /* visibility: hidden;
     opacity: 0;
-    transition: visibility 0s, opacity 0.5s linear;
+    transition: visibility 0s, opacity 0.5s linear; */
+    display: block;
 }
 
 .submit {
@@ -522,7 +524,8 @@ td {
 }
 
 .show_comment {
-    opacity: 1;
+    /* opacity: 1;
     visibility: visible;
-    opacity: 1;
+    opacity: 1; */
+    display: block;
 }

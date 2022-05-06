@@ -61,6 +61,7 @@ Route::namespace('Customer')->prefix('customer')->group(function(){
     Route::post('/upload', [UploadController::class, 'upload'])->name('customer.upload');
     Route::get('/project/details/{id}', [CustomerPagesController::class, 'details'])->name('customer.details');
     Route::post('/project/details/comment/{project_id}', [UploadController::class, 'comment'])->name('customer.comment');
+    Route::post('/project/details/reply/{comment_id}', [UploadController::class, 'reply'])->name('customer.reply');
 
 });
 // ============================ Customer routes =======================

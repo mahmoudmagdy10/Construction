@@ -10,6 +10,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Project;
+use App\Models\Comment;
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -70,5 +71,13 @@ class User extends Authenticatable
         return $query->select('id','name','email','password','phone','address','national_id','kind');
     }
 
+    public function projects()
+    {
+        return $this->hasMany(Project::class, 'user_id', 'id');
+    }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'user_id', 'id');
+    }
 
 }

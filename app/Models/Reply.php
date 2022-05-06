@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Comment;
 
 class Reply extends Model
 {
@@ -23,7 +24,10 @@ class Reply extends Model
 
     public function  scopeSelection($query)
     {
-
         return $query->select('id', 'content', 'user_id', 'project_id','comment_id');
+    }
+
+    public function users(){
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

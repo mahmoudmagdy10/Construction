@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\Project;
+use App\Models\Reply;
 
 class Comment extends Model
 {
@@ -20,4 +23,15 @@ class Comment extends Model
 
         return $query->select('id', 'content', 'project_id', 'user_id');
     }
+
+    
+    public function users(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
+    
+    public function replies()
+    {
+        return $this->hasMany(Reply::class, 'comment_id', 'id');
+    }
+
 }
