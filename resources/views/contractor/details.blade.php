@@ -22,12 +22,32 @@
         <div class="projects">
                 <div data-aos="fade-up" data-aos-delay="150" class="card">
                     <div class="box">
-                        <div class="det">
-                            <img src="{{asset('image-home/house2.jpg')}}" alt="" />
-                            <ul>
-                                <a href=""><h3>House</h3></a>
-                            </ul>
+                      <div class="det">
+                        <h3>Architecture</h3>
+                        @if($prop->project->arch === 'Italian')
+                        <div class="fram">
+                          <iframe title="Petrovsky travel palace in Moscow" frameborder="0" allowfullscreen
+                              mozallowfullscreen="true" webkitallowfullscreen="true"
+                              allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
+                              execution-while-out-of-viewport execution-while-not-rendered web-share
+                              src="https://sketchfab.com/models/8b877b1776794c139d80fd93999003f0/embed"> </iframe>
                         </div>
+                        @endif
+                        @if($prop->project->arch === 'American')
+                        <div class="fram">
+                          <iframe src="https://sketchfab.com/models/8b877b1776794c139d80fd93999003f0/embed"> </iframe>
+                        </div>
+                        @endif
+                        @if($prop->project->arch === 'UK')
+                        <div class="fram">
+                          <iframe title="Ndecor Design Dokuzer İnşaat 3D" frameborder="0" allowfullscreen
+                              mozallowfullscreen="true" webkitallowfullscreen="true"
+                              allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
+                              execution-while-out-of-viewport execution-while-not-rendered web-share
+                              src="https://sketchfab.com/models/e4869a806dfa4efd9d480fda16990c52/embed"> </iframe>
+                        </div>
+                        @endif
+                      </div>
                     </div>
                 </div>
 
@@ -208,7 +228,7 @@
                 <form action="{{ route('contractor.reply',$item->id) }}" method="POST">
                     @csrf
                     <div class="form-group add ">
-                        <label for="exampleInputEmail1">Add Comment</label>
+                        <label for="exampleInputEmail1">Reply</label>
                         <textarea name ="comment" class="form-control " aria-label="With textarea"></textarea>
                         <input class="submit btn btn-primary" type="submit" value="Send">
                     </div>

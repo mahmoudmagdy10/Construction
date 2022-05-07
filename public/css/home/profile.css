@@ -99,3 +99,39 @@ body {
 .container p {
     color: antiquewhite !important;
 }
+
+.hover_picture {
+    background-color: #1a202c8a;
+    width: 150px;
+    height: 153px;
+    position: absolute;
+    top: 10px;
+    border-radius: 50%;
+    opacity: 0;
+
+}
+
+.hover_picture a {
+    font-size: 16px;
+    width: 235px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    position: absolute;
+    right: -43px;
+    top: 80px;
+    color: brown;
+
+}
+
+.show_hover_picture {
+    background-color: #1a202c8a;
+    width: 150px;
+    height: 153px;
+    position: absolute;
+    top: 10px;
+    border-radius: 50%;
+    opacity: 1;
+    transition: 0.6s;
+
+}

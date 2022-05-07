@@ -1,11 +1,34 @@
 @extends('contractor.layout.app')
 
+@section('link')
+<link rel="stylesheet" href="{{asset('css/home/profile.css')}}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" >
+
+@endsection
+
 @section('content')
 
-<form class="form" action="{{route('contractor.update',$contractor->id)}}" method="POST" enctype="multipart/form-data">
-<input type="hidden" name="token" value = "{{$contractor->remember_token}}">                 
+<form class="form" action="{{route('contractor.update')}}" method="POST" enctype="multipart/form-data">
+  @csrf
 <div class="container">
     <div class="main-body">
+      <div class="col-md-4 mb-3 ">
+
+            <div class="card car-2">
+              <div class="card-body">
+                <div class="d-flex flex-column align-items-center text-center profile_picture">
+                @isset($contractor)
+                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle " width="150">
+                  <div class="mt-3">
+                    <h4>{{$contractor->name}}</h4>
+                @endisset
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="row gutters-sm">
             <div class="col-md-8">
               <div class="card mb-9 car">
@@ -48,16 +71,9 @@
                   <br>
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Country</h6>
+                      <h6 class="mb-0">National_ID</h6>
                     </div>
-                    <input class="col-sm-9 form-control" name="country" value = "{{$contractor->country}}">                    
-                  </div>
-                  <br>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Company</h6>
-                    </div>
-                    <input class="col-sm-9 form-control" name="company" value = "{{$contractor->company}}">                    
+                    <input class="col-sm-9 form-control" name="national_id" value = "{{$contractor->national_id}}">                    
                   </div>
                   <br>
                   <div class="form-actions">

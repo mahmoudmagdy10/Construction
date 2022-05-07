@@ -38,8 +38,11 @@ Route::namespace('Contractor')->prefix('contractor')->group(function(){
     Route::get('/homepage', [PagesController::class, 'homepage'])->name('contractor.homepage');
     Route::get('/explor', [PagesController::class, 'explor'])->name('contractor.explor');
     Route::get('/your_project', [PagesController::class, 'your_project'])->name('contractor.your_project');
-    Route::get('/profile', [PagesController::class, 'profile'])->name('user.profile');
-    Route::get('/profile/edit', [PagesController::class, 'edit'])->name('user.edit');
+
+    Route::get('/profile', [PagesController::class, 'profile'])->name('contractor.profile');
+    Route::get('/profile/edit', [PagesController::class, 'edit'])->name('contractor.edit');
+    Route::post('/profile/update', [PagesController::class, 'update'])->name('contractor.update');
+
     Route::get('/project/details/{id}', [PagesController::class, 'details'])->name('contractor.details');
     Route::post('/project/details/comment/{project_id}', [UploadContractorController::class, 'comment'])->name('contractor.comment');
     Route::post('/project/details/reply/{comment_id}', [UploadContractorController::class, 'reply'])->name('contractor.reply');
@@ -57,8 +60,11 @@ Route::namespace('Customer')->prefix('customer')->group(function(){
     Route::get('/homepage', [CustomerPagesController::class, 'homepage'])->name('customer.homepage');
     Route::get('/construction_style', [CustomerPagesController::class, 'construction_style'])->name('customer.construction_style');
     Route::get('/your_project', [CustomerPagesController::class, 'your_project'])->name('customer.your_project');
-    Route::get('/profile', [CustomerPagesController::class, 'profile'])->name('user.profile');
-    Route::get('/profile/edit', [CustomerPagesController::class, 'edit'])->name('user.edit');
+
+    Route::get('/profile', [CustomerPagesController::class, 'profile'])->name('customer.profile');
+    Route::get('/profile/edit', [CustomerPagesController::class, 'edit'])->name('customer.edit');
+    Route::post('/profile/update', [CustomerPagesController::class, 'update'])->name('customer.update');
+
     Route::post('/upload', [UploadController::class, 'upload'])->name('customer.upload');
     Route::get('/project/details/{id}', [CustomerPagesController::class, 'details'])->name('customer.details');
     Route::post('/project/details/comment/{project_id}', [UploadController::class, 'comment'])->name('customer.comment');

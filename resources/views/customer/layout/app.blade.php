@@ -25,7 +25,7 @@
                     <div class ="pop_up">
                     <a href="{{ route('customer.your_project') }}">My Projects</a>
                         <hr>
-                        <a href="{{ route('user.profile') }}">Profile</a>
+                        <a href="{{ route('customer.profile') }}">Profile</a>
                         <hr>
                         <a href="{{ route('logout') }}">Log Out</a>
                     </div>

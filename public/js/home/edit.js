@@ -14,4 +14,24 @@ document.querySelectorAll("li a").forEach(function (l) {
         l.classList.add("accept");
 
     })
-})
+});
+// ===================================================================
+
+var profile_picture = document.querySelector('.profile_picture');
+var hover_picture = document.querySelector('.hover_picture');
+
+profile_picture.addEventListener('mouseover', function () {
+    hover_picture.classList.add("show_hover_picture");
+    // console.log("yes");
+});
+
+profile_picture.addEventListener('mouseout', function () {
+    hover_picture.classList.remove("show_hover_picture");
+    // console.log("yes");
+});
+
+// document.querySelector("demo").addEventListener("mouseover", hoverPicture);
+
+// function hoverPicture() {
+//   document.getElementById("demo").style.color = "red";
+// }

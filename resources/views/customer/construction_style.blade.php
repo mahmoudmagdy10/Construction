@@ -87,10 +87,10 @@
         </div>
         
         <div class="twod">
-                <div class="twodmodel">
-                    <h3>upload 2D model</h3>
-                    <input type="file" name="file"  class="file">
-                </div>
+            <div class="twodmodel">
+                <h3>upload 2D model</h3>
+                <input type="file" name="file"  class="file">
+            </div>
         </div>
     </div>
 
