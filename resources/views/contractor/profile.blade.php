@@ -10,95 +10,81 @@
 @section('content')
 <div class="container">
     <div class="main-body prof">
-          <div class="">
+      @isset($contractor)
 
-            <div class="col-md-4 mb-3 ">
-              <div class="card car-2">
-                <div class="card-body">
-                  <div class="d-flex flex-column align-items-center text-center profile_picture">
-                  @isset($contractor)
-                    <div class="hover_picture">
-                        <a class="hover_button" href="{{route('contractor.edit')}}">Change Picture</a>
-                    </div>
-                      <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle " width="150">
-                    <div class="mt-3">
-                      <h4>{{$contractor->name}}</h4>
-                  @endisset
-                    </div>
-                  </div>
+          <div class="parent">
+              <div class="img-person">
+                @if($contractor->profile_picture !== null)
+                <img class="profile_picture" src='{{asset("Profile_Picture/$profile_picture")}}' alt="" />
+                @endif
+                @if($contractor->profile_picture == null)
+                <img src="{{asset('image-home/profile.jpg')}}" alt="" />
+                @endif
+                <div class="caption">
+                <a class="btn btn-danger " href="{{route('contractor.edit')}}">Upload</a>
                 </div>
               </div>
             </div>
 
-            <div class="col-md-8">
-              <div class="card mb-3 car-3">
-                <div class="card-body">
-                @isset($contractor)
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Full Name</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                    {{$contractor->name}}
-                    </div>
+            <div class="profile_info">
+                <div class="row-container">
+                  <div class="prop">
+                    <h6 class="">Full Name</h6>
                   </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Email</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                    {{$contractor->email}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Password</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                    ***************
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Phone</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                    {{$contractor->phone}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Address</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                    {{$contractor->address}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">National_ID</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                    {{$contractor->national_id}}
-                    </div>
-                  </div>
-                  <hr>
 
-                  <div class="row form-actions">
-                    <div class="col-sm-6">
-                      <a class="btn btn-danger " href="{{route('contractor.edit')}}">Edit</a>
-                    </div>
+                  <div class="value">
+                  {{$contractor->name}}
                   </div>
-                @endisset
                 </div>
-              </div>
+                <hr>
+
+                <div class="row-container">
+                  <div class="prop">
+                    <h6 class="">Email </h6>
+                  </div>
+
+                  <div class="value">
+                  {{$contractor->email}}
+                  </div>
+                </div>
+                <hr>
+                <div class="row-container">
+                  <div class="prop">
+                    <h6 class="">Address</h6>
+                  </div>
+
+                  <div class="value">
+                  {{$contractor->address}}
+                  </div>
+                </div>
+                <hr>
+                <div class="row-container">
+                  <div class="prop">
+                    <h6 class="">National ID</h6>
+                  </div>
+
+                  <div class="value">
+                  {{$contractor->national_id}}
+                  </div>
+                </div>
+                <hr>
+                <div class="row-container">
+                  <div class="prop">
+                    <h6 class="">Phone</h6>
+                  </div>
+
+                  <div class="value">
+                  {{$contractor->phone}}
+                  </div>
+                </div>
+                <hr>
+
+                <div class=" form-actions">
+                    <a class="btn btn-danger " href="{{route('contractor.edit')}}">Edit</a>
+                </div>
+              @endisset
             </div>
-          </div>
+
 
         </div>
     </div>

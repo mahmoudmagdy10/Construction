@@ -58,28 +58,37 @@ class PagesController extends Controller
     public function your_project()
     {
         try{
-            $contractor = User::select()->find(Auth::user()->id);
-            $props = Property::all();
-            if (!$contractor && !$props) {
+            $user= Auth::user();
+            $contractor = User::select()->find($user->id);
+
+            $project = Project::whereHas('comments', function($query) use($user) {
+                $query->whereUserId($user->id);
+            })->with(['props'])->get();
+
+            if (!$contractor && !$project) {
                 return redirect()->route('log_in');
             } else {
-                return view('contractor.your_project')->with(compact('contractor'))->with(compact('props'));
+                return view('contractor.your_project')->with(compact('contractor'))->with(compact('project'));
             }
+            // return $project;
+
         } catch (\Exception $e) {
-            return redirect()->route('log_in');
+            // return redirect()->route('log_in');
+            return "no";
         }
     }
 
 
     public function profile()
     {
+        $profile_picture = Auth::user()->profile_picture;
         if(Auth::check()){
             try{
                 $contractor = User::select()->find(Auth::user()->id);
                 if (!$contractor) {
                     return redirect()->route('log_in');
                 } else {
-                    return view('contractor.profile', compact('contractor'));
+                    return view('contractor.profile', compact('contractor','profile_picture'));
                 }
             } catch (\Exception $e) {
                 return redirect()->route('log_in');

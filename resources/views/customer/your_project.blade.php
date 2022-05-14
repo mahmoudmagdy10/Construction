@@ -24,9 +24,9 @@
                     <div class="det">
                         <a href="{{route('customer.details',$pro->id)}}"><img src="{{asset('image-home/house2.jpg')}}" alt="" /></a>
                         <ul>
-                            <a href="{{route('customer.details',$pro->id)}}"><h3>House</h3></a>
-                            Predict Salary : <li>{{$pro->arch}}</li>
-                            Publish at : <li>{{$pro->created_at}}</li>
+                            <a href="{{route('customer.details',$pro->id)}}"><h3>House</h3></a><br>
+                            <li>Architecture : {{$pro->arch}}</li>
+                            <li>Publish at : {{$pro->created_at->format('d-m-Y')}}</li>
                         </ul>
                     </div>
                 </div>

@@ -12,6 +12,8 @@ body {
     padding: 15px;
     position: relative;
     top: 95px;
+    display: flex;
+    column-gap: 45px;
 
 }
 
@@ -29,6 +31,9 @@ body {
     background-clip: border-box;
     border: 0 solid rgba(0, 0, 0, .125);
     border-radius: .25rem;
+    height: 80%;
+    margin: 100px auto;
+
 }
 
 .card-body {
@@ -78,20 +83,20 @@ body {
 }
 
 .car,
-.car-2,
 .car-3 {
-    box-shadow: 1px 1px 16px 8px #1f466a5c !important;
-    background-color: #ffffff47 !important;
-    left: 8% !important;
-    width: 137% !important;
+    box-shadow: 1px 1px 16px 8px #20706f5c !important;
+    background-color: #02378745 !important;
+    width: 500% !important;
 }
 
 .car-2 {
-    left: 66% !important;
+    width: 85% !important;
+    box-shadow: 1px 1px 16px 8px #20706f5c !important;
+    background-color: #02378745 !important;
+
 }
 
 .car-3 div {
-    left: 0 !important;
     color: antiquewhite !important;
 }
 
@@ -134,4 +139,107 @@ body {
     opacity: 1;
     transition: 0.6s;
 
+}
+
+.profile_photo {
+    height: 100%;
+}
+
+.parent {
+    float: left;
+    border: #8f6e0ef5 6px solid;
+    border-radius: 5%;
+}
+
+.img-person {
+    position: relative;
+    top: 15px;
+    left: 15px;
+    overflow: hidden;
+    transition: 8s 8s top;
+}
+
+/* .img-person img {
+    width: 100%
+} */
+
+.caption {
+
+    width: 100%;
+    height: 100%;
+    background: rgb(20, 9, 9);
+    opacity: 0;
+    position: absolute;
+    top: 100%;
+    transition: 0.8s 0.1s top, 0.8s 0.1s opacity;
+    text-align: center;
+}
+
+.caption img {
+    transition: 0.1s 0.1s background-color;
+    transform: translateY(200px);
+    width: 10%;
+
+
+}
+
+.caption img:hover {
+    background-color: rgb(36, 98, 3);
+
+}
+
+.img-person:hover .caption {
+    opacity: .8;
+    top: 0%;
+}
+
+.profile_info {
+    width: 800px;
+    background-color: #153d44bd;
+    position: relative;
+    box-shadow: 1px 1px 16px 1px #24aedf;
+
+}
+
+.row-container {
+    padding: 12px;
+
+}
+
+.row-container .value {
+    margin-left: 240px;
+}
+
+hr {
+    width: 66% !important;
+    margin: 1px auto !important;
+}
+
+.form-actions a {
+    width: 70px;
+    height: 39px;
+    margin: 20px 0 0 20px !important;
+}
+
+.form-2 {
+    position: absolute;
+    width: 58%;
+    right: 100px;
+}
+
+.form-1 {
+    position: absolute;
+    left: 10%;
+    top: 25%;
+}
+
+.save_profile {
+    position: absolute;
+    top: 400px;
+    left: 46px;
+}
+
+.profile_picture {
+    height: 445px;
+    width: 320px;
 }

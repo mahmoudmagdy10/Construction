@@ -42,6 +42,7 @@ Route::namespace('Contractor')->prefix('contractor')->group(function(){
     Route::get('/profile', [PagesController::class, 'profile'])->name('contractor.profile');
     Route::get('/profile/edit', [PagesController::class, 'edit'])->name('contractor.edit');
     Route::post('/profile/update', [PagesController::class, 'update'])->name('contractor.update');
+    Route::post('/profile/update/profile_picture', [UploadContractorController::class, 'profile_picture'])->name('contractor.profile_picture');
 
     Route::get('/project/details/{id}', [PagesController::class, 'details'])->name('contractor.details');
     Route::post('/project/details/comment/{project_id}', [UploadContractorController::class, 'comment'])->name('contractor.comment');
@@ -64,9 +65,11 @@ Route::namespace('Customer')->prefix('customer')->group(function(){
     Route::get('/profile', [CustomerPagesController::class, 'profile'])->name('customer.profile');
     Route::get('/profile/edit', [CustomerPagesController::class, 'edit'])->name('customer.edit');
     Route::post('/profile/update', [CustomerPagesController::class, 'update'])->name('customer.update');
+    Route::post('/profile/update/profile_picture', [UploadController::class, 'profile_picture'])->name('customer.profile_picture');
 
     Route::post('/upload', [UploadController::class, 'upload'])->name('customer.upload');
     Route::get('/project/details/{id}', [CustomerPagesController::class, 'details'])->name('customer.details');
+
     Route::post('/project/details/comment/{project_id}', [UploadController::class, 'comment'])->name('customer.comment');
     Route::post('/project/details/reply/{comment_id}', [UploadController::class, 'reply'])->name('customer.reply');
 

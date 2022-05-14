@@ -27,7 +27,7 @@ class UploadController extends Controller
         try {
             $rules = [
                 'arch' => "required|in:Italian,UK,American",
-                'file' => 'required|mimes:doc,pdf,docx,zip,png,jpge,jpg',
+                'file' => 'required|mimes:png,jpge,jpg',
                 'csv' => "required",
             ];
 
@@ -187,4 +187,48 @@ class UploadController extends Controller
             return $this->returnError($e->getCode(), $e->getMessage());
         }
     }
+
+    public function profile_picture(Request $request){
+
+        $user_id = Auth::user()->id;
+        $user = User::find($user_id);
+
+        // Validation
+        try {
+            $rules = [
+                'photo' => "required|mimes:png,jpge,jpg",
+            ];
+
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return redirect()->route('customer.edit');
+            }
+
+        } catch (\Exception $e) {
+            return $this->returnError($e->getCode(), $e->getMessage());
+        }
+
+        // Save Picture
+        try{
+            if($request->file()) {
+                $Picture_Name = time().'_'.$request->photo->getClientOriginalName();
+                $request->file('photo')->move(base_path().'/public/Profile_Picture/',$Picture_Name);
+
+            }
+
+            if($user) {
+                $user->profile_picture = $Picture_Name;
+                $user->save();
+            }
+            return redirect()->route('customer.profile');
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('customer.proile');
+        }
+
+
+    }
+
+
 }

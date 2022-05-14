@@ -31,6 +31,7 @@ class User extends Authenticatable
         'address',
         'national_id',
         'phone',
+        'profile_picture',
     ];
 
     /**

@@ -291,9 +291,10 @@ td {
 /* end restaurant  */
 /* start contract  */
 .maincontract {
+    margin-top: 20px;
     padding-top: 100px;
     padding-bottom: 50px;
-    background-image: url("../image/m (4).jpeg");
+    background-image: url('../../image-home/m (4).jpeg');
     background-size: cover;
     position: relative;
     display: none;
@@ -339,8 +340,6 @@ td {
     justify-content: space-between;
     flex-wrap: wrap;
     font-family: 'Nunito Sans', sans-serif;
-
-
     gap: 300px;
 }
 
@@ -387,6 +386,10 @@ td {
 
 .maincontract .container .con-sign a:hover::before {
     height: 100%;
+}
+
+.show_contract {
+    display: block !important;
 }
 
 /* end contractor  */
@@ -478,6 +481,20 @@ td {
     color: #3d3f3f;
 }
 
+.name_comment {
+    font-weight: bold;
+    font-family: cursive;
+    color: #bf5a5a;
+
+}
+
+.name_reply {
+    font-weight: bold;
+    font-family: cursive;
+    color: #1f1a54;
+
+}
+
 .h_3,
 .reply,
 .add,
@@ -498,6 +515,7 @@ td {
     margin-bottom: 55px !important;
     width: 95% !important;
     display: block;
+    margin-left: 20px;
 }
 
 .submit {
@@ -531,5 +549,20 @@ td {
 
 .content {
     width: 95% !important;
+
+}
+
+.icon_star {
+    font-weight: 900;
+    margin-left: 15px;
+    font-size: x-large;
+    cursor: pointer;
+}
+
+.active_icon {
+    font-weight: 900;
+    margin-left: 15px;
+    font-size: x-large;
+    color: #ffc107;
 
 }

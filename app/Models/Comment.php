@@ -28,6 +28,9 @@ class Comment extends Model
     public function users(){
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function project(){
+        return $this->belongsTo(Project::class, 'user_id');
+    }
     
     public function replies()
     {

@@ -22,10 +22,30 @@
           <div data-aos="fade-up" data-aos-delay="150" class="card">
               <div class="box">
                   <div class="det">
-                      <img src="{{asset('image-home/house2.jpg')}}" alt="" />
-                      <ul>
-                          <a href=""><h3>House</h3></a>
-                      </ul>
+                    <h3>Architecture</h3>
+                    @if($prop->project->arch === 'Italian')
+                    <div class="fram">
+                      <iframe title="Petrovsky travel palace in Moscow" frameborder="0" allowfullscreen
+                          mozallowfullscreen="true" webkitallowfullscreen="true"
+                          allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
+                          execution-while-out-of-viewport execution-while-not-rendered web-share
+                          src="https://sketchfab.com/models/8b877b1776794c139d80fd93999003f0/embed"> </iframe>
+                    </div>
+                    @endif
+                    @if($prop->project->arch === 'American')
+                    <div class="fram">
+                      <iframe src="https://sketchfab.com/models/8b877b1776794c139d80fd93999003f0/embed"> </iframe>
+                    </div>
+                    @endif
+                    @if($prop->project->arch === 'UK')
+                    <div class="fram">
+                      <iframe title="Ndecor Design Dokuzer İnşaat 3D" frameborder="0" allowfullscreen
+                          mozallowfullscreen="true" webkitallowfullscreen="true"
+                          allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
+                          execution-while-out-of-viewport execution-while-not-rendered web-share
+                          src="https://sketchfab.com/models/e4869a806dfa4efd9d480fda16990c52/embed"> </iframe>
+                    </div>
+                    @endif
                   </div>
               </div>
           </div>
@@ -167,32 +187,48 @@
     <div class="row">
       <div class="col-md-12">
         <h3 class="text-center mb-5">
-          Nested comment section
+          Comments
+
         </h3>
         <div class="row">
             @foreach($comments as $item)
           <div class="col-md-12">
 
-            <div class="media">
-              <img class="nested_comment rounded-circle shadow-1-strong me-3" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp" alt="avatar" width="65" height="65" />
+            <div class="media comment_area">
+              @if($item->users->profile_picture != null)
+              <?php $comment_photo = $item->users->profile_picture ?>
+              <img class="nested_comment rounded-circle shadow-1-strong me-3" src='{{asset("Profile_Picture/$comment_photo")}}' alt="avatar" width="65" height="65" />
+              @endif
+              @if($item->users->profile_picture == null)
+              <img class="nested_comment rounded-circle shadow-1-strong me-3" src='{{asset("image-home/profile.jpg")}}' alt="avatar" width="65" height="65" />
+              @endif
               <div class="media-body">
                 <div class="row">
-                  <div class="col-12 d-flex">
-                  {{ $item->users->name }}
-                    <span class="time"> {{ $item->created_at->format('M D Y h:i') }}</span>
+                  <div class="col-12 d-flex name">
+                    <h5 class="name_comment"> {{ $item->users->name }} </h5>
+                    <span class="time"> {{ $item->created_at->format('d-m-Y h:i') }}</span>
+                    <i class="fas fa-star icon_star "></i>
+
+
                   </div>
                 </div>		
                 <p class="user-comment mb-1 content" > {{ $item->content }} </p>
                 @foreach($item->replies as $reply)
                 @isset($reply)
                 <div class="media mt-4">
-                    <img class="nested_comment rounded-circle shadow-1-strong"src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar"width="65" height="65" />
+                    @if($reply->users->profile_picture !== null)
+                    <?php $reply_photo = $reply->users->profile_picture ?>
+                    <img class="nested_comment rounded-circle shadow-1-strong me-3" src='{{asset("Profile_Picture/$reply_photo")}}' alt="avatar" width="65" height="65" />
+                    @endif
+                    @if($reply->users->profile_picture == null)
+                    <img class="nested_comment rounded-circle shadow-1-strong me-3" src='{{asset("image-home/profile.jpg")}}' alt="avatar" width="65" height="65" />
+                    @endif 
                     <div class="media-body">
                         
                       <div class="row">
                         <div class="col-12 d-flex">
-                            <h5> {{ $reply->users->name }}  </h5>
-                            <span class="time"> {{ $reply->created_at->format('M D Y h:i') }}</span>
+                            <h5 class="name_reply"> {{ $reply->users->name }}  </h5>
+                            <span class="time"> {{ $reply->created_at->format('d-m-Y h:i') }}</span>
                         </div>
                       </div>
                       <p class="user-reply mb-1 content"> {{ $reply->content }} </p>
@@ -205,9 +241,9 @@
                 <form action="{{ route('customer.reply',$item->id) }}" method="POST">
                     @csrf
                     <div class="form-group add ">
-                        <label for="exampleInputEmail1">Add Comment</label>
+                        <label for="exampleInputEmail1">Reply</label>
                         <textarea name ="comment" class="form-control " aria-label="With textarea"></textarea>
-                        <input class="submit btn btn-primary" type="submit" value="Send">
+                        <input class="submit btn btn-primary" type="submit" value="Send"></input>
                     </div>
                 </form>
               <!-- Add Comment -->
@@ -234,135 +270,6 @@
   </div>
 </div>
 <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -->
-
-@endsection
-
-
-<!-- ####################### -->
-<!-- <section style="background-color: #ad655f;">
-  <div class="container my-5 py-5">
-    <div class="row d-flex justify-content-center">
-      <div class="col-md-12 col-lg-10">
-        <div class="card text-dark">
-          <div class="card-body p-4">
-            <h4 class="mb-0">Recent comments</h4>
-            <p class="fw-light mb-4 pb-2">Latest Comments section by users</p>
-
-            <div class="d-flex flex-start">
-              <img class="rounded-circle shadow-1-strong me-3"
-                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(23).webp" alt="avatar" width="60"
-                height="60" />
-              <div>
-                <h6 class="fw-bold mb-1">Maggie Marsh</h6>
-                <div class="d-flex align-items-center mb-3">
-                  <p class="mb-0">
-                    March 07, 2021
-                    <span class="badge bg-primary">Pending</span>
-                  </p>
-                  <a href="#!" class="link-muted"><i class="fas fa-pencil-alt ms-2"></i></a>
-                  <a href="#!" class="link-muted"><i class="fas fa-redo-alt ms-2"></i></a>
-                  <a href="#!" class="link-muted"><i class="fas fa-heart ms-2"></i></a>
-                </div>
-                <p class="mb-0">
-                  Lorem Ipsum is simply dummy text of the printing and typesetting
-                  industry. Lorem Ipsum has been the industry's standard dummy text ever
-                  since the 1500s, when an unknown printer took a galley of type and
-                  scrambled it.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <hr class="my-0" />
-
-          <div class="card-body p-4">
-            <div class="d-flex flex-start">
-              <img class="rounded-circle shadow-1-strong me-3"
-                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(26).webp" alt="avatar" width="60"
-                height="60" />
-              <div>
-                <h6 class="fw-bold mb-1">Lara Stewart</h6>
-                <div class="d-flex align-items-center mb-3">
-                  <p class="mb-0">
-                    March 15, 2021
-                    <span class="badge bg-success">Approved</span>
-                  </p>
-                  <a href="#!" class="link-muted"><i class="fas fa-pencil-alt ms-2"></i></a>
-                  <a href="#!" class="text-success"><i class="fas fa-redo-alt ms-2"></i></a>
-                  <a href="#!" class="link-danger"><i class="fas fa-heart ms-2"></i></a>
-                </div>
-                <p class="mb-0">
-                  Contrary to popular belief, Lorem Ipsum is not simply random text. It
-                  has roots in a piece of classical Latin literature from 45 BC, making it
-                  over 2000 years old. Richard McClintock, a Latin professor at
-                  Hampden-Sydney College in Virginia, looked up one of the more obscure
-                  Latin words, consectetur, from a Lorem Ipsum passage, and going through
-                  the cites.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <hr class="my-0" style="height: 1px;" />
-
-          <div class="card-body p-4">
-            <div class="d-flex flex-start">
-              <img class="rounded-circle shadow-1-strong me-3"
-                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(33).webp" alt="avatar" width="60"
-                height="60" />
-              <div>
-                <h6 class="fw-bold mb-1">Alexa Bennett</h6>
-                <div class="d-flex align-items-center mb-3">
-                  <p class="mb-0">
-                    March 24, 2021
-                    <span class="badge bg-danger">Rejected</span>
-                  </p>
-                  <a href="#!" class="link-muted"><i class="fas fa-pencil-alt ms-2"></i></a>
-                  <a href="#!" class="link-muted"><i class="fas fa-redo-alt ms-2"></i></a>
-                  <a href="#!" class="link-muted"><i class="fas fa-heart ms-2"></i></a>
-                </div>
-                <p class="mb-0">
-                  There are many variations of passages of Lorem Ipsum available, but the
-                  majority have suffered alteration in some form, by injected humour, or
-                  randomised words which don't look even slightly believable. If you are
-                  going to use a passage of Lorem Ipsum, you need to be sure.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <hr class="my-0" />
-
-          <div class="card-body p-4">
-            <div class="d-flex flex-start">
-              <img class="rounded-circle shadow-1-strong me-3"
-                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(24).webp" alt="avatar" width="60"
-                height="60" />
-              <div>
-                <h6 class="fw-bold mb-1">Betty Walker</h6>
-                <div class="d-flex align-items-center mb-3">
-                  <p class="mb-0">
-                    March 30, 2021
-                    <span class="badge bg-primary">Pending</span>
-                  </p>
-                  <a href="#!" class="link-muted"><i class="fas fa-pencil-alt ms-2"></i></a>
-                  <a href="#!" class="link-muted"><i class="fas fa-redo-alt ms-2"></i></a>
-                  <a href="#!" class="link-muted"><i class="fas fa-heart ms-2"></i></a>
-                </div>
-                <p class="mb-0">
-                  It uses a dictionary of over 200 Latin words, combined with a handful of
-                  model sentence structures, to generate Lorem Ipsum which looks
-                  reasonable. The generated Lorem Ipsum is therefore always free from
-                  repetition, injected humour, or non-characteristic words etc.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
 <!-- start contract  -->
 <div class="maincontract">
     <div class="container">
@@ -377,14 +284,8 @@
     </div>
 </div>
 <!-- end contract  -->
-<div class="payement">
-    <div class="container">
-    <div class="pay">
-        <h3>go to the payment </h3>
-        <a href="#">payment</a>
-    </div>
-    </div>
-</div>
+
+@endsection
 
 @section('script')
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -393,7 +294,8 @@
     duration: 550,
     });
 </script>
-<!-- <script src=" {{asset('js/comment/reply.js')}}"></script> -->
+<script src=" {{asset('js/comment/details.js')}}"></script>
 <script src="node_modules/@fortawesome/fontawesome-free/js/all.js" charset="utf-8"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 @endsection

@@ -18,18 +18,41 @@
         </div>
         <div class="projects">
         @isset($contractor)
-          @foreach($props as $prop)
+          @foreach($project as $pro)
             <div data-aos="fade-up" data-aos-delay="150" class="card">
                 <div class="box">
                     <div class="det">
-                        <img src="{{asset('image-home/house2.jpg')}}" alt="" />
+                    @if($pro->arch === 'Italian')
+                        <div class="fram">
+                          <iframe title="Petrovsky travel palace in Moscow" frameborder="0" allowfullscreen
+                              mozallowfullscreen="true" webkitallowfullscreen="true"
+                              allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
+                              execution-while-out-of-viewport execution-while-not-rendered web-share
+                              src="https://sketchfab.com/models/8b877b1776794c139d80fd93999003f0/embed"> </iframe>
+                        </div>
+                        @endif
+                        @if($pro->arch === 'American')
+                        <div class="fram">
+                          <iframe src="https://sketchfab.com/models/8b877b1776794c139d80fd93999003f0/embed"> </iframe>
+                        </div>
+                        @endif
+                        @if($pro->arch === 'UK')
+                        <div class="fram">
+                          <iframe title="Ndecor Design Dokuzer İnşaat 3D" frameborder="0" allowfullscreen
+                              mozallowfullscreen="true" webkitallowfullscreen="true"
+                              allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
+                              execution-while-out-of-viewport execution-while-not-rendered web-share
+                              src="https://sketchfab.com/models/e4869a806dfa4efd9d480fda16990c52/embed"> </iframe>
+                        </div>
+                        @endif
                         <ul>
-                            <h3>House</h3>
-                            Predict Salary : <li>{{$prop->PREDICTION}}</li>
-                            Publish at : <li>{{$prop->created_at}}</li>
+                            <a href="{{route('contractor.details',$pro->id)}}"><h3>House</h3></a><br>
+                            @foreach($pro->props as $prop)
+                            <li>Predict Price : {{$prop->PREDICTION}}</li>
+                            @endforeach
+                            <li>Publish at :  {{$pro->created_at->format('d-m-Y')}}</li>
 
                         </ul>
-                        <a href="#">Edit</a>
                     </div>
                 </div>
             </div>
