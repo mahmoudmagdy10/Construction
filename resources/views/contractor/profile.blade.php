@@ -4,7 +4,14 @@
 <link rel="stylesheet" href="{{asset('css/home/profile.css')}}">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" >
+@endsection
 
+@section('profile')
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("Profile_Picture/$contractor->profile_picture")}}' alt="avatar" width="40" height="40" />
+@endsection
+
+@section('title')
+    Profile
 @endsection
 
 @section('content')

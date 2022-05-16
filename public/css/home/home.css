@@ -1714,53 +1714,120 @@ body {
     line-height: 1.1;
   }
 
-  .finish .container .web p a {}
 }
 
 /* end finish  */
 
 /* Icon profile */
 .icon_profile {
-  background-color: #6b4559;
   width: 26px;
   height: 25px;
+  position: absolute;
   border-radius: 50%;
   cursor: pointer;
+  right: 58px;
+  top: 35px;
+}
+
+.icon_profile:hover {
+  width: 26px;
+  height: 25px;
+  position: absolute;
+  border-radius: 50%;
+  cursor: pointer;
+  right: 7px;
+  top: 10px;
+  box-shadow: 11px 7px 10px 14px #ffc107;
+  transition: 0.7s;
+
+}
+
+.icon_profile:not(:hover) {
+  width: 26px;
+  height: 25px;
+  position: absolute;
+  border-radius: 50%;
+  cursor: pointer;
+  right: 7px;
+  transition: 0.7s;
+  top: 10px;
+
+}
+
+.icon_profile img {
+
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+
+
+}
+
+.icon_profile img:hover {
+
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  transition: 0.7s;
+  top: 43px;
+  position: fixed;
+}
+
+.icon_profile img:not(:hover) {
+
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  transition: 0.7s;
+  top: 43px;
+  position: fixed;
+
+
 }
 
 .pop_up {
-  width: 155px;
-  position: absolute;
-  background-color: #3d535f99;
-  top: 60px;
-  right: 32px;
-  height: 160px;
-  border-radius: 10px;
-  opacity: 0;
-  font-family: cursive;
+  width: 155px !important;
+  position: absolute !important;
+  background-color: #5d778994 !important;
+  top: 50px !important;
+  right: 2px !important;
+  height: 158px !important;
+  border-radius: 10px !important;
+  font-family: cursive !important;
+  /* border: 1px dashed #6c6a65 !important; */
+  display: none;
 }
 
 .popup_container {
-  position: relative;
+  position: relative !important;
 }
 
 .show {
-  opacity: 1;
-  -webkit-transition: opacity 0.9s ease-in-out;
+  display: block !important;
+  -webkit-transition: opacity 0.9s ease-in-out !important;
 
 }
 
 .pop_up a {
-  padding: 5px;
-  text-align: center;
-  font-weight: bolder;
-  cursor: pointer;
-  opacity: 1;
+  padding: 11px !important;
+  text-align: center !important;
+  font-weight: bolder !important;
+  cursor: pointer !important;
+  opacity: 1 !important;
+  text-decoration: none;
 }
 
 .pop_up a:hover {
 
-  color: rgb(0, 0, 0) !important;
+  color: #c9942d !important;
+  text-decoration: none;
+  font-weight: bold !important;
+
+}
+
+a:hover {
+  text-decoration: none;
+  color: #c9942d !important;
 }
 
 hr {
@@ -1772,5 +1839,17 @@ hr {
 }
 
 .pop_up a {
-  color: rgb(255, 255, 255);
+  color: rgb(255, 255, 255) !important;
+}
+
+.arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 13px solid transparent;
+  border-right: 13px solid transparent;
+  border-bottom: 13px solid #5d778994;
+  position: fixed;
+  top: 75px;
+  right: 44px;
+  display: none;
 }

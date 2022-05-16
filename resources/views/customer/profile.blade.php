@@ -7,6 +7,14 @@
 
 @endsection
 
+@section('title')
+    Profile
+@endsection
+
+@section('profile')
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("Profile_Picture/$customer->profile_picture")}}' alt="avatar" width="40" height="40" />
+@endsection
+
 @section('content')
 <div class="container">
     <div class="main-body prof">
@@ -88,9 +96,4 @@
 
         </div>
     </div>
-@endsection
-
-@section('script')
-<script src=" {{asset('js/home/edit.js')}}"></script>
-
 @endsection

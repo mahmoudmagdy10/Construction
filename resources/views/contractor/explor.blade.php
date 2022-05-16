@@ -1,5 +1,9 @@
 @extends('contractor.layout.app')
 
+@section('profile')
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("Profile_Picture/$contractor->profile_picture")}}' alt="avatar" width="40" height="40" />
+@endsection
+
 @section('link')
 <link rel="stylesheet" href="{{asset('css/your project.css')}}">
 <link rel="stylesheet" href="{{asset('css/all.min.css')}}">
@@ -7,6 +11,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Nunito+Sans:wght@300;400&family=Open+Sans:ital,wght@0,300;0,400;1,600&family=Work+Sans:wght@200;300;500;600;700;800&display=swap"rel="stylesheet" />
 <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+@endsection
+
+@section('title')
+    Explor
 @endsection
 
 @section('content')

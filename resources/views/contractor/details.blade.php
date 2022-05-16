@@ -2,30 +2,31 @@
 
 @section('link')
     <link rel="stylesheet" href="{{asset('css/customer/details.css')}}">
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&family=Open+Sans:ital,wght@0,300;0,400;1,600&family=Work+Sans:wght@200;300;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&family=Open+Sans:ital,wght@0,300;0,400;1,600&family=Work+Sans:wght@200;300;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&family=Open+Sans:ital,wght@0,300;0,400;1,600&family=Work+Sans:wght@200;300;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?display=swap&amp;family=Libre+Baskerville:400,700|Nunito:300,400,700" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">    <link rel="stylesheet" href="css/project.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&family=Open+Sans:ital,wght@0,300;0,400;1,600&family=Work+Sans:wght@200;300;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 
+@endsection
+@section('title')
+    Details
+@endsection
+
+@section('profile')
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("Profile_Picture/$users->profile_picture")}}' alt="avatar" width="40" height="40" />
 @endsection
 
 @section('content')
+
 <div class="title">
     <div data-aos="fade-up" data-aos-delay="150" class="container">
+
     @isset($users)
         @foreach($props as $prop)
+        
         <div class="projects">
                 <div data-aos="fade-up" data-aos-delay="150" class="card">
                     <div class="box">
                       <div class="det">
                         <h3>Architecture</h3>
+                        <h4 style="color:#1b239fe0;font-weight:bold;">{{$prop->project->arch}}</h4>
                         @if($prop->project->arch === 'Italian')
                         <div class="fram">
                           <iframe title="Petrovsky travel palace in Moscow" frameborder="0" allowfullscreen
@@ -54,6 +55,7 @@
                 </div>
 
         </div>
+        
         <div class="table">
             <table>
             <tr>
@@ -64,7 +66,7 @@
             <tr>
                 <td>1</td>
                 <td>PREDICTION</td>
-                <td>{{$prop->PREDICTION}}</td>
+                <td>{{ number_format($prop->PREDICTION, 4)}} $</td>
             </tr>
             <tr>
                 <td>2</td>
@@ -182,11 +184,23 @@
 
             </table>
         </div>
+
         @endforeach
     @endisset
     </div>
 </div>
+
+@isset($users)
+@foreach($props as $prop)
+    <div class="slide_show">
+        <?php $file_2d = $prop->project->file_path;?>
+        <img class="d-block w-100" src='{{asset("files_2D/$file_2d")}}' alt="First slide">
+    </div>
+@endforeach
+@endisset
 <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -->
+@isset($comments)
+
 <div class="container mb-5 mt-5">  
   <div class="card main">
     <div class="row">
@@ -253,6 +267,7 @@
               <!-- Add Comment -->
               </div>
             </div>
+            <hr>
             @endforeach
             <!-- Add Comment -->
             @if($num_of_comments->count() < 1 )
@@ -273,6 +288,8 @@
     </div>
   </div>
 </div>
+@endisset
+
 <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -->
 @endsection
 

@@ -28,23 +28,24 @@ html {
   scroll-behavior: smooth;
 }
 
-a {
+/* a {
   text-decoration: none;
   color: black;
-}
+} */
 
+/* 
 ul {
   padding: 0px;
   margin: 0px;
   list-style: none;
-}
+} */
 
-.container {
+/* .container {
   padding-left: 15px;
   padding-right: 15px;
   margin-left: auto;
   margin-right: auto;
-}
+} */
 
 * {
   padding: 0px;
@@ -803,3 +804,10 @@ ul {
 
 /* end media  */
 /* end sav  */
+hr {
+  width: 113px !important;
+  margin: auto !important;
+  margin-top: 3px !important;
+  margin-bottom: 2px !important;
+  border: 1px solid #04bf572b !important;
+}

@@ -20,11 +20,11 @@ body {
     background-color: #3fa2ab !important;
 }
 
-ul {
+/* ul {
     padding: 0px;
     margin: 0px;
     list-style: none;
-}
+} */
 
 .container {
     padding-left: 15px;
@@ -462,8 +462,9 @@ td {
 
 /* end contract  */
 .main {
-    box-shadow: 1px 1px 16px 8px #6a1f1f9e !important;
-    border: 1px solid rgb(153, 199, 78) !important;
+    box-shadow: 1px 1px 16px 4px #0b3c62d1;
+    /* border: 1px solid rgb(153, 199, 78) !important; */
+    padding: 10px;
 
 }
 
@@ -565,4 +566,22 @@ td {
     font-size: x-large;
     color: #ffc107;
 
+}
+
+hr {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    margin-top: 3px !important;
+    border: 1px solid #04bf572b !important;
+}
+
+
+.slide_show img {
+    width: 92% !important;
+    height: 520px !important;
+    margin: 1px auto !important;
+    /* margin-top: 200px !important; */
+    /* padding: 30px; */
+    border-radius: 60px;
+    box-shadow: 1px 1px 16px 4px #0b3c62d1;
 }

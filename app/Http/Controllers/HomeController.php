@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -12,10 +13,12 @@ class HomeController extends Controller
             return redirect()->route('log_in');
         }
         if(Auth::user()->kind === 'customer'){
-            return redirect()->route('customer.homepage');
+            $user_customer = User::select()->find(Auth::user()->id);
+            return redirect()->route('customer.homepage')->with(compact('user_customer'));
         }
         if(Auth::user()->kind === 'contractor'){
-            return redirect()->route('contractor.homepage');
+            $user_contractor = User::select()->find(Auth::user()->id);
+            return redirect()->route('contractor.homepage')->with(compact('user_contractor'));
         }
     }
 

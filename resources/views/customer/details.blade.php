@@ -14,6 +14,15 @@
 
 @endsection
 
+@section('title')
+    Details
+@endsection
+
+@section('profile')
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("Profile_Picture/$users->profile_picture")}}' alt="avatar" width="40" height="40" />
+@endsection
+
+
 @section('content')
 <div class="title">
     <div data-aos="fade-up" data-aos-delay="150" class="container">
@@ -59,120 +68,120 @@
             </tr>
             <tr>
                 <td>1</td>
-                <td>PREDICTION</td>
-                <td>{{$prop->PREDICTION}}</td>
+                <td style="color :#f44336;">PREDICTION</td>
+                <td style="color :#5a3528;font-weight: bold;">{{ number_format($prop->PREDICTION, 4)}} $</td>
             </tr>
             <tr>
                 <td>2</td>
-                <td>OverallQual</td>
+                <td style="color :#f44336;">OverallQual</td>
                 <td>{{$prop->OverallQual}}</td>
             </tr>
             <tr>
                 <td>3</td>
-                <td>Neighborhood</td>
+                <td style="color :#f44336;">Neighborhood</td>
                 <td>{{$prop->Neighborhood}}</td>
             </tr>
             <tr>
                 <td>4</td>
-                <td>GrLivArea</td>
+                <td style="color :#f44336;">GrLivArea</td>
                 <td>{{$prop->GrLivArea}}</td>
             </tr>
             <tr>
                 <td>5</td>
-                <td>GarageCars</td>
+                <td style="color :#f44336;">GarageCars</td>
                 <td>{{$prop->GarageCars}}</td>
             </tr>
             <tr>
                 <td>6</td>
-                <td>BsmtQual</td>
+                <td style="color :#f44336;">BsmtQual</td>
                 <td>{{$prop->BsmtQual}}</td>
             </tr>
             <tr>
                 <td>7</td>
-                <td>ExterQual</td>
+                <td style="color :#f44336;">ExterQual</td>
                 <td>{{$prop->ExterQual}}</td>
             </tr>
             <tr>
                 <td>8</td>
-                <td>GarageArea</td>
+                <td style="color :#f44336;">GarageArea</td>
                 <td>{{$prop->GarageArea}}</td>
             </tr>
             <tr>
                 <td>9</td>
-                <td>KitchenQual</td>
+                <td style="color :#f44336;">KitchenQual</td>
                 <td>{{$prop->KitchenQual}}</td>
             </tr>
             <tr>
                 <td>10</td>
-                <td>OverallQual</td>
+                <td style="color :#f44336;">OverallQual</td>
                 <td>{{$prop->OverallQual}}</td>
             </tr>
             <tr>
                 <td>11</td>
-                <td>YearBuilt</td>
+                <td style="color :#f44336;">YearBuilt</td>
                 <td>{{$prop->YearBuilt}}</td>
             </tr>
             <tr>
                 <td>12</td>
-                <td>TotalBsmtSF</td>
+                <td style="color :#f44336;">TotalBsmtSF</td>
                 <td>{{$prop->TotalBsmtSF}}</td>
             </tr>
             </table>
             <table class="continue">
             <tr>
                 <td>13</td>
-                <td>FirstFlrSF</td>
+                <td style="color :#f44336;">FirstFlrSF</td>
                 <td>{{$prop->FirstFlrSF}}</td>
             </tr>
             <tr>
                 <td>14</td>
-                <td>GarageFinish</td>
+                <td style="color :#f44336;">GarageFinish</td>
                 <td>{{$prop->GarageFinish}}</td>
             </tr>
             <tr>
                 <td>15</td>
-                <td>FullBath</td>
+                <td style="color :#f44336;">FullBath</td>
                 <td>{{$prop->FullBath}}</td>
             </tr>
             <tr>
                 <td>16</td>
-                <td>YearRemodAdd</td>
+                <td style="color :#f44336;">YearRemodAdd</td>
                 <td>{{$prop->YearRemodAdd}}</td>
             </tr>
             <tr>
                 <td>17</td>
-                <td>GarageType</td>
+                <td style="color :#f44336;">GarageType</td>
                 <td>{{$prop->GarageType}}</td>
             </tr>
             <tr>
                 <td>18</td>
-                <td>FireplaceQu</td>
+                <td style="color :#f44336;">FireplaceQu</td>
                 <td>{{$prop->FireplaceQu}}</td>
             </tr>
             <tr>
                 <td>19</td>
-                <td>Foundation</td>
+                <td style="color :#f44336;">Foundation</td>
                 <td>{{$prop->Foundation}}</td>
             </tr>
             <tr>
                 <td>20</td>
-                <td>MSSubClass</td>
+                <td style="color :#f44336;">MSSubClass</td>
                 <td>{{$prop->MSSubClass}}</td>
             </tr>
             <tr>
                 <td>21</td>
-                <td>TotRmsAbvGrd</td>
+                <td style="color :#f44336;">TotRmsAbvGrd</td>
                 <td>{{$prop->TotRmsAbvGrd}}</td>
             </tr>
             <tr>
                 <td>22</td>
-                <td>Fireplaces</td>
+                <td style="color :#f44336;">Fireplaces</td>
                 <td>{{$prop->Fireplaces}}</td>
             </tr>
             <tr>
                 <td>23</td>
-                <td>Created At</td>
-                <td>{{$prop->created_at}}</td>
+                <td style="color :#f44336;">Created At</td>
+                <td>{{$prop->created_at->format('d-m-Y h:i')}}</td>
             </tr>
 
 
@@ -181,6 +190,14 @@
         @endforeach
     </div>
 </div>
+@isset($users)
+@foreach($props as $prop)
+    <div class="slide_show">
+        <?php $file_2d = $prop->project->file_path;?>
+        <img class="d-block w-100" src='{{asset("files_2D/$file_2d")}}' alt="First slide">
+    </div>
+@endforeach
+@endisset
 <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -->
 <div class="container mb-5 mt-5">  
   <div class="card main">

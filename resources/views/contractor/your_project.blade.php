@@ -9,6 +9,14 @@
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 @endsection
 
+@section('title')
+    Your Project
+@endsection
+
+@section('profile')
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("Profile_Picture/$contractor->profile_picture")}}' alt="avatar" width="40" height="40" />
+@endsection
+
 @section('content')
 
 <div class="title">
@@ -48,8 +56,8 @@
                         <ul>
                             <a href="{{route('contractor.details',$pro->id)}}"><h3>House</h3></a><br>
                             @foreach($pro->props as $prop)
-                            <li>Predict Price : {{$prop->PREDICTION}}</li>
-                            @endforeach
+                            <li style="color :red; font-weight:bold">Predict Price : {{ number_format($prop->PREDICTION, 2) }} $</li>
+                            @endforeach   
                             <li>Publish at :  {{$pro->created_at->format('d-m-Y')}}</li>
 
                         </ul>

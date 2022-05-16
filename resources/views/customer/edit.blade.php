@@ -7,6 +7,14 @@
 
 @endsection
 
+@section('title')
+    Edit
+@endsection
+
+@section('profile')
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("Profile_Picture/$customer->profile_picture")}}' alt="avatar" width="40" height="40" />
+@endsection
+
 @section('content')
 
 <div class="forms_container">
@@ -40,49 +48,98 @@
               <div class="col-md-8">
                 <div class="card mb-9 car">
                   <div class="card-body bodies">
+
+                  @if(session()->has('success'))
+                  <div class="alert alert-success">
+                      {{ session()->get('success') }}
+                  </div>
+                  @endif
+
                   @isset($customer)
-                    <div class="row">
+                    <div class="input-group mb-3">
                       <div class="col-sm-3">
                         <h6 class="mb-0">Full Name</h6>
                       </div>
-                      <input class="col-sm-6 form-control" name="name" value = "{{$customer->name}}">                 
+                      <div class="input-group-prepend ">
+                        <span class="input-group-text info_icons" id="basic-addon1"><i class="fa fa-user" aria-hidden="true"></i></span>
+                      </div>
+                      <input class="col-sm-6 form-control" name="name" value = "{{$customer->name}}">
+                      @error('name')
+                        <small class="" >{{$message}}</small>
+                      @enderror
                     </div>
                     <br>
-                    <div class="row">
+
+                    <div class="input-group mb-3">
                       <div class="col-sm-3">
                         <h6 class="mb-0">Email</h6>
                       </div>
-                      <input class="col-sm-6 form-control" name="email" value = "{{$customer->email}}" readOnly>                 
+                      <div class="input-group-prepend ">
+                        <span class="input-group-text info_icons" id="basic-addon1"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                      </div>
+                      <input class="col-sm-6 form-control" name="email" value = "{{$customer->email}}" readOnly>
+                      @error('email')
+                        <small class="" >{{$message}}</small>
+                      @enderror
                     </div>
                     <br>
-                    <div class="row">
+
+                    <div class="input-group mb-3">
                       <div class="col-sm-3">
                         <h6 class="mb-0">Password</h6>
                       </div>
-                      <input class="col-sm-9 form-control" name="password" placeholder="Type Old Password OR New Password" >                    
+                      <div class="input-group-prepend ">
+                        <span class="input-group-text info_icons" id="basic-addon1"><i class="fa fa-key" aria-hidden="true"></i></span>
+                      </div>
+                      <input class="col-sm-9 form-control" name="password" placeholder="Type Old Password OR New Password" >
+                      @error('password')
+                        <small class="" >{{$message}}</small>
+                      @enderror
                     </div>
                     <br>
-                    <div class="row">
+
+                    <div class="input-group mb-3">
                       <div class="col-sm-3">
                         <h6 class="mb-0">Phone</h6>
                       </div>
-                      <input class="col-sm-9 form-control" name="phone" value = "{{$customer->phone}}">                    
+                      <div class="input-group-prepend ">
+                        <span class="input-group-text info_icons" id="basic-addon1"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                      </div>
+                      <input class="col-sm-9 form-control" name="phone" value = "{{$customer->phone}}">
+                      @error('phone')
+                        <small class="" >{{$message}}</small>
+                      @enderror
                     </div>
                     <br>
-                    <div class="row">
+
+                    <div class="input-group mb-3">
                       <div class="col-sm-3">
                         <h6 class="mb-0">Address</h6>
                       </div>
-                      <input class="col-sm-9 form-control" name="address" value = "{{$customer->address}}">                    
-                    </div>
-                    <br>
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">National_ID</h6>
+                      <div class="input-group-prepend ">
+                        <span class="input-group-text info_icons" id="basic-addon1"><i class="fa fa-globe" aria-hidden="true"></i></span>
                       </div>
-                      <input class="col-sm-9 form-control" name="national_id" value = "{{$customer->national_id}}">                    
+                      <input class="col-sm-9 form-control" name="address" value = "{{$customer->address}}">
+                      @error('address')
+                        <small class="" >{{$message}}</small>
+                      @enderror
                     </div>
                     <br>
+
+                    <div class="input-group mb-3">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">National ID</h6>
+                      </div>
+                      <div class="input-group-prepend ">
+                        <span class="input-group-text info_icons" id="basic-addon1"><i class="fa fa-id-badge" aria-hidden="true"></i></span>
+                      </div>
+                      <input class="col-sm-9 form-control" name="national_id" value = "{{$customer->national_id}}">
+                      @error('national_id')
+                        <small class="" >{{$message}}</small>
+                      @enderror
+                    </div>
+                    <br>
+
                     <div class="form-actions">
                       <button type="button" class="btn btn-warning mr-1"
                               onclick="history.back();">

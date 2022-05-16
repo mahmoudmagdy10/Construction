@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use DB;
-
+use App\Http\Requests\ProfileRequest;
 
 class CustomerPagesController extends Controller
 {
@@ -28,23 +28,6 @@ class CustomerPagesController extends Controller
                 return redirect()->route('log_in');
             } else {
                 return view('customer.homepage')->with(compact('customer'));
-            }
-
-        } catch (\Exception $e) {
-            return redirect()->route('log_in');
-        }
-
-    }
-
-    public function explor()
-    {
-        try{
-            $customer = User::select()->find(Auth::user()->id);
-            $props = Property::all();
-            if (!$customer && !$props) {
-                return redirect()->route('log_in');
-            } else {
-                return view('customer.explor')->with(compact('customer'))->with(compact('props'));
             }
 
         } catch (\Exception $e) {
@@ -73,7 +56,7 @@ class CustomerPagesController extends Controller
         $id =Auth::user()->id;
         try{
             $customer = User::find($id);
-            $project = Project::all()->where('user_id', '=', $id);
+            $project = Project::where('user_id', '=', $id)->with(['props'])->get();
 
 
             if (!$customer && !$project) {
@@ -107,37 +90,23 @@ class CustomerPagesController extends Controller
 
     public function edit()
     {
-        $customer = User::select()->find(Auth::user()->id);
-        if (!$customer) {
-            return redirect()->route('customer.profile')->with(['error' => 'هذه اللغة غير موجوده']);
-        } else {
-            return view('customer.edit', compact('customer'));
+        try{
+            $customer = User::select()->find(Auth::user()->id);
+            if (!$customer) {
+                return redirect()->route('customer.profile')->with(['error' => 'هذه اللغة غير موجوده']);
+            } else {
+                return view('customer.edit', compact('customer'));
+            }
+        } catch (\Exception $e) {
+            return redirect()->route('log_in');
         }
     }
 
-    public function update(Request $request)
+    public function update(ProfileRequest $request)
     {
         $id= Auth::user()->id;
         $customer = User::find($id);
-        try {
-            // Validation
-            $rules = [
-                "name" => "required|string|max:30",
-                "address" => "required|string",
-                "phone" => "required",
-                "password" => "required",
-                "national_id" => "required",
-            ];
-            $validator = Validator::make($request->all(), $rules);
-            if ($validator->fails()) {
-                // return redirect()->route('customer.edit')->with(['error' => 'هناك خطأ يرجي المحاوله في وقت اخر']);            
-                return"no";
-            }
-        } catch (\Exception $e) {
-            // return redirect()->route('customer.edit')->with(['error' => 'هناك خطأ يرجي المحاوله في وقت اخر']);            
-            return "no no";
-        }
-        // return $request;
+
         try{
 
             if (!$customer) {
@@ -151,11 +120,11 @@ class CustomerPagesController extends Controller
             $customer->password = Hash::make($request['password']);
             $customer->save();
 
-            return redirect()->route('customer.profile')->with(['success' => 'Updated Successfully']);
+            return redirect()->route('customer.edit')->with('success','Updated Successfully');
             // return "yes";
 
         } catch (\Exception $e) {
-            return redirect()->route('customer.edit')->with('هناك خطأ يرجي المحاوله في وقت اخر');
+            return redirect()->route('customer.edit')->with('error' , 'هناك خطأ يرجي المحاوله في وقت اخر');   
             // return 'no';
         }
 

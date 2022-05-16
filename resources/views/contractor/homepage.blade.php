@@ -1,5 +1,13 @@
 @extends('contractor.layout.app')
 
+@section('profile')
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("Profile_Picture/$contractor->profile_picture")}}' alt="avatar" width="40" height="40" />
+@endsection
+
+@section('title')
+    Home
+@endsection
+
 @section('content')
     <!-- start landing  -->
     <div class="home"id="home"class="kv-ee-section kv-ee-section--lg kv-full-page kv-content"style=" background-color: rgb(80,80,80);">
