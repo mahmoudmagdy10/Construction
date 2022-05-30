@@ -1,14 +1,5 @@
 @extends('contractor.layout.app')
 
-@section('profile')
-  @if($contractor->profile_picture !== NULL)
-  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("Profile_Picture/$contractor->profile_picture")}}' alt="avatar" width="40" height="40" />
-  @endif
-  @if($contractor->profile_picture == NULL)
-  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("image-home/profile.jpg")}}' alt="avatar" width="40" height="40" />
-  @endif
-@endsection
-
 @section('link')
 <link rel="stylesheet" href="{{asset('css/your project.css')}}">
 <link rel="stylesheet" href="{{asset('css/all.min.css')}}">
@@ -19,7 +10,16 @@
 @endsection
 
 @section('title')
-    Explor
+    Interested In
+@endsection
+
+@section('profile')
+  @if($contractor->profile_picture !== NULL)
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("Profile_Picture/$contractor->profile_picture")}}' alt="avatar" width="40" height="40" />
+  @endif
+  @if($contractor->profile_picture == NULL)
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("image-home/profile.jpg")}}' alt="avatar" width="40" height="40" />
+  @endif
 @endsection
 
 @section('content')
@@ -27,7 +27,7 @@
 <div class="title">
     <div class="container">
         <div class="info">
-            <h3>Your project</h3>
+            <h3>Interested In Projects</h3>
         </div>
         <div class="projects">
         @isset($contractor)
@@ -35,6 +35,7 @@
             <div data-aos="fade-up" data-aos-delay="150" class="card">
                 <div class="box">
                     <div class="det">
+
                     @if($pro->arch === 'Italian')
                         <div class="fram">
                           <iframe title="Petrovsky travel palace in Moscow" frameborder="0" allowfullscreen
@@ -65,14 +66,10 @@
                             <li style="color :red; font-weight:bold">Predict Price : {{ number_format($prop->PREDICTION) }} $</li>
                             @endforeach   
                             <li>Publish at :  {{$pro->created_at->format('d-m-Y')}}</li>
+
+                            <a class="btn btn-success" href="{{route('contractor.accept',$pro->id)}}"> Accept</a>
+
                         </ul>
-                        <!-- <form action="{{route('contractor.accept',$pro->id)}}" method="POST">
-                            @csrf
-                            <input class="btn btn-success" type="submit" value="Accept" >
-                        </form> -->
-                        <a class="btn btn-success" href="{{route('contractor.accept',$pro->id)}}"> <i class="icon-shopping-cart icon-large"></i> Accept</a>
-
-
                     </div>
                 </div>
             </div>
@@ -80,6 +77,8 @@
         @endisset
 @endsection
 @section('script')
+<script src=" {{asset('js/comment/details.js')}}"></script>
+
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
     AOS.init({

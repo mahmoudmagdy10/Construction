@@ -14,7 +14,12 @@
 @endsection
 
 @section('profile')
+  @if($contractor->profile_picture !== NULL)
   <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("Profile_Picture/$contractor->profile_picture")}}' alt="avatar" width="40" height="40" />
+  @endif
+  @if($contractor->profile_picture == NULL)
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("image-home/profile.jpg")}}' alt="avatar" width="40" height="40" />
+  @endif
 @endsection
 
 @section('content')
@@ -30,6 +35,7 @@
             <div data-aos="fade-up" data-aos-delay="150" class="card">
                 <div class="box">
                     <div class="det">
+
                     @if($pro->arch === 'Italian')
                         <div class="fram">
                           <iframe title="Petrovsky travel palace in Moscow" frameborder="0" allowfullscreen
@@ -55,12 +61,14 @@
                         @endif
                         <ul>
                             <a href="{{route('contractor.details',$pro->id)}}"><h3>House</h3></a><br>
+                            <li>Architecture : {{$pro->arch}}</li>
                             @foreach($pro->props as $prop)
-                            <li style="color :red; font-weight:bold">Predict Price : {{ number_format($prop->PREDICTION, 2) }} $</li>
+                            <li style="color :red; font-weight:bold">Predict Price : {{ number_format($prop->PREDICTION) }} $</li>
                             @endforeach   
                             <li>Publish at :  {{$pro->created_at->format('d-m-Y')}}</li>
-
                         </ul>
+                        <a class="btn btn-danger" href="{{route('contractor.unaccept',$pro->id)}}"> Un Accept</a>
+
                     </div>
                 </div>
             </div>
@@ -68,6 +76,8 @@
         @endisset
 @endsection
 @section('script')
+<script src=" {{asset('js/comment/details.js')}}"></script>
+
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
     AOS.init({

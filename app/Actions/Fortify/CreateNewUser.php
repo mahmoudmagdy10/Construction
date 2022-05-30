@@ -20,25 +20,34 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input)
     {
-        Validator::make($input, [
-            'name' => ['required', 'string', 'max:255', 'unique:users'],
-            'kind' => ['required'],
-            'address' => ['required'],
-            'national_id' => ['required'],
-            'phone' => ['required'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => $this->passwordRules(),
-            'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
-        ])->validate();
+        try{
+            Validator::make($input, [
+                'name' => ['required', 'string', 'max:255', 'unique:users'],
+                'kind' => ['required'],
+                'address' => ['required'],
+                'national_id' => ['required'],
+                'phone' => ['required'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => $this->passwordRules(),
+                'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
+            ])->validate();
+    
+            // return User::create([
+            //     'name' => $input['name'],
+            //     'email' => $input['email'],
+            //     'password' => Hash::make($input['password']),
+            //     'kind' => $input['kind'],
+            //     'address' => $input['address'],
+            //     'national_id' => $input['national_id'],
+            //     'phone' => $input['phone'],
+            // ]);
+            return "good";
 
-        return User::create([
-            'name' => $input['name'],
-            'email' => $input['email'],
-            'password' => Hash::make($input['password']),
-            'kind' => $input['kind'],
-            'address' => $input['address'],
-            'national_id' => $input['national_id'],
-            'phone' => $input['phone'],
-        ]);
+        } catch (\Exception $e) {
+            // return redirect()->route('log_in');
+            return "no";
+        }
+
+
     }
 }

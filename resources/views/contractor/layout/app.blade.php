@@ -5,7 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>@yield('title')</title>
-        
+        <link rel="icon" href="{{ url('image-home/logo.jpeg') }}">
+
         <link rel="stylesheet" href="{{asset('css/home/home.css')}}">
         <link rel="stylesheet" href="{{asset('css/header.css')}}">
         <link rel="stylesheet" href="{{asset('css/all.min.css')}}">
@@ -31,7 +32,7 @@
             <li>
                 <div class="arrow-up"></div>
                 <div class ="pop_up">
-                    <a href="{{ route('contractor.your_project') }} " value = "My Projects">My Projects</a>
+                    <a href="{{ route('contractor.interested_projects') }} " value = "My Projects">Interested In </a>
                     <hr>
                     <a href="{{ route('contractor.profile') }}" value = "Profile">Profile</a>
                     <hr>
@@ -52,5 +53,6 @@
         <script src=" {{asset('js/header.js')}}"></script>
         <script src=" {{asset('js/home/home.js')}}"></script>
         <script src=" {{asset('js/home/edit.js')}}"></script>
+        
     </body>
 </html>

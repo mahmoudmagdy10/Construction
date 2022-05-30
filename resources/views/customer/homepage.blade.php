@@ -1,7 +1,12 @@
 @extends('customer.layout.app')
 
 @section('profile')
+  @if($customer->profile_picture !== NULL)
   <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("Profile_Picture/$customer->profile_picture")}}' alt="avatar" width="40" height="40" />
+  @endif
+  @if($customer->profile_picture == NULL)
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("image-home/profile.jpg")}}' alt="avatar" width="40" height="40" />
+  @endif
 @endsection
 
 @section('title')

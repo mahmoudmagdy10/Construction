@@ -24,6 +24,7 @@ use App\Http\Controllers\Contractor\UploadContractorController;
 
 Route::get('/', [HomeController::class, 'checkUserType']);
 
+Route::post('/regiser_user', [HomeController::class, 'regiser_user'])->name('regiser_user');
 Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
 Route::get('/log_in', function () {
     return view('auth_user.login');
@@ -38,12 +39,16 @@ Route::namespace('Contractor')->prefix('contractor')->group(function(){
     Route::get('/homepage', [PagesController::class, 'homepage'])->name('contractor.homepage');
     Route::get('/explor', [PagesController::class, 'explor'])->name('contractor.explor');
     Route::get('/your_project', [PagesController::class, 'your_project'])->name('contractor.your_project');
+    Route::get('/interested', [PagesController::class, 'interested_projects'])->name('contractor.interested_projects');
+
 
     Route::get('/profile', [PagesController::class, 'profile'])->name('contractor.profile');
     Route::get('/profile/edit', [PagesController::class, 'edit'])->name('contractor.edit');
     Route::post('/profile/update', [PagesController::class, 'update'])->name('contractor.update');
     Route::post('/profile/update/profile_picture', [UploadContractorController::class, 'profile_picture'])->name('contractor.profile_picture');
 
+    Route::get('/project/accept/{project_id}', [PagesController::class, 'accept'])->name('contractor.accept');
+    Route::get('/project/unaccept/{project_id}', [PagesController::class, 'unaccept'])->name('contractor.unaccept');
     Route::get('/project/details/{id}', [PagesController::class, 'details'])->name('contractor.details');
     Route::post('/project/details/comment/{project_id}', [UploadContractorController::class, 'comment'])->name('contractor.comment');
     Route::post('/project/details/reply/{comment_id}', [UploadContractorController::class, 'reply'])->name('contractor.reply');

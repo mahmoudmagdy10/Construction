@@ -14,7 +14,12 @@
 @endsection
 
 @section('profile')
+  @if($customer->profile_picture !== NULL)
   <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("Profile_Picture/$customer->profile_picture")}}' alt="avatar" width="40" height="40" />
+  @endif
+  @if($customer->profile_picture == NULL)
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("image-home/profile.jpg")}}' alt="avatar" width="40" height="40" />
+  @endif
 @endsection
 
 @section('content')
@@ -58,7 +63,7 @@
                             <a href="{{route('customer.details',$pro->id)}}"><h3>House</h3></a><br>
                             <li>Architecture : {{$pro->arch}}</li>
                             @foreach($pro->props as $prop)
-                            <li style="color :red; font-weight:bold">Predict Price : {{ number_format($prop->PREDICTION, 2) }} $</li>
+                            <li style="color :red; font-weight:bold">Predict Price : {{ number_format($prop->PREDICTION) }} $</li>
                             @endforeach                            
                             <li>Publish at : {{$pro->created_at->format('d-m-Y')}}</li>
                         </ul>

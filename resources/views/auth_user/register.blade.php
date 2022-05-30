@@ -9,38 +9,38 @@
     <div class="container">
         <div class="sign-up-form">
             <h1>Customer</h1>
-            <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="{{ route('regiser_user') }}">
             @csrf
             <div class="contain">
                 <label for="name" value="Username">
-                <input id="name" class="input-box" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                <input id="name" class="input-box" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" placeholder="Full Name"/>
             </div>
 
             <div class="mt-4 contain">
                 <label for="email" value="Email" />
-                <input id="email" class="input-box" type="email" name="email" :value="old('email')" required />
+                <input id="email" class="input-box" type="email" name="email" :value="old('email')" required placeholder="your e-mail" />
             </div>
 
             <div class="mt-4 contain">
                 <label for="password" value="Password" />
-                <input id="password" class="input-box" type="password" name="password" required autocomplete="new-password" />
+                <input id="password" class="input-box" type="password" name="password" required autocomplete="new-password" placeholder="your password"/>
             </div>
 
             <div class="mt-4 contain">
                 <label for="password_confirmation" value="Confirm Password" />
-                <input id="password_confirmation" class="input-box" type="password" name="password_confirmation" required autocomplete="new-password" />
+                <input id="password_confirmation" class="input-box" type="password" name="password_confirmation" required autocomplete="new-password" placeholder="confirm password" />
             </div>
             <div class="mt-4 contain">
                 <label for="address" value="Address" />
-                <input id="address" class="input-box" type="text" name="address"  required autofocus autocomplete="address" />
+                <input id="address" class="input-box" type="text" name="address"  required autofocus autocomplete="address" placeholder=" your address" />
             </div>
             <div class="mt-4 contain">
                 <label for="national_id" value="National_id" />
-                <input id="national_id" class="input-box" type="text" name="national_id"  required autofocus  />
+                <input id="national_id" class="input-box" type="text" name="national_id"  required autofocus  placeholder="National ID" />
             </div>              
             <div class="mt-4 contain">
                 <label for="phone" value="Phone" />
-                <input id="phone" class="input-box" type="text" name="phone"  required autofocus  />
+                <input id="phone" class="input-box" type="text" name="phone"  required autofocus  placeholder="your Number" />
             </div>                        
             <div class="mt-4 contain">
                 <label for ="customer" value="Kind" />
@@ -52,7 +52,7 @@
             </div>                
             <button type="submit" class="sign-up-button">
                         Sign Up
-                </button>
+            </button>
                 <p>Have an Account? <a href="{{url('/log_in')}}"><span class=" Sign-in">Sign in</span> </a></p>
             </form>
 

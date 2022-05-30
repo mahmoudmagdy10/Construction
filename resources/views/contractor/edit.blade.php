@@ -1,7 +1,16 @@
 @extends('contractor.layout.app')
 
 @section('profile')
+  @if($contractor->profile_picture !== NULL)
   <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("Profile_Picture/$contractor->profile_picture")}}' alt="avatar" width="40" height="40" />
+  @endif
+  @if($contractor->profile_picture == NULL)
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("image-home/profile.jpg")}}' alt="avatar" width="40" height="40" />
+  @endif
+@endsection
+
+@section('title')
+    Edit
 @endsection
 
 @section('link')
@@ -44,49 +53,97 @@
               <div class="col-md-8">
                 <div class="card mb-9 car">
                   <div class="card-body bodies">
+                  @if(session()->has('success'))
+                  <div class="alert alert-success">
+                      {{ session()->get('success') }}
+                  </div>
+                  @endif
+
                   @isset($contractor)
-                    <div class="row">
+                    <div class="input-group mb-3">
                       <div class="col-sm-3">
                         <h6 class="mb-0">Full Name</h6>
                       </div>
-                      <input class="col-sm-6 form-control" name="name" value = "{{$contractor->name}}">                 
+                      <div class="input-group-prepend ">
+                        <span class="input-group-text info_icons" id="basic-addon1"><i class="fa fa-user" aria-hidden="true"></i></span>
+                      </div>
+                      <input class="col-sm-6 form-control" name="name" value = "{{$contractor->name}}">
+                      @error('name')
+                        <small class="" >{{$message}}</small>
+                      @enderror
                     </div>
                     <br>
-                    <div class="row">
+
+                    <div class="input-group mb-3">
                       <div class="col-sm-3">
                         <h6 class="mb-0">Email</h6>
                       </div>
-                      <input class="col-sm-6 form-control" name="email" value = "{{$contractor->email}}" readOnly>                 
+                      <div class="input-group-prepend ">
+                        <span class="input-group-text info_icons" id="basic-addon1"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                      </div>
+                      <input class="col-sm-6 form-control" name="email" value = "{{$contractor->email}}" readOnly>
+                      @error('email')
+                        <small class="" >{{$message}}</small>
+                      @enderror
                     </div>
                     <br>
-                    <div class="row">
+
+                    <div class="input-group mb-3">
                       <div class="col-sm-3">
                         <h6 class="mb-0">Password</h6>
                       </div>
-                      <input class="col-sm-9 form-control" name="password" placeholder="Type Old Password OR New Password" >                    
+                      <div class="input-group-prepend ">
+                        <span class="input-group-text info_icons" id="basic-addon1"><i class="fa fa-key" aria-hidden="true"></i></span>
+                      </div>
+                      <input class="col-sm-9 form-control" name="password" placeholder="Type Old Password OR New Password" >
+                      @error('password')
+                        <small class="" >{{$message}}</small>
+                      @enderror
                     </div>
                     <br>
-                    <div class="row">
+
+                    <div class="input-group mb-3">
                       <div class="col-sm-3">
                         <h6 class="mb-0">Phone</h6>
                       </div>
-                      <input class="col-sm-9 form-control" name="phone" value = "{{$contractor->phone}}">                    
+                      <div class="input-group-prepend ">
+                        <span class="input-group-text info_icons" id="basic-addon1"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                      </div>
+                      <input class="col-sm-9 form-control" name="phone" value = "{{$contractor->phone}}">
+                      @error('phone')
+                        <small class="" >{{$message}}</small>
+                      @enderror
                     </div>
                     <br>
-                    <div class="row">
+
+                    <div class="input-group mb-3">
                       <div class="col-sm-3">
                         <h6 class="mb-0">Address</h6>
                       </div>
-                      <input class="col-sm-9 form-control" name="address" value = "{{$contractor->address}}">                    
-                    </div>
-                    <br>
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">National_ID</h6>
+                      <div class="input-group-prepend ">
+                        <span class="input-group-text info_icons" id="basic-addon1"><i class="fa fa-globe" aria-hidden="true"></i></span>
                       </div>
-                      <input class="col-sm-9 form-control" name="national_id" value = "{{$contractor->national_id}}">                    
+                      <input class="col-sm-9 form-control" name="address" value = "{{$contractor->address}}">
+                      @error('address')
+                        <small class="" >{{$message}}</small>
+                      @enderror
                     </div>
                     <br>
+
+                    <div class="input-group mb-3">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">National ID</h6>
+                      </div>
+                      <div class="input-group-prepend ">
+                        <span class="input-group-text info_icons" id="basic-addon1"><i class="fa fa-id-badge" aria-hidden="true"></i></span>
+                      </div>
+                      <input class="col-sm-9 form-control" name="national_id" value = "{{$contractor->national_id}}">
+                      @error('national_id')
+                        <small class="" >{{$message}}</small>
+                      @enderror
+                    </div>
+                    <br>
+
                     <div class="form-actions">
                       <button type="button" class="btn btn-warning mr-1"
                               onclick="history.back();">

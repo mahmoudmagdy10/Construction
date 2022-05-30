@@ -50,20 +50,24 @@ class UploadController extends Controller
             }
             Project::create([
                 'arch' => $request['arch'],    
-                'file_path' => $request['fileName'],     
+                'file_path' => $request['fileName'],
                 'user_id' => $request['id'],    
             ]);
+            // return "yes";
 
         } catch (\Exception $e) {
 
             return redirect()->route('customer.construction_style');
+            // return 'no';
         }
         
         // Open CSV && Save in DB
         try{
-            $project = Project::select()->where('user_id', '=', $id)->first();
+            $project = Project::select()->where('user_id', '=', $id)->latest()->first();
             $request->request->add(['id'=> $id]);
             $request->request->add(['project_id'=> $project->id]);
+            // return $project;
+
 
             $students = [];
             if (($open = fopen($request['csv'], "r")) !== FALSE) {  
@@ -103,7 +107,8 @@ class UploadController extends Controller
             
         } catch (\Exception $e) {
 
-            return redirect()->route('customer.construction_style');
+            // return redirect()->route('customer.construction_style');
+            return "no";
         }
     }
     public function comment($project_id,Request $request){

@@ -19,9 +19,13 @@
 @endsection
 
 @section('profile')
+  @if($users->profile_picture !== NULL)
   <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("Profile_Picture/$users->profile_picture")}}' alt="avatar" width="40" height="40" />
+  @endif
+  @if($users->profile_picture == NULL)
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("image-home/profile.jpg")}}' alt="avatar" width="40" height="40" />
+  @endif
 @endsection
-
 
 @section('content')
 <div class="title">
@@ -32,6 +36,8 @@
               <div class="box">
                   <div class="det">
                     <h3>Architecture</h3>
+                    <h4 style="color:#1b239fe0;font-weight:bold;">{{$prop->project->arch}}</h4>
+
                     @if($prop->project->arch === 'Italian')
                     <div class="fram">
                       <iframe title="Petrovsky travel palace in Moscow" frameborder="0" allowfullscreen
@@ -69,7 +75,7 @@
             <tr>
                 <td>1</td>
                 <td style="color :#f44336;">PREDICTION</td>
-                <td style="color :#5a3528;font-weight: bold;">{{ number_format($prop->PREDICTION, 4)}} $</td>
+                <td style="color :#5a3528;font-weight: bold;">{{ number_format($prop->PREDICTION)}} $</td>
             </tr>
             <tr>
                 <td>2</td>
@@ -226,7 +232,6 @@
                     <span class="time"> {{ $item->created_at->format('d-m-Y h:i') }}</span>
                     <i class="fas fa-star icon_star "></i>
 
-
                   </div>
                 </div>		
                 <p class="user-comment mb-1 content" > {{ $item->content }} </p>
@@ -268,7 +273,7 @@
             </div>
             @endforeach
             <!-- Add Comment -->
-            @if($num_of_comments->count() < 1 )
+            @if( $num_of_comments->isEmpty() )
             <form id="form_id" action="{{ route('customer.comment',$project_id) }}" method="POST">
                 @csrf
                 <div class="form-group add">

@@ -5,9 +5,37 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Laravel\Fortify\Contracts\CreatesNewUsers;
+use Laravel\Jetstream\Jetstream;
+use App\Http\Requests\RegisterRequest;
 class HomeController extends Controller
 {
+    public function regiser_user(RegisterRequest $request)
+    {
+        try{
+            User::create([
+                'name' => $request['name'],
+                'email' => $request['email'],
+                'password' => Hash::make($request['password']),
+                'kind' => $request['kind'],
+                'address' => $request['address'],
+                'national_id' => $request['national_id'],
+                'phone' => $request['phone'],
+            ]);
+            // return $request;
+            return redirect()->route('log_in');
+
+        } catch (\Exception $e) {
+            return $e->getMessage();
+            return "no";
+        }
+    }
+
+
+
+
     public function checkUserType(){
         if(!Auth::user()){
             return redirect()->route('log_in');

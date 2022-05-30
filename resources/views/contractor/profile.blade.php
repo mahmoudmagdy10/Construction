@@ -7,8 +7,14 @@
 @endsection
 
 @section('profile')
+  @if($contractor->profile_picture !== NULL)
   <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("Profile_Picture/$contractor->profile_picture")}}' alt="avatar" width="40" height="40" />
+  @endif
+  @if($contractor->profile_picture == NULL)
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("image-home/profile.jpg")}}' alt="avatar" width="40" height="40" />
+  @endif
 @endsection
+
 
 @section('title')
     Profile
@@ -95,9 +101,4 @@
 
         </div>
     </div>
-@endsection
-@section('script')
-
-<script src=" {{asset('js/home/edit.js')}}"></script>
-
 @endsection

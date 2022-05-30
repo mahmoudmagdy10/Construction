@@ -17,12 +17,14 @@ class Project extends Model
         'arch',
         'file_path',
         'user_id',
+        'accepted',
+        'belog_to_contractor',
     ];
 
     public function  scopeSelection($query)
     {
 
-        return $query->select('id', 'arch', 'file_path', 'user_id');
+        return $query->select('id', 'arch', 'file_path', 'user_id','accepted','belog_to_contractor');
     }
     
     public function users(){

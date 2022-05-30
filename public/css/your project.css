@@ -131,7 +131,7 @@ header ul li a:hover::before {
 }
 
 header.active {
-  background: white;
+  background: #0e2a3c30;
   box-shadow: 1px 0px 0px white;
 }
 
@@ -457,4 +457,42 @@ header.active .bars i {
 .swiper .swiper-button-prev:hover {
   color: black;
 
+}
+
+.project_star {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: x-large;
+  cursor: pointer;
+
+}
+
+.btn-warning {
+  background-color: orangered !important;
+}
+
+.btn-success {
+  background-color: rgb(20, 129, 20) !important;
+}
+
+.btn-success:hover {
+  background-color: rgb(26, 197, 26) !important;
+}
+
+.btn-danger {
+  background-color: rgb(182, 72, 72) !important;
+}
+
+.btn-danger:hover {
+  background-color: rgb(194, 28, 28) !important;
+}
+
+.btn:hover {
+  color: rgb(48, 48, 48) !important;
+  font-weight: bold !important;
+}
+
+.btn-danger:hover {
+  color: rgb(255, 255, 255) !important;
 }

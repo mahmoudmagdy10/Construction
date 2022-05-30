@@ -137,11 +137,11 @@ class CustomerPagesController extends Controller
             $user = Auth::user();
             $users = User::find($user->id);
             $props = Property::all()->where('project_id', '=', $id);
-            $project = Project::all()->where('id', '=', $id);        
+            $project = Project::all()->where('id', '=', $id);
             $comments = Comment::where('project_id',$id)->with(['users','replies'])->get();
             $project_id = $id;
             $user = Comment::where('user_id',$user->id)->with(['users'])->get();
-            $num_of_comments = Comment::where('user_id',"=",Auth::user()->id)->get();
+            $num_of_comments = Comment::where('user_id',"=",Auth::user()->id)->where('project_id',"=",$id)->get();
 
             
             if (!$users && !$props && !$project && !$comments_of_users && !$replies_of_users) {
@@ -149,6 +149,7 @@ class CustomerPagesController extends Controller
             } else {
                 return view('customer.details')->with(compact('users','props','project','comments','project_id','num_of_comments'));
             }
+            // return $num_of_comments;
 
         } catch (\Exception $e) {
             return redirect()->route('log_in')->with('هناك خطأ يرجي المحاوله في وقت اخر');

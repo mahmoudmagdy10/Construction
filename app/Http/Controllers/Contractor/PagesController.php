@@ -61,9 +61,7 @@ class PagesController extends Controller
             $user= Auth::user();
             $contractor = User::select()->find($user->id);
 
-            $project = Project::whereHas('comments', function($query) use($user) {
-                $query->whereUserId($user->id);
-            })->with(['props'])->get();
+            $project = Project::where('belong_to_contractor', '=', $user->id)->with(['props'])->get();
 
             if (!$contractor && !$project) {
                 return redirect()->route('log_in');
@@ -73,11 +71,104 @@ class PagesController extends Controller
             // return $project;
 
         } catch (\Exception $e) {
+            return redirect()->route('log_in');
+            // return "no";
+        }
+    }
+
+    public function interested_projects()
+    {
+        try{
+            $user= Auth::user();
+            $contractor = User::select()->find($user->id);
+
+            $project = Project::whereHas('comments', function($query) use($user) {
+                $query->whereUserId($user->id);
+            })->with(['props'])->get();
+
+            if (!$contractor && !$project) {
+                return redirect()->route('log_in');
+            } else {
+                return view('contractor.interested')->with(compact('contractor'))->with(compact('project'));
+            }
+            // return $project;
+
+        } catch (\Exception $e) {
             // return redirect()->route('log_in');
             return "no";
         }
     }
+    // Accept => Add To your Projects
+    public function accept($id,Request $request)
+    {
+        $user_id= Auth::user()->id;
+        $contractor = User::find($user_id);
+        $add_pro = Project::find($id);
+        $props = Property::where('project_id', '=', $id)->with(['project'])->get();
+        $project = Project::where('id', '=', $id)->with(['props'])->get();
+        $comments = Comment::where('project_id',$id)->where('user_id',$user_id)->with(['replies','users'])->get();
+        
+        try{
 
+            if (!$contractor) {
+                return redirect()->route('log_in');
+            }
+            if (!$add_pro) {
+                return redirect()->route('contractor.explor');
+            }
+            $request->request->add(['user_id'=>$user_id]);
+            // Project Accept
+            $add_pro->accepted = 1;
+            $add_pro->belong_to_contractor = $request['user_id'];
+            $add_pro->save();
+            
+            // return $add_pro;
+            return redirect()->route('contractor.your_project')->with(['success' => 'Updated Successfully']);
+
+        } catch (\Exception $e) {
+            return redirect()->route('contractor.your_project')->with('هناك خطأ يرجي المحاوله في وقت اخر');
+            // return "no";
+        }
+
+
+        // return $comments;
+
+    }
+    // ==========================
+    // UnAccept => Add To your Projects
+    public function unaccept($id)
+    {
+        $user_id= Auth::user()->id;
+        $contractor = User::find($user_id);
+        $add_pro = Project::find($id);
+        $project = Project::where('id', '=', $id)->with(['props'])->get();
+        
+        try{
+
+            if (!$contractor) {
+                return redirect()->route('log_in');
+            }
+            if (!$add_pro) {
+                return redirect()->route('contractor.explor');
+            }
+            // Project Accept
+            $add_pro->accepted = 0;
+            $add_pro->belong_to_contractor = 0;
+            $add_pro->save();
+            
+            // return $add_pro;
+            return redirect()->route('contractor.your_project')->with(['success' => 'Updated Successfully']);
+
+        } catch (\Exception $e) {
+            return redirect()->route('contractor.your_project')->with('هناك خطأ يرجي المحاوله في وقت اخر');
+            // return "no";
+        }
+
+
+        // return $comments;
+
+    }
+    // ==========================
 
     public function profile()
     {

@@ -105,9 +105,7 @@ header ul li {
 }
 
 header ul li a.accept {
-  border-bottom: 2px solid white;
-  position: relative;
-  text-decoration: none;
+  color: #c5850e !important;
 
 }
 
@@ -167,6 +165,8 @@ header.active ul {
 
 header.active ul li a.accept {
   border-bottom: 2px solid white;
+  color: #c5850e !important;
+
 
 }
 
