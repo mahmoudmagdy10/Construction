@@ -33,8 +33,14 @@ Route::get('/log_in', function () {
 Route::get('/register_', function () {
     return view('auth_user.register');
 })->name('sign_up');
+
+Route::get('/forget_password', function () {
+    return view('auth.password.email');
+})->name('forget_password');
+
+
 // ============================ Contractor routes =======================
-Route::namespace('Contractor')->prefix('contractor')->group(function(){
+Route::namespace('Contractor')->prefix('contractor')->middleware('auth')->group(function(){
     
     Route::get('/homepage', [PagesController::class, 'homepage'])->name('contractor.homepage');
     Route::get('/explor', [PagesController::class, 'explor'])->name('contractor.explor');
@@ -61,7 +67,7 @@ Route::namespace('Contractor')->prefix('contractor')->group(function(){
 
 // ============================ Customer routes =======================
 
-Route::namespace('Customer')->prefix('customer')->group(function(){
+Route::namespace('Customer')->prefix('customer')->middleware('auth')->group(function(){
     
     Route::get('/homepage', [CustomerPagesController::class, 'homepage'])->name('customer.homepage');
     Route::get('/construction_style', [CustomerPagesController::class, 'construction_style'])->name('customer.construction_style');

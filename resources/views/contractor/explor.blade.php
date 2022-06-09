@@ -41,7 +41,7 @@
                               mozallowfullscreen="true" webkitallowfullscreen="true"
                               allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
                               execution-while-out-of-viewport execution-while-not-rendered web-share
-                              src="https://sketchfab.com/models/8b877b1776794c139d80fd93999003f0/embed"> </iframe>
+                              src="https://sketchfab.com/models/98620d7a356445e593a1fe71b4e9cf20/embed"> </iframe>
                         </div>
                         @endif
                         @if($pro->arch === 'American')
@@ -56,6 +56,24 @@
                               allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
                               execution-while-out-of-viewport execution-while-not-rendered web-share
                               src="https://sketchfab.com/models/e4869a806dfa4efd9d480fda16990c52/embed"> </iframe>
+                        </div>
+                        @endif
+                        @if($pro->arch === 'german')
+                        <div class="fram">
+                          <iframe title="Ndecor Design Dokuzer İnşaat 3D" frameborder="0" allowfullscreen
+                              mozallowfullscreen="true" webkitallowfullscreen="true"
+                              allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
+                              execution-while-out-of-viewport execution-while-not-rendered web-share
+                              src="https://sketchfab.com/models/80782c1ce7d34c04ac193e918978c009/embed"> </iframe>
+                        </div>
+                        @endif
+                        @if($pro->arch === 'spanish')
+                        <div class="fram">
+                          <iframe title="Ndecor Design Dokuzer İnşaat 3D" frameborder="0" allowfullscreen
+                              mozallowfullscreen="true" webkitallowfullscreen="true"
+                              allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
+                              execution-while-out-of-viewport execution-while-not-rendered web-share
+                              src="https://sketchfab.com/models/80782c1ce7d34c04ac193e918978c009/embed"> </iframe>
                         </div>
                         @endif
                         <ul>
@@ -78,6 +96,7 @@
             </div>
             @endforeach
         @endisset
+
 @endsection
 @section('script')
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

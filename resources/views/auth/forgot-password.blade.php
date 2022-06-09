@@ -1,34 +1,32 @@
-<x-guest-layout>
-    <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
-        </div>
 
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Reset Password Form In Bootstrap</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300i,400,700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="{{ asset('css/auth/forgetPass.css') }}">
+
+   </head>
+   <body>
         @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
+            <div class="alert alert-success">
                 {{ session('status') }}
             </div>
         @endif
-
-        <x-jet-validation-errors class="mb-4" />
-
-        <form method="POST" action="{{ route('password.email') }}">
+      <div class="container d-flex justify-content-center align-items-center vh-100">
+         <div class="bg-white text-center p-5 mt-3 center">
+            <h3>Forgot Password </h3>
+            <form class="pb-3" method="POST" action="{{ route('password.email') }}">
             @csrf
-
-            <div class="block">
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <x-jet-button>
-                    {{ __('Email Password Reset Link') }}
-                </x-jet-button>
-            </div>
-        </form>
-    </x-jet-authentication-card>
-</x-guest-layout>
+               <div class="form-group">
+                  <input  class="form-control" placeholder="Your Email" type="email" name="email" :value="old('email')" required autofocus>
+               </div>
+               <input type="submit" class="btn" value="Reset Password">
+            </form>
+         </div>
+      </div>
+   </body>
+</html>

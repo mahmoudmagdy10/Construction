@@ -26,7 +26,7 @@ class UploadController extends Controller
         // Validation
         try {
             $rules = [
-                'arch' => "required|in:Italian,UK,American",
+                'arch' => "required|in:Italian,UK,American,spanish,german",
                 'file' => 'required|mimes:png,jpge,jpg',
                 'csv' => "required",
             ];
@@ -34,7 +34,9 @@ class UploadController extends Controller
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
                 return redirect()->route('customer.construction_style');
+                // return "no";
             }
+            // return $request;
 
         } catch (\Exception $e) {
             return $this->returnError($e->getCode(), $e->getMessage());
@@ -107,8 +109,8 @@ class UploadController extends Controller
             
         } catch (\Exception $e) {
 
-            // return redirect()->route('customer.construction_style');
-            return "no";
+            return redirect()->route('customer.construction_style');
+            // return "no";
         }
     }
     public function comment($project_id,Request $request){

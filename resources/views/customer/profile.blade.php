@@ -41,7 +41,7 @@
             <div class="profile_info">
                 <div class="row-container">
                   <div class="prop">
-                    <h6 class="">Full Name</h6>
+                    <h4 class="">Full Name</h4>
                   </div>
 
                   <div class="value">
@@ -52,7 +52,7 @@
 
                 <div class="row-container">
                   <div class="prop">
-                    <h6 class="">Email </h6>
+                    <h4 class="">Email </h4>
                   </div>
 
                   <div class="value">
@@ -62,7 +62,7 @@
                 <hr>
                 <div class="row-container">
                   <div class="prop">
-                    <h6 class="">Address</h6>
+                    <h4 class="">Address</h4>
                   </div>
 
                   <div class="value">
@@ -72,7 +72,7 @@
                 <hr>
                 <div class="row-container">
                   <div class="prop">
-                    <h6 class="">National ID</h6>
+                    <h4 class="">National ID</h4>
                   </div>
 
                   <div class="value">
@@ -82,7 +82,7 @@
                 <hr>
                 <div class="row-container">
                   <div class="prop">
-                    <h6 class="">Phone</h6>
+                    <h4 class="">Phone</h4>
                   </div>
 
                   <div class="value">

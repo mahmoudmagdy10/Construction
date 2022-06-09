@@ -10,9 +10,14 @@ use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
 use App\Http\Requests\RegisterRequest;
+use Storage;
+use Response;
+use PDF;
+
+
 class HomeController extends Controller
 {
-    public function regiser_user(RegisterRequest $request)
+    public function regiser_user(Request $request)
     {
         try{
             User::create([
@@ -22,18 +27,18 @@ class HomeController extends Controller
                 'kind' => $request['kind'],
                 'address' => $request['address'],
                 'national_id' => $request['national_id'],
+                'tax_record' => $request['tax_record'],
                 'phone' => $request['phone'],
             ]);
             // return $request;
             return redirect()->route('log_in');
+            // return $request;
 
         } catch (\Exception $e) {
             return $e->getMessage();
             return "no";
         }
     }
-
-
 
 
     public function checkUserType(){
@@ -55,4 +60,7 @@ class HomeController extends Controller
         return redirect('/log_in')->with(['msg_body' => 'You signed out!']);
 
     }
+
+
 }
+

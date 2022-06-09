@@ -34,6 +34,7 @@ class User extends Authenticatable
         'profile_picture',
         'email',
         'kind',
+        'tax_record',
     ];
 
     /**
@@ -70,7 +71,7 @@ class User extends Authenticatable
     public function  scopeSelection($query)
     {
 
-        return $query->select('id','name','email','password','phone','address','national_id','kind');
+        return $query->select('id','name','email','password','phone','address','national_id','kind','tax_record');
     }
 
     public function projects()

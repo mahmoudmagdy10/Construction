@@ -59,6 +59,24 @@
                               src="https://sketchfab.com/models/e4869a806dfa4efd9d480fda16990c52/embed"> </iframe>
                         </div>
                         @endif
+                        @if($pro->arch === 'german')
+                        <div class="fram">
+                          <iframe title="Ndecor Design Dokuzer İnşaat 3D" frameborder="0" allowfullscreen
+                              mozallowfullscreen="true" webkitallowfullscreen="true"
+                              allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
+                              execution-while-out-of-viewport execution-while-not-rendered web-share
+                              src="https://sketchfab.com/models/80782c1ce7d34c04ac193e918978c009/embed"> </iframe>
+                        </div>
+                        @endif
+                        @if($pro->arch === 'spanish')
+                        <div class="fram">
+                          <iframe title="Ndecor Design Dokuzer İnşaat 3D" frameborder="0" allowfullscreen
+                              mozallowfullscreen="true" webkitallowfullscreen="true"
+                              allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
+                              execution-while-out-of-viewport execution-while-not-rendered web-share
+                              src="https://sketchfab.com/models/80782c1ce7d34c04ac193e918978c009/embed"> </iframe>
+                        </div>
+                        @endif
                         <ul>
                             <a href="{{route('contractor.details',$pro->id)}}"><h3>House</h3></a><br>
                             <li>Architecture : {{$pro->arch}}</li>
