@@ -7,6 +7,8 @@ use App\Http\Controllers\Customer\CustomerPagesController;
 use App\Http\Controllers\Customer\UploadController;
 use App\Http\Controllers\Contractor\ContractorUploadController;
 use App\Http\Controllers\Contractor\UploadContractorController;
+use App\Http\Controllers\Payments\FatoorahController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,7 +43,7 @@ Route::get('/forget_password', function () {
 
 // ============================ Contractor routes =======================
 Route::namespace('Contractor')->prefix('contractor')->middleware('auth')->group(function(){
-    
+
     Route::get('/homepage', [PagesController::class, 'homepage'])->name('contractor.homepage');
     Route::get('/explor', [PagesController::class, 'explor'])->name('contractor.explor');
     Route::get('/your_project', [PagesController::class, 'your_project'])->name('contractor.your_project');
@@ -68,7 +70,7 @@ Route::namespace('Contractor')->prefix('contractor')->middleware('auth')->group(
 // ============================ Customer routes =======================
 
 Route::namespace('Customer')->prefix('customer')->middleware('auth')->group(function(){
-    
+
     Route::get('/homepage', [CustomerPagesController::class, 'homepage'])->name('customer.homepage');
     Route::get('/construction_style', [CustomerPagesController::class, 'construction_style'])->name('customer.construction_style');
     Route::get('/your_project', [CustomerPagesController::class, 'your_project'])->name('customer.your_project');
@@ -84,7 +86,9 @@ Route::namespace('Customer')->prefix('customer')->middleware('auth')->group(func
     Route::post('/project/details/comment/{project_id}', [UploadController::class, 'comment'])->name('customer.comment');
     Route::post('/project/details/reply/{comment_id}', [UploadController::class, 'reply'])->name('customer.reply');
 
+    Route::get('/payment/{project_id}', [CustomerPagesController::class, 'payment'])->name('customer.payment');
+    Route::get('/paymentDefault', [CustomerPagesController::class, 'paymentDefault'])->name('customer.paymentDefault');
+
+
 });
 // ============================ Customer routes =======================
-
-

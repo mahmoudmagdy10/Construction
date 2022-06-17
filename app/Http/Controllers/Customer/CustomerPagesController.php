@@ -63,6 +63,7 @@ class CustomerPagesController extends Controller
                 return redirect()->route('log_in');
             } else {
                 return view('customer.your_project')->with(compact('customer','project'));
+                // return $project;
             }
         } catch (\Exception $e) {
             return redirect()->route('log_in');
@@ -124,7 +125,7 @@ class CustomerPagesController extends Controller
             // return "yes";
 
         } catch (\Exception $e) {
-            return redirect()->route('customer.edit')->with('error' , 'هناك خطأ يرجي المحاوله في وقت اخر');   
+            return redirect()->route('customer.edit')->with('error' , 'هناك خطأ يرجي المحاوله في وقت اخر');
             // return 'no';
         }
 
@@ -143,7 +144,7 @@ class CustomerPagesController extends Controller
             $user = Comment::where('user_id',$user->id)->with(['users'])->get();
             $num_of_comments = Comment::where('user_id',"=",Auth::user()->id)->where('project_id',"=",$id)->get();
 
-            
+
             if (!$users && !$props && !$project && !$comments_of_users && !$replies_of_users) {
                 return redirect()->back();
             } else {
@@ -155,6 +156,36 @@ class CustomerPagesController extends Controller
             return redirect()->route('log_in')->with('هناك خطأ يرجي المحاوله في وقت اخر');
         }
 
+    }
+
+    public function payment($project_id){
+        try{
+            $customer = User::select()->find(Auth::user()->id);
+            if (!$customer) {
+                return redirect()->route('log_in');
+            } else {
+                return view('customer.payment')->with(compact('customer','project_id'));
+                // return $project_id;
+            }
+
+        } catch (\Exception $e) {
+            return redirect()->route('log_in');
+        }
+    }
+    public function paymentDefault(){
+        try{
+            $customer = User::select()->find(Auth::user()->id);
+            if (!$customer) {
+                return redirect()->route('log_in');
+            } else {
+                return view('customer.paymentDefault')->with(compact('customer'));
+                // return $customer;
+            }
+
+        } catch (\Exception $e) {
+            // return redirect()->route('log_in');
+            return "no";
+        }
     }
 
 

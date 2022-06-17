@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Payments\FatoorahController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('pay',[FatoorahController::class, 'payOrder'])->name('customer.pay');
+Route::get('success_call_back',[FatoorahController::class, 'successCallBack']);
+Route::get('failed_call_back',[FatoorahController::class, 'failCallBack']);

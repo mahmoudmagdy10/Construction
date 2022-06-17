@@ -82,8 +82,12 @@
                             <li>Architecture : {{$pro->arch}}</li>
                             @foreach($pro->props as $prop)
                             <li style="color :red; font-weight:bold">Predict Price : {{ number_format($prop->PREDICTION) }} $</li>
-                            @endforeach                            
+                            @endforeach
                             <li>Publish at : {{$pro->created_at->format('d-m-Y')}}</li>
+
+                            @if($pro->payment_status == 0)
+                            <a href="{{route('customer.payment',$pro->id)}}"><h3>Pay</h3></a><br>
+                            @endif
                         </ul>
                     </div>
                 </div>

@@ -19,14 +19,16 @@ class Project extends Model
         'user_id',
         'accepted',
         'belog_to_contractor',
+        'paied_salary',
+        'payment_status',
     ];
 
     public function  scopeSelection($query)
     {
 
-        return $query->select('id', 'arch', 'file_path', 'user_id','accepted','belog_to_contractor');
+        return $query->select('id', 'arch', 'file_path', 'user_id','accepted','belog_to_contractor','paied_salary','payment_status');
     }
-    
+
     public function users(){
         return $this->belongsTo(User::class, 'user_id');
     }
@@ -34,7 +36,7 @@ class Project extends Model
     public function comments(){
         return $this->hasMany(Comment::class, 'project_id');
     }
-    
+
     public function props(){
         return $this->hasMany(Property::class, 'project_id');
     }

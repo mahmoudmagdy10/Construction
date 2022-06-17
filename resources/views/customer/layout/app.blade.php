@@ -19,13 +19,13 @@
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
         <link rel="stylesheet"href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
 
-        
+
         <style>
         .swiper-slide{
         width:400px;
         }
         </style>
-        
+
     </head>
     <body>
         <!-- start header  -->
@@ -37,7 +37,7 @@
                 <li><a class="accept" href="{{route('customer.homepage')}}" value = "Home">Home</a></li>
                 <li><a href="{{route('customer.construction_style')}}" value = "Upload">Upload</a></li>
                 <li><a href="{{route('customer.your_project')}}" value = "Your Project">Your Project</a></li>
-                <li><a href="project.html" value = "Payment">Payment</a></li>
+                <li><a href="{{route('customer.paymentDefault')}}" value = "Payment">Payment</a></li>
                 <li class="icon_profile">
                     @yield('profile')
                 </li>
