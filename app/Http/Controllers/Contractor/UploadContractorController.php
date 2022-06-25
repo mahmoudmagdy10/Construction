@@ -41,7 +41,7 @@ class UploadContractorController extends Controller
 
             $request->request->add(['id'=> $user->id]);
             $request->request->add(['project_id'=>$project_id]);
-    
+
             Comment::create([
                 "content" => $request->comment,
                 "user_id" => $request->id,
@@ -50,12 +50,12 @@ class UploadContractorController extends Controller
             return redirect()->back()->with('message','Created Successfully');
             // return $request;
 
-            
+
 
         } catch (\Exception $e) {
             return $this->returnError($e->getCode(), $e->getMessage());
         }
-        
+
     }
 
 
@@ -83,17 +83,34 @@ class UploadContractorController extends Controller
             $request->request->add(['id'=> $user->id]);
             $request->request->add(['project_id'=>$project_id]);
             $request->request->add(['comment_id'=>$comment_id]);
-    
+            // $request->request->add(['profile_picture'=>$user->profile_picture]);
+            // $request->request->add(['user_name'=>$user->name]);
+
+
             Reply::create([
                 "content" => $request->comment,
                 "user_id" => $request->id,
                 "project_id" => $request->project_id,
                 "comment_id" => $request->comment_id,
             ]);
-            return redirect()->back()->with('message','Created Successfully');
-            // return $id;
 
-            
+            // $reply = Reply::select()->latest()->first();
+            // $address = route('customer.details',$project_id);
+            // $request->request->add(['address'=>$address]);
+
+
+            // $data = [
+            //     "user_photo" => $request->profile_picture,
+            //     "user_name" => $request->user_name,
+            //     "user_id" => $request->id,
+            //     "project_id" => $request->project_id,
+            //     "comment_id" => $request->comment_id,
+            //     "address" => $request->address,
+            // ];
+
+            // event(new NewNotificationContractor($data));
+
+            return redirect()->back()->with('message','Created Successfully');
 
         } catch (\Exception $e) {
             return $this->returnError($e->getCode(), $e->getMessage());

@@ -2,7 +2,7 @@
 function myNav(){
     let bar = document.getElementById("bar");
     let nav = document.querySelector(".navigation");
-    
+
     bar.onclick=() =>{
         if(nav.style.right=="0%"){
             nav.style.right="-100%";
@@ -15,24 +15,24 @@ function myNav(){
 
         }else{
             nav.style.right="0%";
-            bar.classList = "fa-solid fa-xmark"; 
+            bar.classList = "fa-solid fa-xmark";
             bar.style.cssText = "margin-left:16px";
         }
     }
 } myNav();
 
-function sayHeader(){  
+function sayHeader(){
      let header = document.getElementById("header");
      window.addEventListener("scroll",function(){
          if(this.window.scrollY > 0){
              header.classList.add("active")
          }
-           
-      
+
+
          else{
-            
+
              header.classList.remove("active")
-        
+
          }
      })
 }sayHeader();
@@ -44,7 +44,7 @@ document.querySelectorAll("li a").forEach(function (l) {
     l.addEventListener("click", function () {
         document.querySelector(".accept").classList.remove("accept");
         l.classList.add("accept");
-        
+
     })
 })
 
@@ -57,10 +57,10 @@ lis.forEach((e) => {
         localStorage.setItem("color-option", ele.target.dataset.color);
         document.querySelector(".set").classList.remove("set");
         e.classList.add("set");
-     
-    
+
+
     })
-  
+
 })
 let mainColor = localStorage.getItem("color-option");
 if (mainColor !== null) {
@@ -91,8 +91,8 @@ acceptClass.forEach(element => {
 //     e.addEventListener("click", (ele) => {
 //         document.documentElement.style.setProperty("--main-img", ele.target.data-img);
 //         localStorage.setItem("imgsrc", ele.target.data-img);
-        
-       
+
+
 //     })
 // });
 // let imgop = localStorage.getItem("imgsrc");
@@ -115,7 +115,7 @@ window.addEventListener("scroll",function(){
 
     }else{
         mysection.style.cssText="margin-top:200px";
- 
+
     }
 });
 let i=0,text;
@@ -127,7 +127,7 @@ function typing(){
         i++;
         setTimeout(typing,200);
     }
-    
+
 }
 typing();
 let btn1 = document.getElementById("btn1");
@@ -146,7 +146,7 @@ btn1.addEventListener("click", function () {
         behavior: "smooth"
     })
 });
-// start about 
+// start about
 let imgs = document.querySelectorAll(".about-us .container .img img");
 imgs.forEach((e) => {
     e.addEventListener("click", function (ele) {
@@ -165,7 +165,7 @@ imgs.forEach((e) => {
         poupop.appendChild(imgp);
 
         imgp.src = e.src;
-      
+
         document.body.appendChild(poupop);
 
 
@@ -177,7 +177,7 @@ imgs.forEach((e) => {
             document.querySelector(".overlay").remove();
         };
     });
-    
+
 });
 let mood = document.querySelector("header .mode i");
 
@@ -185,7 +185,7 @@ mood.addEventListener("click", (eo) => {
     document.body.classList.toggle("dark");
     if (document.body.classList.contains("dark")) {
         mood.classList = "fa-solid fa-sun";
-        
+
     } else {
         mood.classList = "fa-solid fa-moon";
 

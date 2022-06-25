@@ -19,6 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('pay',[FatoorahController::class, 'payOrder'])->name('customer.pay');
+Route::post('pay',[FatoorahController::class, 'payOrder'])->name('user.pay');
 Route::get('success_call_back',[FatoorahController::class, 'successCallBack']);
 Route::get('failed_call_back',[FatoorahController::class, 'failCallBack']);

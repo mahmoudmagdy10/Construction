@@ -9,7 +9,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&family=Open+Sans:ital,wght@0,300;0,400;1,600&family=Work+Sans:wght@200;300;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-   
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 @endsection
 
@@ -58,6 +58,24 @@
                             allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
                             execution-while-out-of-viewport execution-while-not-rendered web-share
                             src="https://sketchfab.com/models/e4869a806dfa4efd9d480fda16990c52/embed"> </iframe>
+                        </div>
+                        @endif
+                        @if($prop->project->arch === 'german')
+                        <div class="fram">
+                          <iframe title="Ndecor Design Dokuzer İnşaat 3D" frameborder="0" allowfullscreen
+                              mozallowfullscreen="true" webkitallowfullscreen="true"
+                              allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
+                              execution-while-out-of-viewport execution-while-not-rendered web-share
+                              src="https://sketchfab.com/models/80782c1ce7d34c04ac193e918978c009/embed"> </iframe>
+                        </div>
+                        @endif
+                        @if($prop->project->arch === 'spanish')
+                        <div class="fram">
+                          <iframe title="Ndecor Design Dokuzer İnşaat 3D" frameborder="0" allowfullscreen
+                              mozallowfullscreen="true" webkitallowfullscreen="true"
+                              allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
+                              execution-while-out-of-viewport execution-while-not-rendered web-share
+                              src="https://sketchfab.com/models/80782c1ce7d34c04ac193e918978c009/embed"> </iframe>
                         </div>
                         @endif
                     </div>
@@ -208,11 +226,13 @@
 
     <div class="comment-system">
 
-        <div id="success" class="alert alert-success" style="display: none">
-            Saved Successfuly
-        </div>
-    
         <h3>Comments</h3>
+
+        @if(session()->has('success'))
+        <div class="alert alert-success">
+            {{ session()->get('success') }}
+        </div>
+        @endif
 
         @foreach($comments as $item)
         <div class="comment">
@@ -241,7 +261,7 @@
             @endif
             @if($reply->users->profile_picture == null)
             <img class="" src='{{asset("image-home/profile.jpg")}}' alt="avatar" />
-            @endif 
+            @endif
 
             <span class="h3_reply">{{ $reply->users->name }}</span>
             <span class="time"> {{ $reply->created_at->format('d-m-Y h:i') }} </span>

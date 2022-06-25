@@ -10,6 +10,7 @@ use App\Models\Property;
 use App\Models\Project;
 use App\Models\Comment;
 use App\Models\Reply;
+use App\Models\Transaction;
 use App\Traits\GeneralTrait;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Validator;
@@ -107,7 +108,7 @@ class PagesController extends Controller
         $props = Property::where('project_id', '=', $id)->with(['project'])->get();
         $project = Project::where('id', '=', $id)->with(['props'])->get();
         $comments = Comment::where('project_id',$id)->where('user_id',$user_id)->with(['replies','users'])->get();
-        
+
         try{
 
             if (!$contractor) {
@@ -121,7 +122,7 @@ class PagesController extends Controller
             $add_pro->accepted = 1;
             $add_pro->belong_to_contractor = $request['user_id'];
             $add_pro->save();
-            
+
             // return $add_pro;
             return redirect()->route('contractor.your_project')->with(['success' => 'Updated Successfully']);
 
@@ -142,7 +143,7 @@ class PagesController extends Controller
         $contractor = User::find($user_id);
         $add_pro = Project::find($id);
         $project = Project::where('id', '=', $id)->with(['props'])->get();
-        
+
         try{
 
             if (!$contractor) {
@@ -155,7 +156,7 @@ class PagesController extends Controller
             $add_pro->accepted = 0;
             $add_pro->belong_to_contractor = 0;
             $add_pro->save();
-            
+
             // return $add_pro;
             return redirect()->route('contractor.your_project')->with(['success' => 'Updated Successfully']);
 
@@ -215,11 +216,11 @@ class PagesController extends Controller
             ];
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
-                return redirect()->route('contractor.edit')->with(['error' => 'هناك خطأ يرجي المحاوله في وقت اخر']);            
+                return redirect()->route('contractor.edit')->with(['error' => 'هناك خطأ يرجي المحاوله في وقت اخر']);
                 return"no";
             }
         } catch (\Exception $e) {
-            return redirect()->route('contractor.edit')->with(['error' => 'هناك خطأ يرجي المحاوله في وقت اخر']);            
+            return redirect()->route('contractor.edit')->with(['error' => 'هناك خطأ يرجي المحاوله في وقت اخر']);
             return "no no";
         }
         // return $request;
@@ -252,21 +253,41 @@ class PagesController extends Controller
 
         $users = User::find($user->id);
         $props = Property::where('project_id', '=', $id)->with(['project'])->get();
-        $project = Project::all()->where('id', '=', $id);        
+        $project = Project::all()->where('id', '=', $id);
         $comments = Comment::where('project_id',$id)->where('user_id',$user->id)->with(['replies','users'])->get();
+        $payment = Transaction::where('project_id', '=', $id)->get();
         $project_id = $id;
 
         $num_of_comments = Comment::where('user_id',"=",Auth::user()->id)->where('project_id',$id)->get();
-        
+
         if (!$users && !$props && !$project && !$comments_of_users && !$replies_of_users) {
             return redirect()->back();
         } else {
-            return view('contractor.details')->with(compact('users','props','project','comments','project_id','num_of_comments'));
+            return view('contractor.details')->with(compact('users','props','project','comments','project_id','num_of_comments','payment'));
+            // return $payment;
         }
 
         // return $props;
 
 
+    }
+
+    public function payment($project_id){
+        try{
+            $contractor = User::select()->find(Auth::user()->id);
+            $project = Project::find($project_id);
+            $props = Property::where('project_id', '=', $project_id)->get();
+            if (!$contractor) {
+                return redirect()->route('log_in');
+            } else {
+                return view('contractor.payment')->with(compact('contractor','project_id','props','project'));
+
+            }
+
+        } catch (\Exception $e) {
+            return redirect()->route('log_in');
+            // return 'no';
+        }
     }
 
 

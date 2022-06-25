@@ -21,12 +21,13 @@ class Project extends Model
         'belog_to_contractor',
         'paied_salary',
         'payment_status',
+        'contractor_tax',
     ];
 
     public function  scopeSelection($query)
     {
 
-        return $query->select('id', 'arch', 'file_path', 'user_id','accepted','belog_to_contractor','paied_salary','payment_status');
+        return $query->select('id', 'arch', 'file_path', 'user_id','accepted','belog_to_contractor','paied_salary','payment_status','contractor_tax');
     }
 
     public function users(){

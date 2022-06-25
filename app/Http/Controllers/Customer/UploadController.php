@@ -14,6 +14,7 @@ use App\Traits\GeneralTrait;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
+use App\Events\NewNotification;
 
 class UploadController extends Controller
 {
@@ -51,9 +52,9 @@ class UploadController extends Controller
                 $request->request->add(['fileName'=> $fileName]);
             }
             Project::create([
-                'arch' => $request['arch'],    
+                'arch' => $request['arch'],
                 'file_path' => $request['fileName'],
-                'user_id' => $request['id'],    
+                'user_id' => $request['id'],
             ]);
             // return "yes";
 
@@ -62,7 +63,7 @@ class UploadController extends Controller
             return redirect()->route('customer.construction_style');
             // return 'no';
         }
-        
+
         // Open CSV && Save in DB
         try{
             $project = Project::select()->where('user_id', '=', $id)->latest()->first();
@@ -72,11 +73,11 @@ class UploadController extends Controller
 
 
             $students = [];
-            if (($open = fopen($request['csv'], "r")) !== FALSE) {  
+            if (($open = fopen($request['csv'], "r")) !== FALSE) {
                 while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
                     $students[] = $data;
                 }
-            
+
                 fclose($open);
             }
             Property::create([
@@ -101,12 +102,12 @@ class UploadController extends Controller
                 "MSSubClass"=>$students[1][18],
                 "TotRmsAbvGrd"=>$students[1][19],
                 "Fireplaces"=>$students[1][20],
-                'user_id' => $request['id'],    
-                'project_id' => $request['project_id'],    
+                'user_id' => $request['id'],
+                'project_id' => $request['project_id'],
         ]);
 
-            return redirect()->route('customer.your_project');
-            
+            return redirect()->route('customer.payment',$request->project_id);
+
         } catch (\Exception $e) {
 
             return redirect()->route('customer.construction_style');
@@ -136,7 +137,7 @@ class UploadController extends Controller
 
             $request->request->add(['id'=> $user->id]);
             $request->request->add(['project_id'=>$project_id]);
-    
+
             Comment::create([
                 "content" => $request->comment,
                 "user_id" => $request->id,
@@ -145,19 +146,21 @@ class UploadController extends Controller
             return redirect()->back()->with('message','Created Successfully');
             // return $request;
 
-            
+
 
         } catch (\Exception $e) {
             return $this->returnError($e->getCode(), $e->getMessage());
         }
-        
+
     }
 
 
     public function reply($comment_id,Request $request){
         $user = User::select()->find(Auth::user()->id);
-        $comment = Comment::find($comment_id)->first();
+        $comment = Comment::find($comment_id);
         $project_id = $comment->project_id;
+        $project = Project::find($project_id);
+        $project_owner = $project->user_id;
 
         // Validation
         try {
@@ -178,17 +181,36 @@ class UploadController extends Controller
             $request->request->add(['id'=> $user->id]);
             $request->request->add(['project_id'=>$project_id]);
             $request->request->add(['comment_id'=>$comment_id]);
-    
+            // $request->request->add(['profile_picture'=>$user->profile_picture]);
+            // $request->request->add(['user_name'=>$user->name]);
+
             Reply::create([
                 "content" => $request->comment,
                 "user_id" => $request->id,
                 "project_id" => $request->project_id,
                 "comment_id" => $request->comment_id,
             ]);
-            return redirect()->back()->with('message','Created Successfully');
-            // return $id;
 
-            
+            // $reply = Reply::select()->latest()->first();
+            // $address = route('customer.details',$project_id);
+            // $request->request->add(['address'=>$address]);
+            // $request->request->add(['reciver_user'=>$project_owner]);
+
+
+            // $data = [
+            //     "user_photo" => $request->profile_picture,
+            //     "user_name" => $request->user_name,
+            //     "user_id" => $request->id,
+            //     "project_id" => $request->project_id,
+            //     "comment_id" => $request->comment_id,
+            //     "address" => $request->address,
+            //     "reciver_user" => $request->reciver_user,
+            // ];
+
+            // event(new NewNotification($data));
+
+            return redirect()->back()->with('message','Created Successfully');
+            // return $data;
 
         } catch (\Exception $e) {
             return $this->returnError($e->getCode(), $e->getMessage());

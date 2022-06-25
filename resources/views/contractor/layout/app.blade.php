@@ -31,6 +31,28 @@
             <div class="logo">
                 <a href="{{route('contractor.homepage')}}"><img src='{{asset("image-home/logo.jpeg")}}'/></a>
             </div>
+
+            <ul class="notification_dropdown_2">
+                <li class="notify_icon_2">
+                    <span class="count_notify_2" data-count="1">1</span>
+                    <i class="fas fa-bell"></i>
+                </li>
+                <li>
+                    <h2>Notifications</h2>
+                    <div class ="pop_up_notify_2">
+
+                        <div class="pop_up_container_2">
+                            <img class="" src='{{asset("image-home/profile.jpg")}}' alt="avatar"  />
+                            <span class="h3_reply">
+                                mahmoud has commented to your post mahmoud has commented to your post
+                            </span>
+                            <span class="time"> 20-6-2022 </span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+
             <ul class="navigation">
                 <li><a class="accept" href="{{route('contractor.homepage')}}" value = "Home">Home</a></li>
                 <li><a href="{{route('contractor.explor')}}" value = "Explor">Explor</a></li>
@@ -66,9 +88,33 @@
         <script src=" {{asset('js/header.js')}}"></script>
         <!-- <script src=" {{asset('js/home/home.js')}}"></script> -->
         <script src=" {{asset('js/home/edit.js')}}"></script>
+        <script src=" {{asset('js/home/home.js')}}"></script>
 
         <script src=" {{asset('js/home.js')}}"></script>
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+        <!-- JQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <!-- Pusher script  -->
+        <script src="https://js.pusher.com/7.1/pusher.min.js"></script>
+        <script>
+
+            // Enable pusher logging - don't include this in production
+            Pusher.logToConsole = true;
+
+            var pusher = new Pusher('6def5b4303fc5ed6f28a', {
+            cluster: 'mt1'
+            });
+
+            var channel = pusher.subscribe('newnotification-contractor');
+            channel.bind('App\\Events\\NewNotificationContractor', function(data) {
+            alert(JSON.stringify(data));
+            });
+
+        </script>
+        <script src=" {{asset('js/notification/pusherNotificationContractor.js')}}"></script>
+
+
         <script>
         AOS.init({
             duration: 800,
@@ -111,6 +157,6 @@
 
         );
         </script>
-        
+
     </body>
 </html>

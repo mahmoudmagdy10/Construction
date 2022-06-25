@@ -7,8 +7,12 @@ use Illuminate\Http\Request;
 use App\Http\Services\FatoorahService;
 use App\Models\Transaction;
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Session;
+use Config;
+
 
 
 
@@ -16,16 +20,19 @@ use Illuminate\Support\Facades\Redirect;
 class FatoorahController extends Controller
 {
     private $fatoorahServices;
+
     public function __construct(FatoorahService $fatoorahServices){
         $this->fatoorahServices = $fatoorahServices; // Inject fatoorahServices in Controller and take instance from it
-
     }
+
+
     public function payOrder(Request $request){
 
-        $invoice_value = $request->salary + 50;
+        $invoice_value = $request->salary;
         $name = $request->name;
         $email = $request->email;
         $project = $request->project_id;
+
         //Fill POST fields array
         $data = [
             //Fill required data
@@ -43,15 +50,12 @@ class FatoorahController extends Controller
 
         $returned_data = $this->fatoorahServices->sendPayment($data);
 
-        // return $returned_data;
-
         Transaction::create([
             'invoice_id' => $returned_data['Data']['InvoiceId'],
             'user_id' => $request['user_id'],
             'salary' => $invoice_value,
             'project_id'=> $project,
         ]);
-        // return "OK";
         $redirect_link = $returned_data['Data']['InvoiceURL'];
         return redirect()->away($redirect_link);
 
@@ -68,16 +72,30 @@ class FatoorahController extends Controller
         $saved_pay = Transaction::where('invoice_id',$invoice_id)->get();
         $saved_pay_invoice_id = $saved_pay[0]->invoice_id;
         $project_id = $saved_pay[0]->project_id;
+        $user_id = $saved_pay[0]->user_id;
+        $role = User::find($saved_pay[0]->user_id);
 
         if($saved_pay_invoice_id === $invoice_id){
-            $project = Project::find($project_id);
-            $project->payment_status = 1;
-            $project->save();
+            if($role == 'customer'){
+                $project = Project::find($project_id);
+                $project->payment_status = 1;
+                $project->save();
 
-            return redirect()->route('customer.payment', $project_id)->with('success','Payment done Successfully');
+                return redirect()->route('customer.payment', $project_id)->with('success','Payment done Successfully');
 
-            // return $project;
+            }else{
+
+                $project = Project::find($project_id);
+                $project->contractor_tax = 1;
+                $project->save();
+                return redirect()->route('contractor.payment', $project_id)->with('success','Payment done Successfully');
+
+            }
+        }else{
+            return abort(404);
         }
+        return $request;
+
 
     }
 

@@ -616,3 +616,30 @@ hr {
     background-color: #f3f3f3 !important;
     box-shadow: 1px 1px 6px 2px #cbc2c2;
 }
+
+.projects .verified {
+    display: flex;
+    gap: 10px;
+    background-color: #65a927;
+    padding: 13px;
+    margin-left: 30px;
+    width: 70%;
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: 1px 1px 11px 2px #83d2f5;
+    height: 48px;
+}
+
+.projects .unverified {
+    display: flex;
+    gap: 10px;
+    background-color: #a62110;
+    padding: 13px;
+    margin-left: 30px;
+    width: 70%;
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: 1px 1px 11px 2px #83d2f5;
+    color: white;
+    height: 48px;
+}

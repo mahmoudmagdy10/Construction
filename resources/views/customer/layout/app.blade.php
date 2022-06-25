@@ -33,6 +33,29 @@
             <div class="logo">
             <a href="{{route('customer.homepage')}}"><img src='{{asset("image-home/logo.jpeg")}}'/></a>
             </div>
+
+            <ul class="notification_dropdown1">
+
+                <li class="notify_icon1">
+                    <span class="count_notify1" data-count="1">1</span>
+                    <i class="fas fa-bell"></i>
+                </li>
+
+                <li>
+                    <h2>Notifications</h2>
+                    <div class ="pop_up_notify1">
+
+                        <div class="pop_up_container1">
+                            <img class="" src='{{asset("image-home/profile.jpg")}}' alt="avatar"  />
+                            <span class="h3_reply">
+                                mahmoud has commented to your post mahmoud has commented to your post
+                            </span>
+                            <span class="time"> 20-6-2022 </span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
             <ul class="navigation">
                 <li><a class="accept" href="{{route('customer.homepage')}}" value = "Home">Home</a></li>
                 <li><a href="{{route('customer.construction_style')}}" value = "Upload">Upload</a></li>
@@ -51,6 +74,18 @@
                         <a href="{{ route('logout') }}">Log Out</a>
                     </div>
                 </li>
+                <li>
+                    <div class="arrow-up"></div>
+                    <div class ="pop_up">
+                        <a href="{{ route('customer.your_project') }}" value = "Your Projects">Your Projects</a>
+                        <hr>
+                        <a href="{{ route('customer.profile') }}" value = "Profile">Profile</a>
+                        <hr>
+                        <a href="{{ route('logout') }}">Log Out</a>
+                    </div>
+                </li>
+
+
             </ul>
             <div class="bars">
                 <i id="bar" class="fas fa-bars"></i>
@@ -72,13 +107,34 @@
         <script src=" {{asset('js/home/edit.js')}}"></script>
         <script src=" {{asset('js/home.js')}}"></script>
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+        <!-- JQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <!-- Pusher script  -->
+        <script src="https://js.pusher.com/7.1/pusher.min.js"></script>
+        <script>
+
+            // Enable pusher logging - don't include this in production
+            Pusher.logToConsole = true;
+
+            var pusher = new Pusher('6def5b4303fc5ed6f28a', {
+            cluster: 'mt1'
+            });
+
+            var channel = pusher.subscribe('new-notification');
+            channel.bind('App\\Events\\NewNotification', function(data) {
+            alert(JSON.stringify(data));
+            });
+
+        </script>
+        <script src=" {{asset('js/notification/pusherNotification.js')}}"></script>
+
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
         <script>
         AOS.init({
             duration: 800,
         });
         </script>
-        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
         <!-- Initialize Swiper -->
         <script>
         var swiper = new Swiper(".mySwiper", {

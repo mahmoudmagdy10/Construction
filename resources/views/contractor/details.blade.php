@@ -52,10 +52,40 @@
                             src="https://sketchfab.com/models/e4869a806dfa4efd9d480fda16990c52/embed"> </iframe>
                         </div>
                         @endif
+                        @if($prop->project->arch === 'german')
+                        <div class="fram">
+                          <iframe title="Ndecor Design Dokuzer İnşaat 3D" frameborder="0" allowfullscreen
+                              mozallowfullscreen="true" webkitallowfullscreen="true"
+                              allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
+                              execution-while-out-of-viewport execution-while-not-rendered web-share
+                              src="https://sketchfab.com/models/80782c1ce7d34c04ac193e918978c009/embed"> </iframe>
+                        </div>
+                        @endif
+                        @if($prop->project->arch === 'spanish')
+                        <div class="fram">
+                          <iframe title="Ndecor Design Dokuzer İnşaat 3D" frameborder="0" allowfullscreen
+                              mozallowfullscreen="true" webkitallowfullscreen="true"
+                              allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
+                              execution-while-out-of-viewport execution-while-not-rendered web-share
+                              src="https://sketchfab.com/models/80782c1ce7d34c04ac193e918978c009/embed"> </iframe>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
+            @if(!($payment->isEmpty()))
+            <div class="verified">
+                <p><i class="fa fa-check-circle" aria-hidden="true"></i> Payment verified</p>
+                <span>${{ number_format($prop->PREDICTION) }}+ spent</span>
             </div>
+            @endif
+            @if($payment->isEmpty())
+            <div class="unverified">
+                <p><i class="fa fa-times-circle" aria-hidden="true"></i> Payment unverified</p>
+                <span>$0 spent</span>
+            </div>
+            @endif
+        </div>
             <div class="table">
                 <table>
                 <tr>
@@ -200,6 +230,12 @@
     <div class="comment-system">
         <h3>Comments</h3>
 
+        @if(session()->has('success'))
+        <div class="alert alert-success">
+            {{ session()->get('success') }}
+        </div>
+        @endif
+
         @foreach($comments as $item)
         <div class="comment">
             @if($item->users->profile_picture != null)
@@ -226,7 +262,7 @@
             @endif
             @if($reply->users->profile_picture == null)
             <img class="" src='{{asset("image-home/profile.jpg")}}' alt="avatar" />
-            @endif 
+            @endif
 
             <span class="h3_reply">{{ $reply->users->name }}</span>
             <span class="time"> {{ $reply->created_at->format('d-m-Y h:i') }} </span>

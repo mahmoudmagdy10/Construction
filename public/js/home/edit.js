@@ -11,6 +11,16 @@ my_icon.addEventListener('click', function () {
 
 // =================================================
 
+var notify_icon1 = document.querySelector('.notify_icon1');
+var pop_up_notify1 = document.querySelector('.pop_up_notify1');
+
+notify_icon1.addEventListener('click', function () {
+    pop_up_notify1.classList.toggle("show");
+});
+
+
+// =================================================
+
 document.querySelectorAll("li a").forEach(function (l) {
     l.addEventListener("click", function () {
         document.querySelector(".accept").classList.remove("accept");

@@ -29,6 +29,11 @@
         <div class="info">
             <h3>Your project</h3>
         </div>
+        @if(session()->has('success'))
+            <div class="alert alert-success">
+                {{ session()->get('success') }}
+            </div>
+        @endif
         <div class="projects">
         @isset($contractor)
           @foreach($project as $pro)
@@ -82,11 +87,13 @@
                             <li>Architecture : {{$pro->arch}}</li>
                             @foreach($pro->props as $prop)
                             <li style="color :red; font-weight:bold">Predict Price : {{ number_format($prop->PREDICTION) }} $</li>
-                            @endforeach   
+                            @endforeach
                             <li>Publish at :  {{$pro->created_at->format('d-m-Y')}}</li>
                         </ul>
                         <a class="btn btn-danger" href="{{route('contractor.unaccept',$pro->id)}}"> Un Accept</a>
-
+                        @if($pro->contractor_tax == 0)
+                        <a href="{{route('contractor.payment',$pro->id)}}"><h3>Pay</h3></a><br>
+                        @endif
                     </div>
                 </div>
             </div>

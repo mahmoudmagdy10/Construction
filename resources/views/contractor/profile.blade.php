@@ -39,7 +39,13 @@
               </div>
             </div>
 
+            @if(session()->has('success'))
+                <div class="alert alert-success">
+                    {{ session()->get('success') }}
+                </div>
+            @endif
             <div class="profile_info">
+
                 <div class="row-container">
                   <div class="prop">
                     <h6 class="">Full Name</h6>

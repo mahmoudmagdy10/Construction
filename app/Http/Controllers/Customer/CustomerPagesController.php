@@ -161,15 +161,18 @@ class CustomerPagesController extends Controller
     public function payment($project_id){
         try{
             $customer = User::select()->find(Auth::user()->id);
+            $project = Project::find($project_id);
+            $props = Property::where('project_id', '=', $project_id)->get();
             if (!$customer) {
                 return redirect()->route('log_in');
             } else {
-                return view('customer.payment')->with(compact('customer','project_id'));
-                // return $project_id;
+                return view('customer.payment')->with(compact('customer','project_id','props','project'));
+
             }
 
         } catch (\Exception $e) {
             return redirect()->route('log_in');
+            // return 'no';
         }
     }
     public function paymentDefault(){
@@ -183,8 +186,8 @@ class CustomerPagesController extends Controller
             }
 
         } catch (\Exception $e) {
-            // return redirect()->route('log_in');
-            return "no";
+            return redirect()->route('log_in');
+            // return "no";
         }
     }
 

@@ -60,6 +60,7 @@ Route::namespace('Contractor')->prefix('contractor')->middleware('auth')->group(
     Route::get('/project/details/{id}', [PagesController::class, 'details'])->name('contractor.details');
     Route::post('/project/details/comment/{project_id}', [UploadContractorController::class, 'comment'])->name('contractor.comment');
     Route::post('/project/details/reply/{comment_id}', [UploadContractorController::class, 'reply'])->name('contractor.reply');
+    Route::get('/payment/{project_id}', [PagesController::class, 'payment'])->name('contractor.payment');
 
 });
 
