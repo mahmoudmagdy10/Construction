@@ -21,22 +21,24 @@ class NewNotification implements ShouldBroadcastNow
      * @return void
      */
 
-    public $user_photo;
+    // public $user_photo;
     public $user_name;
     public $user_id;
     public $project_id;
-    public $comment_id;
+    public $notification_type;
     public $address;
-    public $reciver_user;
+    public $profile_picture;
 
-    public function __construct($data = [])
+
+    public function __construct($data)
     {
-        $this->user_photo = $data['user_photo'];
+        // $this->user_photo = $data['user_photo'];
         $this->user_name = $data['user_name'];
         $this->user_id = $data['user_id'];
         $this->project_id = $data['project_id'];
+        $this->notification_type = $data['notification_type'];
         $this->address = $data['address'];
-        $this->reciver_user = $data['reciver_user'];
+        $this->profile_picture = $data['profile_picture'];
     }
 
     /**
@@ -46,6 +48,6 @@ class NewNotification implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('new-notification');
+        return new Channel('new-notification');
     }
 }

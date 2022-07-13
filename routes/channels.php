@@ -13,6 +13,15 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
-});
+// Broadcast::channel('new-notification.{userId}', function ($user, $userId) {
+//     return $user->id === $userId;
+
+// });
+
+// Broadcast::channel('new-notification', function ($user) {
+//     return true;
+// });
+
+// Broadcast::channel('comment.{commentId}', function ($user, $commentId) {
+//     return $user->id === Comment::findOrNew($commentId)->user_id;
+// });

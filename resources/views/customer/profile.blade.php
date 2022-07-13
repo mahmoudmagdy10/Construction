@@ -13,12 +13,13 @@
 
 @section('profile')
   @if($customer->profile_picture !== NULL)
-  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("Profile_Picture/$customer->profile_picture")}}' alt="avatar" width="40" height="40" />
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{ url("storage/uploads/Profile_Picture/$customer->profile_picture") }}' alt="avatar" width="40" height="40" />
   @endif
   @if($customer->profile_picture == NULL)
-  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("image-home/profile.jpg")}}' alt="avatar" width="40" height="40" />
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{ url("storage/uploads/image-home/profile.jpg") }}' alt="avatar" width="40" height="40" />
   @endif
 @endsection
+
 @section('content')
 <div class="container">
     <div class="main-body prof">
@@ -27,10 +28,10 @@
           <div class="parent">
               <div class="img-person">
                 @if($customer->profile_picture !== null)
-                <img class="profile_picture" src='{{asset("Profile_Picture/$customer->profile_picture")}}' alt="" />
+                <img class="profile_picture" src='{{ url("storage/uploads/Profile_Picture/$customer->profile_picture") }}' alt="" />
                 @endif
                 @if($customer->profile_picture == null)
-                <img src="{{asset('image-home/profile.jpg')}}" alt="" />
+                <img src='{{ url("storage/uploads/image-home/profile.jpg") }}' alt="" />
                 @endif
                 <div class="caption">
                 <a class="btn btn-danger " href="{{route('customer.edit')}}">Upload</a>
@@ -39,6 +40,7 @@
             </div>
 
             <div class="profile_info">
+
                 <div class="row-container">
                   <div class="prop">
                     <h4 class="">Full Name</h4>
@@ -100,4 +102,29 @@
 
         </div>
     </div>
+@endsection
+
+@section('script')
+
+<script>
+
+    let btn1 = document.getElementById("btn1");
+    window.onscroll = function () {
+        if (scrollY >= 200) {
+            btn1.style.display = "flex";
+        } else {
+            btn1.style.display = "none";
+
+        }
+    }
+    btn1.addEventListener("click", function () {
+        scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth"
+        })
+    });
+
+</script>
+
 @endsection

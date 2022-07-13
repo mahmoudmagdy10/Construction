@@ -14,11 +14,11 @@ class AddMoreFieldsToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->renameColumn('name', 'username')->unique();
-            $table->string('email')->nullable()->change();        
-            $table->string('address');          
-            $table->bigInteger('national_id');          
-            $table->bigInteger('phone');          
+            $table->string('address');
+            $table->bigInteger('national_id')->nullable();
+            $table->bigInteger('phone');
+            $table->bigInteger('tax_record')->nullable();
+            $table->string('profile_picture')->nullable();
         });
     }
 

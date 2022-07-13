@@ -23,15 +23,16 @@ class NewNotificationContractor implements ShouldBroadcastNow
     public $user_name;
     public $user_id;
     public $project_id;
-    public $comment_id;
+    public $comment;
     public $address;
 
     public function __construct($data = [])
     {
-        $this->user_photo = $data['user_photo'];
-        $this->user_name = $data['user_name'];
-        $this->user_id = $data['user_id'];
-        $this->project_id = $data['project_id'];
+        // $this->user_photo = $data['user_photo'];
+        // $this->user_name = $data['user_name'];
+        // $this->user_id = $data['user_id'];
+        // $this->project_id = $data['project_id'];
+        $this->comment = $data['comment'];
         $this->address = $data['address'];
     }
 
@@ -42,6 +43,6 @@ class NewNotificationContractor implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        return new Channel('newnotification-contractor');
+        return new PrivateChannel('comment.'.$this->comment->id);
     }
 }

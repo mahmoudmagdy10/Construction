@@ -17,10 +17,10 @@ class CheckCustomerAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->kind === 'customer') {
+        if (Auth::user() &&  Auth::user()->kind === 'customer') {
             return $next($request);
-        } else {
-            return redirect()->route('log_in');
-        }    
+        }
+
+        return redirect()->route('login');
     }
 }

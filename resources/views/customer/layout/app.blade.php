@@ -4,6 +4,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
         <title>@yield('title')</title>
         <link rel="icon" href="{{ url('image-home/logo.jpeg') }}">
 
@@ -34,7 +36,7 @@
             <a href="{{route('customer.homepage')}}"><img src='{{asset("image-home/logo.jpeg")}}'/></a>
             </div>
 
-            <ul class="notification_dropdown1">
+            <!-- <ul class="notification_dropdown1">
 
                 <li class="notify_icon1">
                     <span class="count_notify1" data-count="1">1</span>
@@ -54,7 +56,7 @@
                         </div>
                     </div>
                 </li>
-            </ul>
+            </ul> -->
 
             <ul class="navigation">
                 <li><a class="accept" href="{{route('customer.homepage')}}" value = "Home">Home</a></li>
@@ -68,9 +70,7 @@
                     <div class="arrow-up"></div>
                     <div class ="pop_up">
                         <a href="{{ route('customer.your_project') }}" value = "Your Projects">Your Projects</a>
-                        <hr>
                         <a href="{{ route('customer.profile') }}" value = "Profile">Profile</a>
-                        <hr>
                         <a href="{{ route('logout') }}">Log Out</a>
                     </div>
                 </li>
@@ -97,15 +97,16 @@
     <!-- end header  -->
         <main>
             @yield('content')
+            @yield('scrollTop')
             <button id="btn1">
                 <i class="fas fa-angle-double-up"></i>
             </button>
         </main>
         @yield('script')
         <script src=" {{asset('js/header.js')}}"></script>
-        <!-- <script src=" {{asset('js/home/home.js')}}"></script> -->
         <script src=" {{asset('js/home/edit.js')}}"></script>
         <script src=" {{asset('js/home.js')}}"></script>
+        <!-- <script src=" {{asset('js/home2.js')}}"></script> -->
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
         <!-- JQuery -->
@@ -127,7 +128,6 @@
             });
 
         </script>
-        <script src=" {{asset('js/notification/pusherNotification.js')}}"></script>
 
         <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
         <script>

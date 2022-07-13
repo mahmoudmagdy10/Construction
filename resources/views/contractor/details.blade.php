@@ -5,16 +5,17 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 @endsection
+
 @section('title')
     Details
 @endsection
 
 @section('profile')
   @if($users->profile_picture !== NULL)
-  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("Profile_Picture/$users->profile_picture")}}' alt="avatar" width="40" height="40" />
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{ url("storage/uploads/Profile_Picture/$users->profile_picture") }}' alt="avatar" width="40" height="40" />
   @endif
   @if($users->profile_picture == NULL)
-  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("image-home/profile.jpg")}}' alt="avatar" width="40" height="40" />
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{ url("storage/uploads/image-home/profile.jpg") }}' alt="avatar" width="40" height="40" />
   @endif
 @endsection
 
@@ -221,7 +222,7 @@
     @foreach($props as $prop)
         <div class="slide_show">
             <?php $file_2d = $prop->project->file_path;?>
-            <img class="d-block w-100" src='{{asset("files_2D/$file_2d")}}' alt="First slide">
+            <img class="d-block w-100" src='{{ url("storage/uploads/files_2D/$file_2d") }}' alt="First slide">
         </div>
     @endforeach
     @endisset
@@ -240,10 +241,10 @@
         <div class="comment">
             @if($item->users->profile_picture != null)
             <?php $comment_photo = $item->users->profile_picture ?>
-            <img class="" src='{{asset("Profile_Picture/$comment_photo")}}' alt="avatar" />
+            <img class="" src='{{ url("storage/uploads/Profile_Picture/$comment_photo") }}' alt="avatar" />
             @endif
             @if($item->users->profile_picture == null)
-            <img class="" src='{{asset("image-home/profile.jpg")}}' alt="avatar"  />
+            <img class="" src='{{ url("storage/uploads/image-home/profile.jpg") }}' alt="avatar"  />
             @endif
 
             <span class="h_3">{{ $item->users->name }}</span>
@@ -258,10 +259,10 @@
         @isset($reply)
             @if($reply->users->profile_picture !== null)
             <?php $reply_photo = $reply->users->profile_picture ?>
-            <img class="" src='{{asset("Profile_Picture/$reply_photo")}}' alt="avatar"  />
+            <img class="" src='{{ url("storage/uploads/Profile_Picture/$reply_photo") }}' alt="avatar"  />
             @endif
             @if($reply->users->profile_picture == null)
-            <img class="" src='{{asset("image-home/profile.jpg")}}' alt="avatar" />
+            <img class="" src=' {{ url("storage/uploads/image-home/profile.jpg") }}' alt="avatar" />
             @endif
 
             <span class="h3_reply">{{ $reply->users->name }}</span>
@@ -274,7 +275,7 @@
                 @csrf
                 <div class="form-group add ">
                     <label for="exampleInputEmail1">Reply</label>
-                    <textarea name ="comment" class="form-control " aria-label="With textarea"></textarea>
+                    <textarea name ="reply" class="form-control " aria-label="With textarea"></textarea>
                     <input class="submit btn btn-primary" type="submit" value="Send"></input>
                 </div>
             </form>
@@ -323,4 +324,25 @@
 <script src="node_modules/@fortawesome/fontawesome-free/js/all.js" charset="utf-8"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+@endsection
+
+@section('script')
+<script>
+    let btn1 = document.getElementById("btn1");
+    window.onscroll = function () {
+        if (scrollY >= 200) {
+            btn1.style.display = "flex";
+        } else {
+            btn1.style.display = "none";
+
+        }
+    }
+    btn1.addEventListener("click", function () {
+        scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth"
+        })
+    });
+</script>
 @endsection

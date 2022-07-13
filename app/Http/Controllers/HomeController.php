@@ -17,8 +17,9 @@ use PDF;
 
 class HomeController extends Controller
 {
-    public function regiser_user(Request $request)
+    public function register_user(RegisterRequest $request)
     {
+
         try{
             User::create([
                 'name' => $request['name'],
@@ -30,20 +31,19 @@ class HomeController extends Controller
                 'tax_record' => $request['tax_record'],
                 'phone' => $request['phone'],
             ]);
-            // return $request;
-            return redirect()->route('log_in');
+            return redirect()->route('login');
             // return $request;
 
         } catch (\Exception $e) {
             return $e->getMessage();
-            return "no";
+            // return "no";
         }
     }
 
 
     public function checkUserType(){
         if(!Auth::user()){
-            return redirect()->route('log_in');
+            return redirect()->route('login');
         }
         if(Auth::user()->kind === 'customer'){
             $user_customer = User::select()->find(Auth::user()->id);
@@ -57,7 +57,7 @@ class HomeController extends Controller
 
     public function logout(Request $request){
         Auth::logout();
-        return redirect('/log_in')->with(['msg_body' => 'You signed out!']);
+        return redirect('/login')->with(['msg_body' => 'You signed out!']);
 
     }
 

@@ -10,13 +10,16 @@ use App\Models\Property;
 use App\Models\project;
 use App\Models\Comment;
 use App\Models\Reply;
+use App\Models\Notification;
 use App\Traits\GeneralTrait;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use DB;
-use App\Http\Requests\ProfileRequest;
+use App\Events\NewNotification;
+use App\Notifications\RealTimeNotification;
+
 
 class CustomerPagesController extends Controller
 {
@@ -24,14 +27,17 @@ class CustomerPagesController extends Controller
     {
         try{
             $customer = User::select()->find(Auth::user()->id);
+
             if (!$customer) {
-                return redirect()->route('log_in');
+                return redirect()->route('login');
             } else {
+                // event(new NewNotification('Hello mego'));
+                // $customer->notify(new RealTimeNotification('Hello World'));
                 return view('customer.homepage')->with(compact('customer'));
             }
 
         } catch (\Exception $e) {
-            return redirect()->route('log_in');
+            return redirect()->route('login');
         }
 
     }
@@ -41,13 +47,13 @@ class CustomerPagesController extends Controller
         try{
             $customer = User::select()->find(Auth::user()->id);
             if (!$customer) {
-                return redirect()->route('log_in');
+                return redirect()->route('login');
             } else {
                 return view('customer.construction_style')->with(compact('customer'));
             }
 
         } catch (\Exception $e) {
-            return redirect()->route('log_in');
+            return redirect()->route('login');
         }
 
     }
@@ -60,13 +66,13 @@ class CustomerPagesController extends Controller
 
 
             if (!$customer && !$project) {
-                return redirect()->route('log_in');
+                return redirect()->route('login');
             } else {
                 return view('customer.your_project')->with(compact('customer','project'));
                 // return $project;
             }
         } catch (\Exception $e) {
-            return redirect()->route('log_in');
+            return redirect()->route('login');
         }
     }
 
@@ -76,15 +82,15 @@ class CustomerPagesController extends Controller
             try{
                 $customer = User::select()->find(Auth::user()->id);
                 if (!$customer) {
-                    return redirect()->route('log_in');
+                    return redirect()->route('login');
                 } else {
                     return view('customer.profile', compact('customer'));
                 }
             } catch (\Exception $e) {
-                return redirect()->route('log_in');
+                return redirect()->route('login');
             }
         } else{
-            return redirect()->route('log_in');
+            return redirect()->route('login');
         }
 
     }
@@ -99,37 +105,11 @@ class CustomerPagesController extends Controller
                 return view('customer.edit', compact('customer'));
             }
         } catch (\Exception $e) {
-            return redirect()->route('log_in');
+            return redirect()->route('login');
         }
     }
 
-    public function update(ProfileRequest $request)
-    {
-        $id= Auth::user()->id;
-        $customer = User::find($id);
 
-        try{
-
-            if (!$customer) {
-                return redirect()->route('log_in');
-            }
-
-            $customer->name = $request['name'];
-            $customer->address = $request['address'];
-            $customer->phone = $request['phone'];
-            $customer->national_id = $request['national_id'];
-            $customer->password = Hash::make($request['password']);
-            $customer->save();
-
-            return redirect()->route('customer.edit')->with('success','Updated Successfully');
-            // return "yes";
-
-        } catch (\Exception $e) {
-            return redirect()->route('customer.edit')->with('error' , 'هناك خطأ يرجي المحاوله في وقت اخر');
-            // return 'no';
-        }
-
-    }
 
     public function details($id)
     {
@@ -148,12 +128,17 @@ class CustomerPagesController extends Controller
             if (!$users && !$props && !$project && !$comments_of_users && !$replies_of_users) {
                 return redirect()->back();
             } else {
-                return view('customer.details')->with(compact('users','props','project','comments','project_id','num_of_comments'));
-            }
-            // return $num_of_comments;
+                foreach($project as $pro){
+                    if( $pro->user_id !== $users->id){
+                        return redirect()->route('notfound')->with('هناك خطأ يرجي المحاوله في وقت اخر');
 
+                    }else{
+                        return view('customer.details')->with(compact('users','props','project','comments','project_id','num_of_comments'));
+                    }
+                }
+            }
         } catch (\Exception $e) {
-            return redirect()->route('log_in')->with('هناك خطأ يرجي المحاوله في وقت اخر');
+            return redirect()->route('login')->with('هناك خطأ يرجي المحاوله في وقت اخر');
         }
 
     }
@@ -164,14 +149,14 @@ class CustomerPagesController extends Controller
             $project = Project::find($project_id);
             $props = Property::where('project_id', '=', $project_id)->get();
             if (!$customer) {
-                return redirect()->route('log_in');
+                return redirect()->route('login');
             } else {
                 return view('customer.payment')->with(compact('customer','project_id','props','project'));
 
             }
 
         } catch (\Exception $e) {
-            return redirect()->route('log_in');
+            return redirect()->route('login');
             // return 'no';
         }
     }
@@ -179,14 +164,14 @@ class CustomerPagesController extends Controller
         try{
             $customer = User::select()->find(Auth::user()->id);
             if (!$customer) {
-                return redirect()->route('log_in');
+                return redirect()->route('login');
             } else {
                 return view('customer.paymentDefault')->with(compact('customer'));
                 // return $customer;
             }
 
         } catch (\Exception $e) {
-            return redirect()->route('log_in');
+            return redirect()->route('login');
             // return "no";
         }
     }

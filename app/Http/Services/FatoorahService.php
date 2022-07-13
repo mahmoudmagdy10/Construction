@@ -47,14 +47,12 @@ class FatoorahService {
 
         $response = $this->buildRequest('/v2/SendPayment' , 'POST' ,  $data);
         return $response;
-        // return "hiiii";
 
     }
 
     public function getPaymentStatus($data){
 
         return $response = $this->buildRequest('/v2/getPaymentStatus' , 'POST' ,  $data);
-        // return "hiiii";
 
     }
 

@@ -15,9 +15,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 
+    <style>
+        .logo a img {
+
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            transition: 0.5s;
+            }
+    </style>
+
 
 </head>
 <body>
+    <div class="logo">
+        <a href="{{route('contractor.homepage')}}"><img src='{{asset("image-home/logo.jpeg")}}'/></a>
+    </div>
     <div class="login">
         <form method="POST" action="{{ route('login') }}">
             @csrf
@@ -29,7 +42,7 @@
             <label for="password">Password</label>
             <input type="password" name="password" placeholder="Password" id="password">
 
-            <input type="submit"value="log in">
+            <input class="submit" type="submit"value="log in">
             <div class="social">
             <div class="go">
                 <div class="sign">
@@ -43,7 +56,7 @@
             </div>
         </div>
         </form>
-        
+
 
     </div>
     <script src="{{asset('js/auth/pro.js')}}"></script>

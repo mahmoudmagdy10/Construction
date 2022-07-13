@@ -3,13 +3,13 @@ body {
     padding: 0;
     /* background-color: #00838F; */
     background-color: white;
-    background: linear-gradient(to right, rgb(0, 105, 128) 50%, white 50%);
+    background: linear-gradient(to right, rgb(0, 105, 128) 50%, #104670 50%);
 }
 
 .sign-up-form {
     width: 500px;
-    margin: 0px auto;
-    margin-left: 19%;
+    margin: 15px auto;
+    margin-left: 33%;
     background-color: rgba(0, 0, 0, 0.01);
 }
 
@@ -19,6 +19,11 @@ body {
     flex-direction: row;
     width: 92%;
     margin: 1px auto;
+}
+
+.container-signup .container {
+    background-color: #1fc8d9b8;
+
 }
 
 .photo-sign img {
@@ -50,12 +55,9 @@ body {
 }
 
 .signUpAs>div.active {
-    border: 1px rgb(11, 212, 84) solid;
-    color: #006980;
-    box-shadow: 1px 1px 10px 1px #006980;
+    color: #1d3376;
+    box-shadow: 1px 1px 11px 4px #ffffff;
     transition: 0.2s;
-
-    /* background:rgb(252, 156, 132); */
 }
 
 

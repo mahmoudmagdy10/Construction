@@ -15,10 +15,10 @@
 
 @section('profile')
   @if($customer->profile_picture !== NULL)
-  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("Profile_Picture/$customer->profile_picture")}}' alt="avatar" width="40" height="40" />
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{ url("storage/uploads/Profile_Picture/$customer->profile_picture") }}' alt="avatar" width="40" height="40" />
   @endif
   @if($customer->profile_picture == NULL)
-  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("image-home/profile.jpg")}}' alt="avatar" width="40" height="40" />
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{ url("storage/uploads/image-home/profile.jpg") }}' alt="avatar" width="40" height="40" />
   @endif
 @endsection
 
@@ -76,19 +76,18 @@
                               src="https://sketchfab.com/models/80782c1ce7d34c04ac193e918978c009/embed"> </iframe>
                         </div>
                         @endif
-
-                        <ul>
-                            <a href="{{route('customer.details',$pro->id)}}"><h3>House</h3></a><br>
-                            <li>Architecture : {{$pro->arch}}</li>
-                            @foreach($pro->props as $prop)
-                            <li style="color :red; font-weight:bold">Predict Price : {{ number_format($prop->PREDICTION) }} $</li>
-                            @endforeach
-                            <li>Publish at : {{$pro->created_at->format('d-m-Y')}}</li>
-
-                            @if($pro->payment_status == 0)
-                            <a href="{{route('customer.payment',$pro->id)}}"><h3>Pay</h3></a><br>
-                            @endif
-                        </ul>
+                        <a href="{{route('customer.details',$pro->id)}}">
+                            <ul>
+                                <li>Architecture : {{$pro->arch}}</li>
+                                @foreach($pro->props as $prop)
+                                <li style="color :#000; font-weight:bold">Predict Price : {{ number_format($prop->PREDICTION) }} $</li>
+                                @endforeach
+                                <li>Publish at : {{$pro->created_at->format('d-m-Y')}}</li><br>
+                            </ul>
+                        </a><br>
+                        @if($pro->payment_status == 0)
+                        <a href="{{route('customer.payment',$pro->id)}}" class="pay" style="background-color:green; font-weight:bold; color:white"><h3>Pay</h3></a><br>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -103,6 +102,23 @@
 <script>
     AOS.init({
         duration: 550,
+    });
+
+    let btn1 = document.getElementById("btn1");
+    window.onscroll = function () {
+        if (scrollY >= 200) {
+            btn1.style.display = "flex";
+        } else {
+            btn1.style.display = "none";
+
+        }
+    }
+    btn1.addEventListener("click", function () {
+        scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth"
+        })
     });
 </script>
 @endsection

@@ -7,7 +7,7 @@ var notifications = notificationsWrapper.find('.pop_up_notify1');
 // Subscribe to the channel we specified in our Laravel Event
 var channel = pusher.subscribe('new-notification');
 
-// Bind a function to a Event (the full Laravel class)
+// // Bind a function to a Event (the full Laravel class)
 channel.bind('App\\Events\\NewNotification', function (data) {
     var existingNotifications = notifications.html();
 
@@ -16,7 +16,7 @@ channel.bind('App\\Events\\NewNotification', function (data) {
         <img src="/Profile_Picture/${data.user_photo}"" alt="avatar"  />
 
         <span class="h3_reply">
-            ${data.user_name} has commented to your post
+            ${data.user_name} has Added New Project
         </span>
         <span class="time"> 20-6-2022 </span>
         </div>

@@ -35,10 +35,10 @@ class CheckContractorAuth
         // }
         //  return $next($request);
 
-        if (Auth::user()->kind === 'contractor') {
+        if (Auth::user() &&  Auth::user()->kind === 'contractor') {
             return $next($request);
-        } else {
-            return redirect()->route('log_in');
-        }      
+        }
+
+        return redirect()->route('login');
     }
 }

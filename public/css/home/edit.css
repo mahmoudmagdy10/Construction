@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: cadetblue !important;
+    background-color: rgb(14 57 108) !important;
 }
 
 
@@ -101,7 +101,7 @@ body {
 
 .profile_info {
     width: 700px;
-    background-color: #006980;
+    background-color: #69b2d5ab;
     position: relative;
     box-shadow: 1px 1px 16px 1px #000000;
     left: 30%;
@@ -173,10 +173,15 @@ hr {
     width: 58%;
     right: 65px;
     top: 25%;
-    background-color: #5f9ea0;
+    background-color: #69b2d5ab;
     box-shadow: 1px 1px 18px 3px #3e3e3e;
     padding: 30px;
     border-radius: 10px;
+}
+
+.form-3 {
+    top: 100% !important;
+
 }
 
 .form-1 {
@@ -189,6 +194,8 @@ hr {
     position: absolute;
     top: 400px;
     left: 46px;
+    width: 75% !important;
+
 }
 
 .profile_picture {

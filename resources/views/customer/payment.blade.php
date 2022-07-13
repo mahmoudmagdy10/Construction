@@ -2,8 +2,8 @@
 
 @section('link')
 <link rel="stylesheet" href="{{asset('css/payment.css')}}">
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" > -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" >
 
 @endsection
 
@@ -13,10 +13,10 @@
 
 @section('profile')
   @if($customer->profile_picture !== NULL)
-  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("Profile_Picture/$customer->profile_picture")}}' alt="avatar" width="40" height="40" />
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{ url("storage/uploads/Profile_Picture/$customer->profile_picture") }}' alt="avatar" width="40" height="40" />
   @endif
   @if($customer->profile_picture == NULL)
-  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("image-home/profile.jpg")}}' alt="avatar" width="40" height="40" />
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{ url("storage/uploads/image-home/profile.jpg") }}' alt="avatar" width="40" height="40" />
   @endif
 @endsection
 
@@ -31,6 +31,12 @@
                 Payment Successfully Done!
             </div>
         @endif
+        @isset($error)
+        <div class="alert alert-danger">
+            {{ $error }}
+        </div>
+        @endisset
+
 
         <input type="hidden" name="user_id" value="{{$customer->id}}">
         <input type="hidden" name="project_id" value="{{$project_id}}">

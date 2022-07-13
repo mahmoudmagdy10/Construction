@@ -1,41 +1,35 @@
 
-function myNav(){
+function myNav() {
     let bar = document.getElementById("bar");
     let nav = document.querySelector(".navigation");
 
-    bar.onclick=() =>{
-        if(nav.style.right=="0%"){
-            nav.style.right="-100%";
-            bar.classList="fas fa-bars";
+    bar.onclick = () => {
+        if (nav.style.right == "0%") {
+            nav.style.right = "-100%";
+            bar.classList = "fas fa-bars";
             header.classList.add("active")
             bar.style.cssText = "margin-left:12px";
             bar.style.cssText = "transform: rotate(180deg)";
 
-
-
-        }else{
-            nav.style.right="0%";
+        } else {
+            nav.style.right = "0%";
             bar.classList = "fa-solid fa-xmark";
             bar.style.cssText = "margin-left:16px";
         }
     }
 } myNav();
 
-function sayHeader(){
-     let header = document.getElementById("header");
-     window.addEventListener("scroll",function(){
-         if(this.window.scrollY > 0){
-             header.classList.add("active")
-         }
-
-
-         else{
-
-             header.classList.remove("active")
-
-         }
-     })
-}sayHeader();
+function sayHeader() {
+    let header = document.getElementById("header");
+    window.addEventListener("scroll", function () {
+        if (this.window.scrollY > 0) {
+            header.classList.add("active")
+        }
+        else {
+            header.classList.remove("active")
+        }
+    })
+} sayHeader();
 
 
 
@@ -44,7 +38,6 @@ document.querySelectorAll("li a").forEach(function (l) {
     l.addEventListener("click", function () {
         document.querySelector(".accept").classList.remove("accept");
         l.classList.add("accept");
-
     })
 })
 
@@ -52,20 +45,18 @@ let lis = document.querySelectorAll(".colors ul li");
 
 
 lis.forEach((e) => {
-    e.addEventListener("click", (ele)=>{
+    e.addEventListener("click", (ele) => {
         document.documentElement.style.setProperty("--main-color", ele.target.dataset.color);
         localStorage.setItem("color-option", ele.target.dataset.color);
         document.querySelector(".set").classList.remove("set");
         e.classList.add("set");
-
 
     })
 
 })
 let mainColor = localStorage.getItem("color-option");
 if (mainColor !== null) {
-            document.documentElement.style.setProperty("--main-color", mainColor);
-
+    document.documentElement.style.setProperty("--main-color", mainColor);
 }
 
 let acceptClass = document.querySelectorAll(".navigation .ul li.accept");
@@ -77,65 +68,35 @@ acceptClass.forEach(element => {
 });
 
 
-// let landingImage = document.getElementById("home");
-// let imgArray=["another.avif","build.avif","cand.avif","musion.avif","cav.avif","arm.avif"];
-// setInterval(function(){
-//     let randomNumber = Math.floor(Math.random() * imgArray.length);
-//     landingImage.style.backgroundImage='url("image/'+imgArray[randomNumber]+'")';
 
-// },10000);
+let mysection = document.querySelector(".section .container .text");
+window.addEventListener("scroll", function () {
+    if (this.scrollY >= 200) {
+        mysection.style.cssText = "margin-top:0px";
 
-// let imageGroup = document.querySelectorAll(".malcolor ul li");
-// lis.forEach((e) => {
-
-//     e.addEventListener("click", (ele) => {
-//         document.documentElement.style.setProperty("--main-img", ele.target.data-img);
-//         localStorage.setItem("imgsrc", ele.target.data-img);
-
-
-//     })
-// });
-// let imgop = localStorage.getItem("imgsrc");
-// console.log(imgop);
-// if (imgop !== null) {
-//             document.documentElement.style.setProperty("--main-img", imgop);
-
-// }
-
-
-
-// ?//////////////////////////
-
-
-let mysection=document.querySelector(".section .container .text");
-window.addEventListener("scroll",function(){
-    if(this.scrollY >=200){
-     mysection.style.cssText="margin-top:0px";
-
-
-    }else{
-        mysection.style.cssText="margin-top:200px";
-
+    } else {
+        mysection.style.cssText = "margin-top:200px";
     }
 });
-let i=0,text;
-text="Welcome To Construction Project";
-function typing(){
-    if(i < text.length){
-        document.getElementById("text").innerHTML += text.charAt(i);
 
+let i = 0, text;
+text = "Welcome To Vitruvius ";
+function typing() {
+    if (i < text.length) {
+        document.getElementById("text").innerHTML += text.charAt(i);
         i++;
-        setTimeout(typing,200);
+        setTimeout(typing, 200);
     }
 
 }
 typing();
+
 let btn1 = document.getElementById("btn1");
 window.onscroll = function () {
-    if (scrollY >= 400) {
+    if (scrollY >= 200) {
         btn1.style.display = "flex";
     } else {
-                btn1.style.display = "none";
+        btn1.style.display = "none";
 
     }
 }
@@ -146,6 +107,7 @@ btn1.addEventListener("click", function () {
         behavior: "smooth"
     })
 });
+
 // start about
 let imgs = document.querySelectorAll(".about-us .container .img img");
 imgs.forEach((e) => {
@@ -167,8 +129,6 @@ imgs.forEach((e) => {
         imgp.src = e.src;
 
         document.body.appendChild(poupop);
-
-
 
     })
     document.addEventListener("click", (eleme) => {

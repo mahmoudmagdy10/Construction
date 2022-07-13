@@ -10,11 +10,16 @@ use App\Models\User;
 use App\Models\Property;
 use App\Models\Comment;
 use App\Models\Reply;
+use App\Models\Notification;
 use App\Traits\GeneralTrait;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
 use App\Events\NewNotification;
+use App\Http\Requests\UpdatePasswordRequest;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\ProfileRequest;
+
 
 class UploadController extends Controller
 {
@@ -23,6 +28,10 @@ class UploadController extends Controller
     {
         $user = User::select()->find(Auth::user()->id);
         $id = Auth::user()->id;
+        $request->request->add(['id'=>$id]);
+        $request->request->add(['user_name'=>$user->name]);
+        $request->request->add(['profile_picture'=>$user->profile_picture]);
+
 
         // Validation
         try {
@@ -35,9 +44,8 @@ class UploadController extends Controller
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
                 return redirect()->route('customer.construction_style');
-                // return "no";
+                // return"no";
             }
-            // return $request;
 
         } catch (\Exception $e) {
             return $this->returnError($e->getCode(), $e->getMessage());
@@ -48,7 +56,7 @@ class UploadController extends Controller
             $request->request->add(['id'=>$id]);
             if($request->file()) {
                 $fileName = time().'_'.$request->file->getClientOriginalName();
-                $request->file('file')->move(base_path().'/public/files_2D/',$fileName);
+                $request->file('file')->move('storage/uploads/files_2D/',$fileName);
                 $request->request->add(['fileName'=> $fileName]);
             }
             Project::create([
@@ -61,7 +69,8 @@ class UploadController extends Controller
         } catch (\Exception $e) {
 
             return redirect()->route('customer.construction_style');
-            // return 'no';
+            // return 'noo';
+            // return $request;
         }
 
         // Open CSV && Save in DB
@@ -69,49 +78,81 @@ class UploadController extends Controller
             $project = Project::select()->where('user_id', '=', $id)->latest()->first();
             $request->request->add(['id'=> $id]);
             $request->request->add(['project_id'=> $project->id]);
-            // return $project;
 
 
-            $students = [];
+            $csv_props = [];
             if (($open = fopen($request['csv'], "r")) !== FALSE) {
                 while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
-                    $students[] = $data;
+                    $csv_props[] = $data;
                 }
 
                 fclose($open);
             }
             Property::create([
-                "PREDICTION"=>$students[1][0],
-                "OverallQual"=>$students[1][1],
-                "Neighborhood"=>$students[1][2],
-                "GrLivArea"=>$students[1][3],
-                "GarageCars"=>$students[1][4],
-                "BsmtQual"=>$students[1][5],
-                "ExterQual"=>$students[1][6],
-                "GarageArea"=>$students[1][7],
-                "KitchenQual"=>$students[1][8],
-                "YearBuilt"=>$students[1][9],
-                "TotalBsmtSF"=>$students[1][10],
-                "FirstFlrSF"=>$students[1][11],
-                "GarageFinish"=>$students[1][12],
-                "FullBath"=>$students[1][13],
-                "YearRemodAdd"=>$students[1][14],
-                "GarageType"=>$students[1][15],
-                "FireplaceQu"=>$students[1][16],
-                "Foundation"=>$students[1][17],
-                "MSSubClass"=>$students[1][18],
-                "TotRmsAbvGrd"=>$students[1][19],
-                "Fireplaces"=>$students[1][20],
-                'user_id' => $request['id'],
-                'project_id' => $request['project_id'],
+                "PREDICTION"=>$csv_props[1][0],
+                "OverallQual"=>$csv_props[1][1],
+                "Neighborhood"=>$csv_props[1][2],
+                "GrLivArea"=>$csv_props[1][3],
+                "GarageCars"=>$csv_props[1][4],
+                "BsmtQual"=>$csv_props[1][5],
+                "ExterQual"=>$csv_props[1][6],
+                "GarageArea"=>$csv_props[1][7],
+                "KitchenQual"=>$csv_props[1][8],
+                "YearBuilt"=>$csv_props[1][9],
+                "TotalBsmtSF"=>$csv_props[1][10],
+                "FirstFlrSF"=>$csv_props[1][11],
+                "GarageFinish"=>$csv_props[1][12],
+                "FullBath"=>$csv_props[1][13],
+                "YearRemodAdd"=>$csv_props[1][14],
+                "GarageType"=>$csv_props[1][15],
+                "FireplaceQu"=>$csv_props[1][16],
+                "Foundation"=>$csv_props[1][17],
+                "MSSubClass"=>$csv_props[1][18],
+                "TotRmsAbvGrd"=>$csv_props[1][19],
+                "Fireplaces"=>$csv_props[1][20],
+                "user_id" => $request['id'],
+                "project_id" => $request['project_id'],
         ]);
+        // return "yes";
 
-            return redirect()->route('customer.payment',$request->project_id);
+        $profile_picture;
+        if($user->profile_picture == Null){
+            $profile_picture= 'profile.jpg';
+        } else {
+            $profile_picture= $user->profile_picture;
+
+        }
+
+        $address = route('contractor.details',$request->project_id);
+        $request->request->add(['address'=>$address]);
+        $request->request->add(['notification_type'=>'upload']);
+
+        $data = [
+            "user_id" => $request->id,
+            "user_name" => $request->user_name,
+            "project_id" => $request->project_id,
+            "notification_type" => $request->notification_type,
+            "profile_picture" => $profile_picture,
+            "address" => $address,
+        ];
+        Notification::create([
+            'user_id' => $data['user_id'],
+            'user_name' => $data['user_name'],
+            'project_id' => $data['project_id'],
+            'notification_type' => $data['notification_type'],
+            'address' => $data['address'],
+            'profile_picture' => $data['profile_picture'],
+        ]);
+        // return $data;
+
+        event(new NewNotification($data));
+        return redirect()->route('customer.payment',$request->project_id);
 
         } catch (\Exception $e) {
 
             return redirect()->route('customer.construction_style');
-            // return "no";
+            // return "nooo";
+
         }
     }
     public function comment($project_id,Request $request){
@@ -165,12 +206,14 @@ class UploadController extends Controller
         // Validation
         try {
             $rules = [
-                'comment' => "required",
+                'reply' => "required",
             ];
 
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
                 return redirect()->back();
+                // return "no";
+                // return $request;
             }
 
         } catch (\Exception $e) {
@@ -185,7 +228,7 @@ class UploadController extends Controller
             // $request->request->add(['user_name'=>$user->name]);
 
             Reply::create([
-                "content" => $request->comment,
+                "content" => $request->reply,
                 "user_id" => $request->id,
                 "project_id" => $request->project_id,
                 "comment_id" => $request->comment_id,
@@ -210,10 +253,11 @@ class UploadController extends Controller
             // event(new NewNotification($data));
 
             return redirect()->back()->with('message','Created Successfully');
-            // return $data;
+            // return $request;
 
         } catch (\Exception $e) {
             return $this->returnError($e->getCode(), $e->getMessage());
+            // return "noo";
         }
     }
 
@@ -241,7 +285,7 @@ class UploadController extends Controller
         try{
             if($request->file()) {
                 $Picture_Name = time().'_'.$request->photo->getClientOriginalName();
-                $request->file('photo')->move(base_path().'/public/Profile_Picture/',$Picture_Name);
+                $request->file('photo')->move('storage/uploads/Profile_Picture/',$Picture_Name);
 
             }
 
@@ -249,7 +293,16 @@ class UploadController extends Controller
                 $user->profile_picture = $Picture_Name;
                 $user->save();
             }
+
+            $notification = Notification::select()->where('user_id', '=', $user->id)->first();
+            if($notification) {
+                $notification->profile_picture = $Picture_Name;
+                $notification->save();
+            }
+
             return redirect()->route('customer.profile');
+            // return $notification;
+            // return "no";
 
         } catch (\Exception $e) {
 
@@ -259,5 +312,60 @@ class UploadController extends Controller
 
     }
 
+    public function update_password(UpdatePasswordRequest $request){
+
+        $user_id = Auth::user()->id;
+        $user = User::find($user_id);
+        // return $request;
+
+        // Validation
+        if (Hash::check($request->old_password,$user->password) ) {
+            // Save Password
+            try{
+                if($user) {
+                    $user->password =Hash::make($request->current_password);
+                    $user->save();
+                }
+                return redirect()->route('customer.edit')->with('success','Password Is Updated Successfully');
+
+            } catch (\Exception $e) {
+
+                return redirect()->route('customer.edit')->with('error','Password Is Failed To Update');
+                // return "bad";
+            }
+            // return "Good";
+        }else {
+            return redirect()->route('customer.edit')->with('error','Old Password Is Not Correct');
+        }
+
+
+    }
+
+    public function update(ProfileRequest $request)
+    {
+        $id= Auth::user()->id;
+        $customer = User::find($id);
+
+        try{
+
+            if (!$customer) {
+                return redirect()->route('login');
+            }
+
+            $customer->name = $request['name'];
+            $customer->address = $request['address'];
+            $customer->phone = $request['phone'];
+            $customer->national_id = $request['national_id'];
+            $customer->save();
+
+            return redirect()->route('customer.edit')->with('success','Updated Successfully');
+            // return "yes";
+
+        } catch (\Exception $e) {
+            return redirect()->route('customer.edit')->with('error' , 'هناك خطأ يرجي المحاوله في وقت اخر');
+            // return 'no';
+        }
+
+    }
 
 }

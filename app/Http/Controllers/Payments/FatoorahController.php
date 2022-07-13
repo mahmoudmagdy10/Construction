@@ -13,10 +13,6 @@ use Illuminate\Support\Facades\Redirect;
 use Session;
 use Config;
 
-
-
-
-
 class FatoorahController extends Controller
 {
     private $fatoorahServices;
@@ -76,7 +72,7 @@ class FatoorahController extends Controller
         $role = User::find($saved_pay[0]->user_id);
 
         if($saved_pay_invoice_id === $invoice_id){
-            if($role == 'customer'){
+            if($role->kind == 'customer'){
                 $project = Project::find($project_id);
                 $project->payment_status = 1;
                 $project->save();
@@ -92,15 +88,41 @@ class FatoorahController extends Controller
 
             }
         }else{
-            return abort(404);
+            return redirect()->route('notfound');
         }
-        return $request;
+        // return $role;
 
 
     }
 
     public function failCallBack(Request $request){
-        return $request;
+        $data=[];
+        $data['Key']=$request->paymentId;
+        $data['KeyType']='paymentId';
+
+        $pay_status = $this->fatoorahServices->getPaymentStatus($data);
+        $invoice_id = $pay_status['Data']['InvoiceId'];
+
+        $saved_pay = Transaction::where('invoice_id',$invoice_id)->get();
+        $saved_pay_invoice_id = $saved_pay[0]->invoice_id;
+        $project_id = $saved_pay[0]->project_id;
+        $user_id = $saved_pay[0]->user_id;
+        $role = User::find($saved_pay[0]->user_id);
+
+        $error = "fail";
+        if($saved_pay_invoice_id === $invoice_id){
+            if($role->kind == 'customer'){
+                return redirect()->route('customer.payment', $project_id)->with($error);
+
+            }else{
+
+                return redirect()->route('contractor.payment', $project_id)->with($error);
+            }
+        }else{
+            return redirect()->route('notfound');
+        }
+        // return $project_id;
+
 
     }
 }

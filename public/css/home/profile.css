@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background: linear-gradient(to right, rgb(0, 105, 128) 50%, white 50%);
+    background: linear-gradient(to right, rgb(14 57 108) 50%, #1b8383 50%);
 }
 
 
@@ -104,7 +104,7 @@ body {
     background-color: #006980;
     position: relative;
     box-shadow: 1px 1px 16px 1px #000000;
-    left: 25%;
+    left: 21%;
     padding: 2%;
     border-radius: 16px;
 }
@@ -187,7 +187,9 @@ hr {
 .save_profile {
     position: absolute;
     top: 400px;
-    left: 46px;
+    /* left: 46px; */
+    width: 75% !important;
+
 }
 
 .profile_picture {

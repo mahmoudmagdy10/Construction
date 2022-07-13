@@ -29,7 +29,7 @@
             <label for="password">Password</label>
             <input type="password" name="password" placeholder="Password" id="password">
 
-            <input type="submit"value="log in">
+            <input class="submit" type="submit"value="log in">
             <div class="social">
             <div class="go">
                 <div class="sign">
@@ -43,7 +43,7 @@
             </div>
         </div>
         </form>
-        
+
 
     </div>
     <script src="{{asset('js/auth/pro.js')}}"></script>

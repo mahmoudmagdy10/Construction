@@ -2,10 +2,10 @@
 
 @section('profile')
   @if($customer->profile_picture !== NULL)
-  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("Profile_Picture/$customer->profile_picture")}}' alt="avatar" width="40" height="40" />
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{ url("storage/uploads/Profile_Picture/$customer->profile_picture") }}' alt="avatar" width="40" height="40" />
   @endif
   @if($customer->profile_picture == NULL)
-  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("image-home/profile.jpg")}}' alt="avatar" width="40" height="40" />
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{ url("storage/uploads/image-home/profile.jpg") }}' alt="avatar" width="40" height="40" />
   @endif
 @endsection
 
@@ -13,53 +13,30 @@
     Home
 @endsection
 
-@section('profile')
-  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("Profile_Picture/$customer->profile_picture")}}' alt="avatar" width="40" height="40" />
-@endsection
-
 @section('content')
     <!-- start landing  -->
     <div class="home" id="home" style=" background-color: rgb(80,80,80);">
       <div data-aos="zoom-in" data-aos-delay="50" class="container">
+        <input name="user_id" type="hidden" value="{{$customer->id}}">
 
         <div class="content">
-
-          <b>are facilitating the creation of your property from scratch to finish</b>
-
-
-
+          <b>We are facilitating the creation of your property from scratch to finish</b>
         </div>
         <div class="details">
           <h1 id="text">
           </h1>
         </div>
-
       </div>
     </div>
-    <!-- <div class="colors">
-  <ul>
-    <li class="set"data-color="#00838f"></li>
-    <li data-color="#E91E63"></li>
-    <li data-color="black"></li>
-    <li data-color="#009688"></li>
-    <li data-color="rebeccapurple"></li>
-        <li data-color="#03A9F4"></li>
-
-  </ul>
-  </div> -->
-
-    <!-- end  landing  -->
     <!-- start section  -->
     <div class="section">
       <div class="container">
         <div class="text">
           <div class="content-image">
-            <img data-aos="fade-up" data-aos.delay="100" src="{{asset('image-home/undraw_building_re_xfcm.svg')}}" alt="">
+            <img data-aos="fade-up" data-aos.delay="100" src='{{ url("storage/uploads/image-home/undraw_building_re_xfcm.svg") }} ' alt="">
           </div>
           <div data-aos="fade-up" data-aos.delay="150" class="con-text">
-            <h2>Welcome To <span class="man"> Construction</span>
-
-              Project</h2>
+            <h2>Welcome To <span class="man"> Vitruvius</span></h2>
             <p>Do you have more to say and show? You can do it in this section. Add pictures and a short description to
               show visitors more of whatever it is you want.</p>
             <span>Add a description here.</span>
@@ -140,223 +117,79 @@
       </div>
     </div>
     <!-- end road map -->
-    <!-- start about us  -->
-    <div id="about-us" class="about-us">
-      <h2>what they're saying about us</h2>
-      <div class="main-title" data-aos="fade-up" data-aos.delay="350">
-        <h1>about us</h1>
-      </div>
-      <div class="container swiper mySwiper">
-        <div class="swiper-wrapper">
-
-
-
-
-          <div class="box swiper-slide" data-aos="fade-up" data-aos-delay="400">
-
-
-            <div class="img">
-              <img src="{{asset('image-home/rawwwak.jpeg')}}" alt="">
-            </div>
-            <div class="box-date">
-              <h3>Abduallh
-                Eid</h3>
-              <p>Data Scientist &
-                Machine Learning En </p>
-              <div class="icon-about">
-                <a href="https://www.facebook.com/profile.php?id=100012194289790"><i
-                    class="fa-brands fa-facebook-square"></i>
-                </a>
-                <a href=""><i class="fa-brands fa-twitter-square"></i></a>
-                <a href=""><i class="fa-brands fa-instagram-square"></i></a>
-                <a href=""><i class="fa-brands fa-linkedin"></i></a>
-
-              </div>
-            </div>
-
-
-
-          </div>
-          <div class="box swiper-slide" data-aos="fade-up" data-aos-delay="450">
-
-            <div class="img">
-              <img src="{{asset('image-home/el rooby.jpg')}}" alt="">
-            </div>
-            <div class="box-date">
-              <h3>ahmed el rooby</h3>
-              <p>front end developer</p>
-              <div class="icon-about">
-                <a href="https://www.facebook.com/profile.php?id=100012194289790"><i
-                    class="fa-brands fa-facebook-square"></i>
-                </a>
-                <a href=""><i class="fa-brands fa-twitter-square"></i></a>
-                <a href=""><i class="fa-brands fa-instagram-square"></i></a>
-                <a href=""><i class="fa-brands fa-linkedin"></i></a>
-
-              </div>
-            </div>
-
-
-          </div>
-          <div class="box swiper-slide" data-aos="fade-up" data-aos-delay="500">
-
-            <div class="img">
-              <img src="{{asset('image-home/hassan.jpeg')}}" alt="">
-            </div>
-            <div class="box-date">
-              <h3>Ahmed
-                Hassan</h3>
-              <p>Full stack Android
-                Flutter Developer </p>
-              <div class="icon-about">
-                <a href="https://www.facebook.com/profile.php?id=100012194289790"><i
-                    class="fa-brands fa-facebook-square"></i>
-                </a>
-                <a href=""><i class="fa-brands fa-twitter-square"></i></a>
-                <a href=""><i class="fa-brands fa-instagram-square"></i></a>
-                <a href=""><i class="fa-brands fa-linkedin"></i></a>
-
-              </div>
-            </div>
-
-
-          </div>
-          <div class="box swiper-slide" data-aos="fade-up" data-aos-delay="550">
-
-            <div class="img">
-              <img src="{{asset('image-home/mego.jpeg')}}" alt="">
-            </div>
-            <div class="box-date">
-              <h3>Mahmoud
-                Magdy</h3>
-              <p>Full stack web
-                Developer </p>
-              <div class="icon-about">
-                <a href="https://www.facebook.com/profile.php?id=100012194289790"><i
-                    class="fa-brands fa-facebook-square"></i>
-                </a>
-                <a href=""><i class="fa-brands fa-twitter-square"></i></a>
-                <a href=""><i class="fa-brands fa-instagram-square"></i></a>
-                <a href=""><i class="fa-brands fa-linkedin"></i></a>
-
-              </div>
-            </div>
-
-
-          </div>
-          <div class="box swiper-slide" data-aos="fade-up" data-aos-delay="600">
-
-            <div class="img">
-              <img src="{{asset('image-home/hema.jpeg')}}" alt="">
-            </div>
-            <div class="box-date">
-              <h3>Ibrahim
-                EL Hossiny</h3>
-              <p>Python Developer
-              </p>
-              <div class="icon-about">
-                <a href="https://www.facebook.com/profile.php?id=100012194289790"><i
-                    class="fa-brands fa-facebook-square"></i>
-                </a>
-                <a href=""><i class="fa-brands fa-twitter-square"></i></a>
-                <a href=""><i class="fa-brands fa-instagram-square"></i></a>
-                <a href=""><i class="fa-brands fa-linkedin"></i></a>
-
-              </div>
-            </div>
-
-
-          </div>
-          <div class="box swiper-slide" data-aos="fade-up" data-aos-delay="650">
-
-            <div class="img">
-              <img src="{{asset('image-home/fouad.jpeg')}}" alt="">
-            </div>
-            <div class="box-date">
-              <h3>Mohamed
-                Fouad</h3>
-              <p>front end developer
-              </p>
-              <div class="icon-about">
-                <a href="https://www.facebook.com/profile.php?id=100012194289790"><i
-                    class="fa-brands fa-facebook-square"></i>
-                </a>
-                <a href=""><i class="fa-brands fa-twitter-square"></i></a>
-                <a href=""><i class="fa-brands fa-instagram-square"></i></a>
-                <a href=""><i class="fa-brands fa-linkedin"></i></a>
-
-              </div>
-            </div>
-
-
-          </div>
-          <div class="box swiper-slide" data-aos="fade-up" data-aos-delay="700" width="400px">
-
-            <div class="img">
-              <img src="{{asset('image-home/haza.jpeg')}}" alt="">
-            </div>
-            <div class="box-date">
-              <h3>Abd-Elrahman
-                Tarek</h3>
-              <p>cyber security
-                python developer
-              </p>
-              <div class="icon-about">
-                <a href="https://www.facebook.com/profile.php?id=100012194289790"><i
-                    class="fa-brands fa-facebook-square"></i>
-                </a>
-                <a href=""><i class="fa-brands fa-twitter-square"></i></a>
-                <a href=""><i class="fa-brands fa-instagram-square"></i></a>
-                <a href=""><i class="fa-brands fa-linkedin"></i></a>
-
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- end about us  -->
 
     <!-- start footer  -->
+
     <div class="footer">
-      <div class="container" data-aos="zoom-in" data-aos.delay="750">
-        <div class="nav">
+      <div class="container">
+        <div class="box-1">
+            <img src='{{url("storage/uploads/image-home/WhatsApp Image 2022-05-11 at 4.35.41 PM.jpeg")}}' alt="">
+            <p>This site specializes in construction. It's available to carry out any project for our clients whether by
+                sending 3D/2D models of private projects or choosing from our site. Moreover, our clients can send us models
+                to calculate the costs for them.</p>
+        </div>
+        <br>
+        <div class="box-2">
+          <h2>Permalinks</h2>
           <ul class="navigation">
-            <li><a class="accept" href="home.html">home</a></li>
-            <li><a href="construction-style.html">construction-style</a></li>
-            <li><a href="your-project.html">your project</a></li>
-            <li><a href="contractor.html">project(contractor)</a></li>
+            <li><a class="accept" href="{{route('customer.homepage')}}" target=_blank value = "Home">Home</a></li>
+            <li><a href="{{route('customer.construction_style')}}" target=_blank value = "Upload">Upload</a></li>
+            <li><a href="{{route('customer.your_project')}}" target=_blank value = "Your Project">Your Project</a></li>
+            <li><a href="{{route('customer.paymentDefault')}}" target=_blank value = "Payment">Payment</a></li>
             <li><a href="">about us</a></li>
-            <li><a href="signin.html">sign in</a></li>
-            <li><a href="signup.html">sign up</a></li>
-
+            <li><a href="{{route('login')}}" target=_blank>sign in</a></li>
+            <li><a href="{{route('sign_up')}}" target=_blank>sign up</a></li>
           </ul>
-
-        </div>
-        <div class="logo">
-          <img src="{{asset('image-home/WhatsApp Image 2022-05-11 at 4.35.41 PM.jpeg')}}" alt="">
         </div>
       </div>
     </div>
-    <!-- end footer  -->
-    <!-- start details -->
-    <div class="data">
-      <div class="container" data-aos-easing="ease-in-out" data-aos.delay="800">
-        <div class="address">address</div>
-        <div class="content-det">
-          <h2>About us</h2>
-          <p>We are facilitating the creation of your property from scratch to finish</p>
-        </div>
-      </div>
-    </div>
-    <!-- end details -->
-    <!-- start finish  -->
 
+<!-- end footer-->
+@endsection
 
-    <!-- end finish  -->
+@section('script')
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 800,
+      });
+    </script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        loop: true,
+        autoplay: true,
+        speed: 800,
+        breakpoints: {
+          // when window width is >= 320px
+          576: {
+            slidesPerView: 2,
+            spaceBetween: 30
+          },
+          // when window width is >= 480px
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 10
+          },
+          // when window width is >= 640px
+          991: {
+
+            slidesPerView: 3,
+            spaceBetween: 20
+          },
+        }
+        ,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      }
+
+      );
+    </script>
 
 @endsection

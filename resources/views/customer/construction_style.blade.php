@@ -22,12 +22,13 @@
 
 @section('profile')
   @if($customer->profile_picture !== NULL)
-  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("Profile_Picture/$customer->profile_picture")}}' alt="avatar" width="40" height="40" />
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{ url("storage/uploads/Profile_Picture/$customer->profile_picture") }}' alt="avatar" width="40" height="40" />
   @endif
   @if($customer->profile_picture == NULL)
-  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("image-home/profile.jpg")}}' alt="avatar" width="40" height="40" />
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{ url("storage/uploads/image-home/profile.jpg") }}' alt="avatar" width="40" height="40" />
   @endif
 @endsection
+
 
 @section('content')
 <form class="arch" method="POST" action="{{ route('customer.upload') }}" enctype="multipart/form-data">
@@ -198,6 +199,26 @@
     AOS.init({
         duration: 550,
     });
+
+
+    let btn1 = document.getElementById("btn1");
+window.onscroll = function () {
+    if (scrollY >= 200) {
+        btn1.style.display = "flex";
+    } else {
+        btn1.style.display = "none";
+
+    }
+}
+btn1.addEventListener("click", function () {
+    scroll({
+        top: 0,
+        left: 0,
+        behavior: "smooth"
+    })
+});
+
 </script>
+
 
 @endsection

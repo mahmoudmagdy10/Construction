@@ -24,11 +24,11 @@ class ProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => "required|max:30",
+            "name" => "required|max:30|min:8",
             "address" => "required",
             "phone" => "required",
-            "password" => "required",
-            "national_id" => "required",
+            "national_id" => "min:14|max:14",
+            "tax_record" => "min:14|max:14",
         ];
     }
     public function messages()
@@ -37,9 +37,8 @@ class ProfileRequest extends FormRequest
             'address.required'     => __('address required'),
             'name.required'        => __('name required'),
             'name.max'             => __('max num of string is 30 chars'),
+            'name.min'             => __('minimum num of string is 8 chars'),
             'phone.required'       => __('phone required'),
-            'password.required'    => __('password required'),
-            'national_id.required' => __('national_id required'),
 
         ];
     }

@@ -19,68 +19,70 @@
 
 @section('profile')
   @if($users->profile_picture !== NULL)
-  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("Profile_Picture/$users->profile_picture")}}' alt="avatar" width="40" height="40" />
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{ url("storage/uploads/Profile_Picture/$users->profile_picture") }}' alt="avatar" width="40" height="40" />
   @endif
   @if($users->profile_picture == NULL)
-  <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("image-home/profile.jpg")}}' alt="avatar" width="40" height="40" />
+  <img class=" rounded-circle shadow-1-strong me-3" src='{{ url("storage/uploads/image-home/profile.jpg") }}' alt="avatar" width="40" height="40" />
   @endif
 @endsection
 
 @section('content')
+    <!-- ========================  Properties Table  ============================== -->
+
     <div class="title">
         <div data-aos="fade-up" data-aos-delay="150" class="container">
             @foreach($props as $prop)
             <div class="projects">
-            <div data-aos="fade-up" data-aos-delay="150" class="card">
-                <div class="box">
-                    <div class="det">
-                        <h3>Architecture</h3>
-                        <h4 style="color:#1b239fe0;font-weight:bold;">{{$prop->project->arch}}</h4>
+                <div data-aos="fade-up" data-aos-delay="150" class="card">
+                    <div class="box">
+                        <div class="det">
+                            <h3>Architecture</h3>
+                            <h4 style="color:#1b239fe0;font-weight:bold;">{{$prop->project->arch}}</h4>
 
-                        @if($prop->project->arch === 'Italian')
-                        <div class="fram">
-                        <iframe title="Petrovsky travel palace in Moscow" frameborder="0" allowfullscreen
-                            mozallowfullscreen="true" webkitallowfullscreen="true"
-                            allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
-                            execution-while-out-of-viewport execution-while-not-rendered web-share
-                            src="https://sketchfab.com/models/8b877b1776794c139d80fd93999003f0/embed"> </iframe>
+                            @if($prop->project->arch === 'Italian')
+                            <div class="fram">
+                            <iframe title="Petrovsky travel palace in Moscow" frameborder="0" allowfullscreen
+                                mozallowfullscreen="true" webkitallowfullscreen="true"
+                                allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
+                                execution-while-out-of-viewport execution-while-not-rendered web-share
+                                src="https://sketchfab.com/models/8b877b1776794c139d80fd93999003f0/embed"> </iframe>
+                            </div>
+                            @endif
+                            @if($prop->project->arch === 'American')
+                            <div class="fram">
+                            <iframe src="https://sketchfab.com/models/8b877b1776794c139d80fd93999003f0/embed"> </iframe>
+                            </div>
+                            @endif
+                            @if($prop->project->arch === 'UK')
+                            <div class="fram">
+                            <iframe title="Ndecor Design Dokuzer İnşaat 3D" frameborder="0" allowfullscreen
+                                mozallowfullscreen="true" webkitallowfullscreen="true"
+                                allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
+                                execution-while-out-of-viewport execution-while-not-rendered web-share
+                                src="https://sketchfab.com/models/e4869a806dfa4efd9d480fda16990c52/embed"> </iframe>
+                            </div>
+                            @endif
+                            @if($prop->project->arch === 'german')
+                            <div class="fram">
+                            <iframe title="Ndecor Design Dokuzer İnşaat 3D" frameborder="0" allowfullscreen
+                                mozallowfullscreen="true" webkitallowfullscreen="true"
+                                allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
+                                execution-while-out-of-viewport execution-while-not-rendered web-share
+                                src="https://sketchfab.com/models/80782c1ce7d34c04ac193e918978c009/embed"> </iframe>
+                            </div>
+                            @endif
+                            @if($prop->project->arch === 'spanish')
+                            <div class="fram">
+                            <iframe title="Ndecor Design Dokuzer İnşaat 3D" frameborder="0" allowfullscreen
+                                mozallowfullscreen="true" webkitallowfullscreen="true"
+                                allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
+                                execution-while-out-of-viewport execution-while-not-rendered web-share
+                                src="https://sketchfab.com/models/80782c1ce7d34c04ac193e918978c009/embed"> </iframe>
+                            </div>
+                            @endif
                         </div>
-                        @endif
-                        @if($prop->project->arch === 'American')
-                        <div class="fram">
-                        <iframe src="https://sketchfab.com/models/8b877b1776794c139d80fd93999003f0/embed"> </iframe>
-                        </div>
-                        @endif
-                        @if($prop->project->arch === 'UK')
-                        <div class="fram">
-                        <iframe title="Ndecor Design Dokuzer İnşaat 3D" frameborder="0" allowfullscreen
-                            mozallowfullscreen="true" webkitallowfullscreen="true"
-                            allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
-                            execution-while-out-of-viewport execution-while-not-rendered web-share
-                            src="https://sketchfab.com/models/e4869a806dfa4efd9d480fda16990c52/embed"> </iframe>
-                        </div>
-                        @endif
-                        @if($prop->project->arch === 'german')
-                        <div class="fram">
-                          <iframe title="Ndecor Design Dokuzer İnşaat 3D" frameborder="0" allowfullscreen
-                              mozallowfullscreen="true" webkitallowfullscreen="true"
-                              allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
-                              execution-while-out-of-viewport execution-while-not-rendered web-share
-                              src="https://sketchfab.com/models/80782c1ce7d34c04ac193e918978c009/embed"> </iframe>
-                        </div>
-                        @endif
-                        @if($prop->project->arch === 'spanish')
-                        <div class="fram">
-                          <iframe title="Ndecor Design Dokuzer İnşaat 3D" frameborder="0" allowfullscreen
-                              mozallowfullscreen="true" webkitallowfullscreen="true"
-                              allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
-                              execution-while-out-of-viewport execution-while-not-rendered web-share
-                              src="https://sketchfab.com/models/80782c1ce7d34c04ac193e918978c009/embed"> </iframe>
-                        </div>
-                        @endif
                     </div>
                 </div>
-            </div>
             </div>
             <div class="table">
                 <table>
@@ -213,35 +215,29 @@
             @endforeach
         </div>
     </div>
-    <!-- ================================================================ -->
+    <!-- ========================  2D File ============================== -->
     @isset($users)
     @foreach($props as $prop)
         <div class="slide_show">
             <?php $file_2d = $prop->project->file_path;?>
-            <img class="d-block w-100" src='{{asset("files_2D/$file_2d")}}' alt="First slide">
+            <img class="d-block w-100" src='{{ url("storage/uploads/files_2D/$file_2d") }}'  alt="First slide">
         </div>
     @endforeach
     @endisset
-    <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -->
+    <!-- =======================  comment-system ========================= -->
 
     <div class="comment-system">
 
         <h3>Comments</h3>
 
-        @if(session()->has('success'))
-        <div class="alert alert-success">
-            {{ session()->get('success') }}
-        </div>
-        @endif
-
         @foreach($comments as $item)
         <div class="comment">
             @if($item->users->profile_picture != null)
             <?php $comment_photo = $item->users->profile_picture ?>
-            <img class="" src='{{asset("Profile_Picture/$comment_photo")}}' alt="avatar" />
+            <img class="" src='{{ url("storage/uploads/Profile_Picture/$comment_photo") }}' alt="avatar" />
             @endif
             @if($item->users->profile_picture == null)
-            <img class="" src='{{asset("image-home/profile.jpg")}}' alt="avatar"  />
+            <img class="" src='{{ url("storage/uploads/image-home/profile.jpg") }}' alt="avatar"  />
             @endif
 
             <span class="h_3">{{ $item->users->name }}</span>
@@ -252,22 +248,22 @@
 
         <div class="reply">
 
-        @foreach($item->replies as $reply)
-        @isset($reply)
+            @foreach($item->replies as $reply)
+            @isset($reply)
 
-            @if($reply->users->profile_picture !== null)
-            <?php $reply_photo = $reply->users->profile_picture ?>
-            <img class="" src='{{asset("Profile_Picture/$reply_photo")}}' alt="avatar"  />
-            @endif
-            @if($reply->users->profile_picture == null)
-            <img class="" src='{{asset("image-home/profile.jpg")}}' alt="avatar" />
-            @endif
+                @if($reply->users->profile_picture !== null)
+                <?php $reply_photo = $reply->users->profile_picture ?>
+                <img class="" src='{{ url("storage/uploads/Profile_Picture/$reply_photo") }}' alt="avatar"  />
+                @endif
+                @if($reply->users->profile_picture == null)
+                <img class="" src='{{ url("storage/uploads/image-home/profile.jpg") }}' alt="avatar" />
+                @endif
 
-            <span class="h3_reply">{{ $reply->users->name }}</span>
-            <span class="time"> {{ $reply->created_at->format('d-m-Y h:i') }} </span>
-            <div class="content">{{ ucfirst($reply->content) }}</div>
-        @endisset
-        @endforeach
+                <span class="h3_reply">{{ $reply->users->name }}</span>
+                <span class="time"> {{ $reply->created_at->format('d-m-Y h:i') }} </span>
+                <div class="content">{{ ucfirst($reply->content) }}</div>
+            @endisset
+            @endforeach
 
             <!-- Add Comment -->
             <form id="reply_form" action="{{ route('customer.reply',$item->id) }}" method="POST">
@@ -294,18 +290,19 @@
         @endif
         <!-- Add Comment -->
     </div>
-    <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -->
+
+    <!-- =======================  contract ========================= -->
+
     <!-- start contract  -->
     <div class="maincontract">
         <div class="container">
-        <div class="cont-det">
-            <h2>contract</h2>
-            <div class="con-sign">
-            <p>Let's write the contract</p>
-            <a href="}">sign</a>
+            <div class="cont-det">
+                <h2>contract</h2>
+                <div class="con-sign">
+                <p>Let's write the contract</p>
+                <a href="}">sign</a>
+                </div>
             </div>
-        </div>
-
         </div>
     </div>
     <!-- <embed src="{{asset('contract/contract.pdf')}}" data-aos="zoom-in" data-aos-delay="150"> -->
@@ -323,5 +320,24 @@
 <script src=" {{asset('js/comment/details.js')}}"></script>
 <script src="node_modules/@fortawesome/fontawesome-free/js/all.js" charset="utf-8"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script>
 
+    let btn1 = document.getElementById("btn1");
+    window.onscroll = function () {
+        if (scrollY >= 200) {
+            btn1.style.display = "flex";
+        } else {
+            btn1.style.display = "none";
+
+        }
+    }
+    btn1.addEventListener("click", function () {
+        scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth"
+        })
+    });
+
+</script>
 @endsection
