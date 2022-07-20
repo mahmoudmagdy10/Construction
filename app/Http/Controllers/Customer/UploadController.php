@@ -143,7 +143,7 @@ class UploadController extends Controller
             'address' => $data['address'],
             'profile_picture' => $data['profile_picture'],
         ]);
-        // return $data;
+        // return $request;
 
         event(new NewNotification($data));
         return redirect()->route('customer.payment',$request->project_id);
@@ -253,6 +253,13 @@ class UploadController extends Controller
             // event(new NewNotification($data));
 
             return redirect()->back()->with('message','Created Successfully');
+            // return response()->json([
+            //     'bool'=>true
+            // ]);
+            // return json_encode(['status'=>true,"redirect_url"=>route("customer.reply", $request->comment_id)]);
+            // return response()->json(['status'=>true,"redirect_url"=>route("customer.reply", $request->comment_id)]);
+
+
             // return $request;
 
         } catch (\Exception $e) {
@@ -363,6 +370,30 @@ class UploadController extends Controller
 
         } catch (\Exception $e) {
             return redirect()->route('customer.edit')->with('error' , 'هناك خطأ يرجي المحاوله في وقت اخر');
+            // return 'no';
+        }
+
+    }
+
+    public function delete_project($id)
+    {
+        $userId= Auth::user()->id;
+        $customer = User::find($userId);
+
+        try{
+
+            if (!($customer)) {
+                return redirect()->route('login');
+                // return"no";
+            }
+
+            $project = Project::findOrFail($id)->delete();
+
+            return redirect()->route('customer.your_project')->with('success','Deleted Successfully');
+            // return $project;
+
+        } catch (\Exception $e) {
+            return redirect()->route('customer.your_project')->with('error' , 'Failed To Delete');
             // return 'no';
         }
 

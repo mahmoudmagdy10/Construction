@@ -128,17 +128,17 @@
                               src="https://sketchfab.com/models/80782c1ce7d34c04ac193e918978c009/embed"> </iframe>
                         </div>
                         @endif
-                        <ul>
-                            <a href="{{route('contractor.details',$pro->id)}}"><h3>House</h3></a><br>
-                            <li>Architecture : {{$pro->arch}}</li>
-                            @foreach($pro->props as $prop)
-                            <li style="color :red; font-weight:bold">Predict Price : {{ number_format($prop->PREDICTION) }} $</li>
-                            @endforeach
-                            <li>Publish at :  {{$pro->created_at->format('d-m-Y')}}</li>
+                        <a href="{{route('contractor.details',$pro->id)}}"><br>
+                            <ul>
+                                <li>Architecture : {{$pro->arch}}</li>
+                                @foreach($pro->props as $prop)
+                                <li style="color :red; font-weight:bold">Predict Price : {{ number_format($prop->PREDICTION) }} $</li>
+                                @endforeach
+                                <li>Publish at :  {{$pro->created_at->format('d-m-Y')}}</li>
+                            </ul>
+                        </a>
+                        <a class="btn btn-success" href="{{route('contractor.accept',$pro->id)}}" style="color:white; font-weight:bold"> Accept</a>
 
-                            <a class="btn btn-success" href="{{route('contractor.accept',$pro->id)}}"> Accept</a>
-
-                        </ul>
                     </div>
                 </div>
             </div>

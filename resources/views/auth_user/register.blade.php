@@ -7,11 +7,23 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <title>Sign Up</title>
-    <link rel="icon" href="{{ url('image-home/logo.jpeg') }}">
+    <link rel="icon" href='{{ url("storage/uploads/image-home/logo.jpeg")}}'>
 
   </head>
-
+  <style>
+    .logo img{
+        width: 100px;
+        height: 100px;
+        border-radius: 10px;
+        position: absolute;
+        top: 15px;
+        left: 11px;
+    }
+</style>
   <body>
+  <div class="logo">
+        <img src='{{url("storage/uploads/image-home/logo.jpeg")}}'/>
+    </div>
     <div class="container-signup">
         <div class="photo-sign">
             <!-- <img class=" rounded-circle shadow-1-strong me-3" src='{{asset("image-home/undraw (2).svg")}}' alt="avatar" /> -->
@@ -147,9 +159,9 @@
                     </div>
                 </form>
 
-                <p>
-                    Have an Account?
-                    <a href="{{route('login')}}"><span class="Sign-in">Sign in</span> </a>
+                <p style="color:black">
+                    Have An Account ? &emsp;
+                    <a href="{{route('login')}}"><span class="Sign-in">Log In</span> </a>
                 </p>
             </div>
         </div>

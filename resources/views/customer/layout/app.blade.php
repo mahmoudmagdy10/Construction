@@ -7,7 +7,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>@yield('title')</title>
-        <link rel="icon" href="{{ url('image-home/logo.jpeg') }}">
+        <link rel="icon" href='{{ url("storage/uploads/image-home/logo.jpeg")}}'>
 
         <!-- <link rel="stylesheet" href="{{asset('css/home/home.css')}}"> -->
         <link rel="stylesheet" href="{{asset('css/home.css')}}">
@@ -21,6 +21,7 @@
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
         <link rel="stylesheet"href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
 
+        <link rel="stylesheet" href="{{asset('css/customer_dark.css')}}">
 
         <style>
         .swiper-slide{
@@ -33,7 +34,7 @@
         <!-- start header  -->
         <header id="header">
             <div class="logo">
-            <a href="{{route('customer.homepage')}}"><img src='{{asset("image-home/logo.jpeg")}}'/></a>
+            <a href="{{route('customer.homepage')}}"><img src='{{ url("storage/uploads/image-home/logo.jpeg")}}'/></a>
             </div>
 
             <!-- <ul class="notification_dropdown1">
@@ -87,12 +88,14 @@
 
 
             </ul>
-            <div class="bars">
+            <div class="bars" data-aos="zoom-in" data-aos.delay="50">
                 <i id="bar" class="fas fa-bars"></i>
             </div>
-            <div class="mode">
-                <i class="fa-solid fa-moon"></i>
+
+            <div class="mode" data-aos="zoom-in" data-aos.delay="50">
+                <i id="check" onclick="changeStatus()" class="fa-solid fa-moon"></i>
             </div>
+
         </header>
     <!-- end header  -->
         <main>
@@ -103,6 +106,9 @@
             </button>
         </main>
         @yield('script')
+        <script src="{{asset('js/landing.js')}}"></script>
+
+
         <script src=" {{asset('js/header.js')}}"></script>
         <script src=" {{asset('js/home/edit.js')}}"></script>
         <script src=" {{asset('js/home.js')}}"></script>
@@ -113,21 +119,6 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <!-- Pusher script  -->
         <script src="https://js.pusher.com/7.1/pusher.min.js"></script>
-        <script>
-
-            // Enable pusher logging - don't include this in production
-            Pusher.logToConsole = true;
-
-            var pusher = new Pusher('6def5b4303fc5ed6f28a', {
-            cluster: 'mt1'
-            });
-
-            var channel = pusher.subscribe('new-notification');
-            channel.bind('App\\Events\\NewNotification', function(data) {
-            alert(JSON.stringify(data));
-            });
-
-        </script>
 
         <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
         <script>

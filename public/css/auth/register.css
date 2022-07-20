@@ -20,7 +20,7 @@ body {
 
 .sign-up-form {
 
-    box-shadow: 0 0 17px #333;
+    box-shadow: 0 0 17px rgb(0, 0, 0);
     padding: 20px;
     margin: 30% 0;
     text-align: center;

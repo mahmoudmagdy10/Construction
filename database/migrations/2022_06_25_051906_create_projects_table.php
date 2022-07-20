@@ -17,7 +17,7 @@ class CreateProjectsTable extends Migration
             $table->id();
             $table->string('arch', 100);
             $table->string('file_path', 100);
-            $table->tinyInteger('accepted')->default('0');
+            $table->tinyInteger('accepted')->nullable();
             $table->tinyInteger('payment_status')->nullable();
             $table->bigInteger('paied_salary')->nullable();
             $table->integer('contractor_tax')->nullable();

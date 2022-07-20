@@ -268,6 +268,7 @@
             <!-- Add Comment -->
             <form id="reply_form" action="{{ route('customer.reply',$item->id) }}" method="POST">
                 @csrf
+                <input id="comment_id"  type="hidden" value="{{$item->id}}"></input>
                 <div class="form-group add ">
                     <label for="exampleInputEmail1" style="margin-bottom:5px;">Reply</label>
                     <textarea name ="reply" class="form-control reply_field" aria-label="With textarea"></textarea>
@@ -340,4 +341,40 @@
     });
 
 </script>
+
+<script>
+        $(document).on('click','#add_reply',function(e){
+            e.preventDefault();
+
+
+            var formData = new FormData($('#reply_form')[0]);
+            var id = $('#comment_id').val();
+            var url = '{{ route("customer.reply", ":id") }}';
+            url = url.replace(':id', id);
+
+
+            $.ajax({
+                type:'post',
+                enctype:'multipart/form-data',
+                url:url,
+                data:formData,
+                processData:false,
+                contentType:false,
+                cache:false,
+                success:function(data){
+                    if(data.status == true)
+                        console.log("Good");
+                        // window.location = url;
+                },
+                error:function(reject){
+                    // var data = $.parseJSON(reject.responseText);
+                    // $.each(data.errors,function(key,val){
+                    //     $('#'+ key +'_error').text(val[0]);
+                    // });
+                    console.log("Bad");
+
+                }
+            });
+        });
+    </script>
 @endsection

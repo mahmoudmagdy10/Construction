@@ -13,9 +13,9 @@ channel.bind('App\\Events\\NewNotification', function (data) {
 
     var newNotificationHtml = `<a style="background-color:#10737c" href="${data.address}">
         <div class="pop_up_container_2">
-        <img src="/Profile_Picture/${data.profile_picture}"" alt="avatar"  />
+        <img src="/storage/uploads/Profile_Picture/${data.profile_picture}"" alt="avatar"  />
         <span class="h3_reply">
-            ${data.user_name} has commented to your post
+            ${data.user_name} has added a New Project
         </span>
         <span class="time"> 3-7-2022 </span>
         </div>

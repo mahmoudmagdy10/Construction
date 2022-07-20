@@ -274,13 +274,16 @@ class PagesController extends Controller
         $comments = Comment::where('project_id',$id)->where('user_id',$user->id)->with(['replies','users'])->get();
         $payment = Transaction::where('project_id', '=', $id)->get();
         $project_id = $id;
+        $notifications = Notification::where('notification_type', '=', "upload")->orderBy('id', 'DESC')->get();
+        $notification_count = Notification::where('seen',"=",0)->count();
+
 
         $num_of_comments = Comment::where('user_id',"=",Auth::user()->id)->where('project_id',$id)->get();
 
         if (!$users && !$props && !$project && !$comments_of_users && !$replies_of_users) {
             return redirect()->back();
         } else {
-            return view('contractor.details')->with(compact('users','props','project','comments','project_id','num_of_comments','payment'));
+            return view('contractor.details')->with(compact('users','props','project','comments','project_id','num_of_comments','payment','notifications','notification_count'));
             // return $payment;
         }
 

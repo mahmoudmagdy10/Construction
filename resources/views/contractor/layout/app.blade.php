@@ -5,13 +5,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>@yield('title')</title>
-        <link rel="icon" href="{{ url('image-home/logo.jpeg') }}">
+        <link rel="icon" href='{{ url("storage/uploads/image-home/logo.jpeg")}}  '>
 
         <!-- <link rel="stylesheet" href="{{asset('css/home/home.css')}}"> -->
         <link rel="stylesheet" href="{{asset('css/home.css')}}">
         <!-- <link rel="stylesheet" href="{{asset('css/header.css')}}"> -->
         <link rel="stylesheet" href="{{asset('css/all.min.css')}}">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{asset('css/customer_dark.css')}}">
+
 
         @yield('link')
         <link rel="stylesheet" href="css/home.css">
@@ -36,7 +38,7 @@
 
             <ul class="navigation">
                 <li><a class="accept" href="{{route('contractor.homepage')}}" value = "Home">Home</a></li>
-                <li><a href="{{route('contractor.explor')}}" value = "Explor">Explor</a></li>
+                <li><a href="{{route('contractor.explor')}}" value = "Explor">Explore</a></li>
                 <li><a href="{{route('contractor.your_project')}}" value = "Your Project">Your Project</a></li>
                 <li><a href="{{route('contractor.paymentDefault')}}" value = "Payment">Payment</a></li>
                 <li class="icon_profile">
@@ -84,11 +86,6 @@
 
             var pusher = new Pusher('6def5b4303fc5ed6f28a', {
             cluster: 'mt1'
-            });
-
-            var channel = pusher.subscribe('new-notification');
-            channel.bind('App\\Events\\NewNotification', function(data) {
-            alert(JSON.stringify(data));
             });
 
         </script>

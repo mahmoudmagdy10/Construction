@@ -110,7 +110,6 @@ class CustomerPagesController extends Controller
     }
 
 
-
     public function details($id)
     {
         try{
@@ -121,7 +120,7 @@ class CustomerPagesController extends Controller
             $project = Project::all()->where('id', '=', $id);
             $comments = Comment::where('project_id',$id)->with(['users','replies'])->get();
             $project_id = $id;
-            $user = Comment::where('user_id',$user->id)->with(['users'])->get();
+            // $user = Comment::where('user_id',$user->id)->with(['users'])->get();
             $num_of_comments = Comment::where('user_id',"=",Auth::user()->id)->where('project_id',"=",$id)->get();
 
 

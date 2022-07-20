@@ -158,7 +158,7 @@
             <div class="to-p">
                 <p>Please go to our app to predict the price of your house
                     and download a CSV file that predicted</p>
-                <a href="https://app2.datarobot.com/applications/62a0700f2056e8897b8961e2/?token=HldWaQP3BZ6qUOrFazW0IOBGJXu3x7-AYtmgu1nURkU" target="_blank">go to app</a>
+                <a href="https://app2.datarobot.com/applications/62cf3cd6da667eb5a51fea6f/?token=NsvaFny6U1cZGQ62hEN0VdEePiXcu6OMlMEzcl4Po_8" target="_blank">go to app</a>
             </div>
         </div>
     </div>

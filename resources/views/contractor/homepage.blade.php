@@ -69,18 +69,10 @@
     <div class="home" id="home" style=" background-color: rgb(80,80,80);">
       <div data-aos="zoom-in" data-aos-delay="50" class="container">
 
-        <div class="content">
-
-          <b>are facilitating the creation of your property from scratch to finish</b>
-
-
-
-        </div>
+        <div class="content"></div>
         <div class="details">
-          <h1 id="text">
-          </h1>
+          <h1 id="text"></h1>
         </div>
-
       </div>
     </div>
 
@@ -92,12 +84,10 @@
             <img data-aos="fade-up" data-aos.delay="100" src="{{asset('image-home/undraw_building_re_xfcm.svg')}}" alt="">
           </div>
           <div data-aos="fade-up" data-aos.delay="150" class="con-text">
-            <h2>Welcome To <span class="man"> Construction</span>
-
-              Project</h2>
-            <p>Do you have more to say and show? You can do it in this section. Add pictures and a short description to
-              show visitors more of whatever it is you want.</p>
-            <span>Add a description here.</span>
+          <h1>Welcome To <span class="man"> Vitruvius</span></h1>
+            <p>We are facilitating the creation of your Project from scratch to finish.<br>
+                Follow The Road Map
+            </p>
           </div>
         </div>
       </div>
@@ -110,63 +100,67 @@
         <h1>road map</h1>
       </div>
       <div class="container" data-aos="fade-up" data-aos.delay="250">
-        <h2 class="heading">if you customer</h2>
-        <span class="data-step">follow this steps
-        </span>
+        <h1 class="heading">Customer Road Map</h1>
         <div class="cont-map">
           <div class="right">
-            <h2>choose style</h2>
-            <p>Choose your architecture or<br> upload your own
+            <h2>Upload Your Building</h2>
+            <p>Choose Your Architecture Style or Upload Your 3D Style File<br>
+                Upload Your 2D Style File<br>
+                Go To Our Model To get Your CSV File<br>
+                Upload CSV File
+
             </p>
           </div>
           <div class="clear"></div>
           <div class="left">
-            <h2>Fill out the form</h2>
-            <p>Fill in your form with <br>the required data to get the right price
-            </p>
+          <h2>Publish </h2>
+            <p>If You Agree To The Predict Price Save your Project To Get Contractors' Offers</p>
           </div>
           <div class="clear"></div>
           <div class="right">
-            <h2>publish </h2>
-            <p>If you agree to the price<br> publish your project to contractors
-            </p>
+            <h2>Complete Your Building's Payment</h2>
           </div>
           <div class="clear"></div>
           <div class="left">
-            <h2>contract
-            </h2>
-            <p>Upon approval, the contract will be signed.
-            </p>
+            <h2>Comments</h2>
+            <p>Communicate With Contractors And Get Offer</p>
           </div>
+
+          <div class="clear"></div>
+          <div class="right">
+            <h2>Contract</h2>
+            <p>Get Good Offer And Sign Contract.</p>
+          </div>
+          <div class="clear"></div>
           <div class="clear"></div>
 
         </div>
       </div>
+      <br>
+      <br>
       <div class="container" data-aos="fade-up" data-aos.delay="300">
-        <h2 class="heading">if you are a contractor
-        </h2>
-        <span class="data-step">follow this steps
-        </span>
+        <h1 class="heading">Contractor Road Map</h1>
+
         <div class="cont-map">
           <div class="right">
-            <h2>select project
-            </h2>
-            <p>Choose the project you want on the available projects page based on price
-
-            </p>
+            <h2>Select Project</h2>
+            <p>Explor And Choose Project Suitable With You </p>
           </div>
           <div class="clear"></div>
           <div class="left">
-            <h2>make offer</h2>
-            <p>You can add an offer to the project
-
-            </p>
+            <h2>Make Offer</h2>
+            <p>Communicate With Customer Make Offer</p>
           </div>
+
           <div class="clear"></div>
           <div class="right">
-            <h2>contract
-            </h2>
-            <p>Upon approval, the contract will be signed</p>
+            <h2>Complete Your Building's Payment</h2>
+          </div>
+
+          <div class="clear"></div>
+          <div class="left">
+          <h2>Contract</h2>
+            <p>Get Good Offer And Sign Contract.</p>
           </div>
           <div class="clear"></div>
 

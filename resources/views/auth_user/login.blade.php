@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log In</title>
-    <link rel="icon" href="{{ url('image-home/logo.jpeg') }}">
+    <link rel="icon" href='{{ url("storage/uploads/image-home/logo.jpeg")}}'>
 
     <link rel="stylesheet" href="{{asset('css/auth/all.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/auth/login.css')}}">
@@ -29,7 +29,7 @@
 </head>
 <body>
     <div class="logo">
-        <a href="{{route('contractor.homepage')}}"><img src='{{asset("image-home/logo.jpeg")}}'/></a>
+        <a href="{{route('contractor.homepage')}}"><img src='{{url("storage/uploads/image-home/logo.jpeg")}}'/></a>
     </div>
     <div class="login">
         <form method="POST" action="{{ route('login') }}">

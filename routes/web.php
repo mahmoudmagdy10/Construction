@@ -44,6 +44,10 @@ Route::get('/Not-Fount', function () {
     return view('auth_user.notfound');
 })->name('notfound');
 
+Route::get('/Landing-Page', function () {
+    return view('landing.landing-page');
+})->name('landing-page');
+
 
 // ============================ Contractor routes =======================
 Route::namespace('Contractor')->prefix('contractor')->middleware('auth')->group(function(){
@@ -95,6 +99,8 @@ Route::namespace('Customer')->prefix('customer')->middleware('auth')->group(func
         Route::post('/profile/update', [UploadController::class, 'update'])->name('customer.update');
         Route::post('/profile/update/profile_picture', [UploadController::class, 'profile_picture'])->name('customer.profile_picture');
         Route::post('/profile/update/password', [UploadController::class, 'update_password'])->name('customer.update_password');
+        Route::get('/your_project/delete/{id}', [UploadController::class, 'delete_project'])->name('customer.delete_project');
+
 
 
         Route::post('/upload', [UploadController::class, 'upload'])->name('customer.upload');

@@ -14,6 +14,7 @@ body {
     /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
       "Segoe UI Symbol", "Noto Color Emoji"; */
+    color: #000 !important;
 }
 
 .swiper-button-next {
@@ -517,6 +518,7 @@ ul {
     justify-content: center;
     height: 500px;
     background-color: #dddddd;
+    color: #000 !important;
 
 }
 

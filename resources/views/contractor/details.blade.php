@@ -19,6 +19,54 @@
   @endif
 @endsection
 
+@section('notification')
+    <ul class="notification_dropdown_2">
+        <li class="notify_icon_2">
+            @if($notification_count > 0)
+            <span class="count_notify_2" data-count="{{$notification_count}}">{{$notification_count}}</span>
+            @endif
+
+            <i class="fas fa-bell"></i>
+        </li>
+        <li>
+            <h2>Notifications</h2>
+            <div class ="pop_up_notify_2">
+                <!-- <a class="read_all">Mark All As Read <i class="fa fa-check" aria-hidden="true"></i></a> -->
+                <form class="read_all" action="{{route('contractor.read_all')}}" method="post">
+                    @csrf
+                    <input class="btn btn-primary" type="submit" value="Mark All Read">
+                </form>
+
+                @foreach($notifications as $notification)
+                    <div class="pop_up_container_2">
+                        @if($notification->profile_picture !== 'profile.jpg')
+                        <img class=" rounded-circle shadow-1-strong me-3" src='{{ url("storage/uploads/Profile_Picture/$notification->profile_picture") }}' alt="avatar" width="40" height="40" />
+                        @endif
+                        @if($notification->profile_picture == 'profile.jpg')
+                        <img class=" rounded-circle shadow-1-strong me-3" src='{{ url("storage/uploads/image-home/profile.jpg") }}' alt="avatar" width="40" height="40" />
+                        @endif
+                        <a href="{{$notification->address}}">
+                            <span class="h3_reply" style="color:white">
+                                {{$notification->user_name}} Has Added New Project
+                            </span>
+                        </a>
+                        <span class="time"> {{$notification->created_at->format('d-m-Y h:i')}} </span>
+                        @if($notification->seen == 0)
+                        <form class="read" action="{{route('contractor.mark_as_read',$notification->id)}}" method="post">
+                            @csrf
+                            <input class="btn btn-success" type="submit" value="Mark As Read">
+                        </form>
+                        @endif
+                    </div>
+                    <!-- <a class="read">Mark As Read</a> -->
+
+                @endforeach
+            </div>
+
+        </li>
+    </ul>
+@endsection
+
 @section('content')
     <div class="title">
         <div data-aos="fade-up" data-aos-delay="150" class="container">

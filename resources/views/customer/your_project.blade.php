@@ -7,6 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Nunito+Sans:wght@300;400&family=Open+Sans:ital,wght@0,300;0,400;1,600&family=Work+Sans:wght@200;300;500;600;700;800&display=swap"rel="stylesheet" />
 <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
 @endsection
 
 @section('title')
@@ -29,6 +31,16 @@
         <div class="info">
             <h3>Your project</h3>
         </div>
+        @if(session()->has('success'))
+            <div class="alert alert-success">
+                {{ session()->get('success') }}
+            </div>
+        @endif
+        @if(session()->has('error'))
+            <div class="alert alert-danger">
+                {{ session()->get('error') }}
+            </div>
+        @endif
         <div class="projects">
         @isset($customer)
           @foreach($project as $pro)
@@ -85,9 +97,20 @@
                                 <li>Publish at : {{$pro->created_at->format('d-m-Y')}}</li><br>
                             </ul>
                         </a><br>
-                        @if($pro->payment_status == 0)
-                        <a href="{{route('customer.payment',$pro->id)}}" class="pay" style="background-color:green; font-weight:bold; color:white"><h3>Pay</h3></a><br>
-                        @endif
+                        <div class="card_buttons">
+                            @if($pro->payment_status == 0)
+                            <a href="{{route('customer.payment',$pro->id)}}" class=" btn btn-success " style="background-color:green; font-weight:bold; color:white"><h3>Pay</h3></a><br>
+                            @endif
+                            @if($pro->payment_status != 0)
+                            <a href="" class=" btn " style="background-color:grey; font-weight:bold; color:white"><h3>Paied</h3></a><br>
+                            @endif
+                            <!-- <form action="{{route('customer.delete_project',$pro->id)}}" method="post">
+                                @csrf
+                                <input type="submit" class="btn btn-danger delete delete-confirm" style="background-color:Red; font-weight:bold; color:white" value="Delete">
+                            </form> -->
+                            <a href="{{route('customer.delete_project',$pro->id)}}" onclick='return confirm("Are you sure?")' class=" btn btn-danger delete-confirm" style="font-weight:bold; color:white"><h3>Delete</h3></a><br>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -121,4 +144,5 @@
         })
     });
 </script>
+
 @endsection

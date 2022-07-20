@@ -17,8 +17,22 @@
 
 
 </head>
+<style>
+    .logo img{
+        width: 100px;
+        height: 100px;
+        border-radius: 10px;
+        position: absolute;
+        top: 15px;
+        left: 11px;
+    }
+</style>
 <body>
+    <div class="logo">
+        <img src='{{url("storage/uploads/image-home/logo.jpeg")}}'/>
+    </div>
     <div class="login">
+
         <form method="POST" action="{{ route('login') }}">
             @csrf
             <h3><span style="color:#22477e">Login</span> <span style="color:#105868">Here</span></h3>

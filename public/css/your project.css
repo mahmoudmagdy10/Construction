@@ -419,6 +419,22 @@ header.active .bars i {
 
 }
 
+.card .box .det .card_buttons {
+    display: flex;
+    gap: 7px;
+    margin-left: 45px;
+
+}
+
+.card .box .det .delete {
+    background-color: Red;
+    font-weight: bold;
+    color: white;
+    margin-top: 15px;
+    padding: 11px;
+    font-size: 20px;
+}
+
 .card .box .det a:hover {
     background: #0095a8;
 }

@@ -449,7 +449,7 @@ header.active .bars i {
 /* start home */
 .home {
     padding-bottom: var(--main-padding);
-    background-image: linear-gradient(rgb(0 0 0 / 80%), rgb(0 0 0 / 15%)), url(../../image-home/back.jpeg);
+    background-image: linear-gradient(rgb(0 0 0 / 80%), rgb(0 0 0 / 15%)), url(../storage/uploads/image-home/back.jpeg);
     min-height: 100vh;
     padding-top: 335px;
     position: relative;
@@ -541,9 +541,10 @@ header.active .bars i {
     font-size: 55px;
     font-weight: 700;
     text-transform: capitalize;
-    margin-left: 20px;
+    margin-left: -190px;
     transform: translateY(0px);
     font-family: 'Libre Baskerville', serif;
+    width: 700px;
 
 }
 
@@ -669,7 +670,7 @@ header.active .bars i {
 .section {
     padding-top: var(--main-padding);
     padding-bottom: var(--main-padding);
-    background-color: #ddd;
+    /* background-color: #ddd; */
 
 }
 
@@ -692,7 +693,7 @@ header.active .bars i {
     animation-timing-function: linear;
     border-radius: 6px;
     height: 447px !important;
-    background: #ddd;
+    /* background: #ddd; */
 
 }
 
@@ -731,7 +732,6 @@ header.active .bars i {
 .section .container .text .con-text p {
     text-transform: capitalize;
     line-height: 1.6;
-    color: black;
     font-size: 17px;
     margin-bottom: 20px;
     font-family: 'Nunito Sans', sans-serif;
@@ -988,7 +988,7 @@ header.active .bars i {
 .road-map {
     padding-top: 50px;
     padding-bottom: 50px;
-    background: #ddd;
+    /* background: #ddd; */
 }
 
 .road-map .container .cont-map {
@@ -1102,9 +1102,9 @@ header.active .bars i {
     content: "";
     border-width: 18px;
     border-style: solid;
-    border-color: transparent transparent transparent#fff;
+    /* border-color: transparent transparent transparent#fff; */
     top: 22px;
-    right: -35px;
+    right: -36px;
 }
 
 .road-map .container .cont-map .right {
@@ -1816,7 +1816,7 @@ hr {
 .pop_up_notify_2 .pop_up_container_2 .h3_reply {
     /* min-height: 95px;
     margin-left: 22px; */
-    color: white;
+    color: white !important;
     position: absolute;
     left: 60px;
 }

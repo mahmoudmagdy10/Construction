@@ -22,7 +22,7 @@ body {
 }
 
 .container-signup .container {
-    background-color: #1fc8d9b8;
+    background-color: #ffffff;
 
 }
 
@@ -34,7 +34,7 @@ body {
 }
 
 .container {
-    box-shadow: 0 0 17px #333;
+    box-shadow: 0 0 17px rgb(0, 0, 0);
     padding: 20px;
     margin: 12px 0;
     position: relative;
@@ -56,8 +56,8 @@ body {
 
 .signUpAs>div.active {
     color: #1d3376;
-    box-shadow: 1px 1px 11px 4px #ffffff;
-    transition: 0.2s;
+    box-shadow: 1px 1px 9px 4px #74a4afd6;
+    transition: 0.7s;
 }
 
 
@@ -140,8 +140,7 @@ p {
 }
 
 a {
-    text-decoration: none;
-
+    text-decoration: none !important;
     font-size: 18px;
 }
 
@@ -153,14 +152,14 @@ a {
     width: 50%;
     border: none;
     outline: none;
-    background-color: #006980;
+    background-color: #104670;
     color: #fff;
-    box-shadow: 1px 1px 10px 1px #006980;
+    box-shadow: 1px 1px 10px 1px #272727;
 
 }
 
 .Sign-in:hover {
-    background-color: #21abca;
+    background-color: #1b37c3;
 }
 
 .rd {
@@ -190,9 +189,10 @@ a {
     height: 55px;
     font-size: 20px;
     font-weight: bolder;
-    background-color: #006980;
+    background-color: #104670;
+    color: white;
 }
 
 .submit_btn input:hover {
-    background-color: #09849f;
+    background-color: #1731b5;
 }
